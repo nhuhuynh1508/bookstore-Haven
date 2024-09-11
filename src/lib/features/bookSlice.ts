@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export interface BookState {
     cartItems: any[];
-    wishlistItems: any[];
+    wishListItems: any[];
     cartTotalAmount: number;
 }
 
 const initialState: BookState = {
     cartItems: [],
-    wishlistItems: [],
+    wishListItems: [],
     cartTotalAmount: 0,
 };
 
@@ -58,12 +58,13 @@ const bookSlice = createSlice({
         },
 
         addToWishList(state, action) {
-            const bookIndex = state.wishlistItems.findIndex(
+            const bookIndex = state.wishListItems.findIndex(
                 (book) => book.ISBN === action.payload.ISBN);
             // if the book isn;'t added to the wishlist
             if (bookIndex === -1) {
-                state.wishlistItems.push(action.payload);
+                state.wishListItems.push(action.payload);
             }
+            state.wishListItems = [...state.wishListItems];
         }
     }
 });

@@ -1,29 +1,38 @@
 'use client';
 import { addToCart, addToWishList } from "@/lib/features/bookSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useState } from 'react';
 
-// interface BookType {
-//     ISBN: string;
-//     "Book-Title": string;
-//     "Book-Author": string;
-//     "Year-Of-Publication": string;
-//     Publisher: string;
-//     Price: number;
-//     "Image-URL-M": string;
-// }
+// Define your BookType interface here
+interface BookType {
+    ISBN: string;
+    "Book-Title": string;
+    "Book-Author": string;
+    "Year-Of-Publication": string;
+    Publisher: string;
+    Price: number;
+    "Image-URL-M": string;
+}
 
-export const BookItem = ({ book }: any) => {
+export const BookItem = ({ book }: { book: BookType }) => {
     const dispatch = useAppDispatch();
-    const wishList = useAppSelector((state) => state.book.wishlistItems);
-
-    const isWishList = wishList.some((item) => item.ISBN === book.ISBN);
+    const wishList = useAppSelector((state) => state.book.wishListItems);
+    const [isInWishList, setIsInWishList] = useState(wishList.some((item) => item.ISBN === book.ISBN));
 
     const handleAddToCart = () => {
         dispatch(addToCart(book));
     };
 
     const handleAddToWishList = () => {
-        dispatch(addToWishList(book));
+        if (isInWishList) {
+            // Remove from wishlist
+            
+            setIsInWishList(false);
+        } else {
+            // Add to wishlist
+            dispatch(addToWishList(book));
+            setIsInWishList(true);
+        }
     };
 
     return (
@@ -38,9 +47,9 @@ export const BookItem = ({ book }: any) => {
                 onClick={handleAddToWishList}
             >
                 <img
-                    src={isWishList ? "/assets/red-wishlist.png" : "/assets/wishlist.png"}
+                    src={isInWishList ? "/assets/red-heart.png" : "/assets/heart.png"}
                     alt="wishlist"
-                    style={{ width: '40px', height: '40px' }}
+                    style={{ width: '30px', height: '30px' }}
                 />
             </button>
             <div className="p-4">

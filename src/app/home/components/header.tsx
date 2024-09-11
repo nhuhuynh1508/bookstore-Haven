@@ -4,9 +4,9 @@ import { useAppSelector } from "../../../lib/hooks";
 
 export const Header = () => {
     const cartItems = useAppSelector((state) => state.book.cartItems);
-    const wishlistItems = useAppSelector((state) => state.book.wishlistItems);
+    const wishListItems = useAppSelector((state) => state.book.wishListItems);
     const cartTotalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-    const wishListTotalQuantity = wishlistItems.reduce((total, item) => total + item.quantity, 0);
+    const wishListTotalQuantity = wishListItems.reduce((total, item) => total + item.quantity, 0);
     
     return (
     <div className="left-0 top-0 w-full absolute bg-slate-300 h-20 flex items-center sm:px-8 justify-between">
@@ -38,12 +38,12 @@ export const Header = () => {
                 </Link>
                 <Link href="/wishlist">
                 <img
-                    src="/assets/wishlist.png"
+                    src="/assets/heart.png"
                     alt="wishlist"
-                    style={{ width: '40px', height: '40px' }}
+                    style={{ width: '30px', height: '30px' }}
                 />
                 <span
-                    className="absolute top-2 right-6 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center"
+                    className="absolute top-4 right-6 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center"
                 >
                     {wishListTotalQuantity}
                 </span>
