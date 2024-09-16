@@ -14,7 +14,12 @@ interface BookType {
     "Image-URL-M": string;
 }
 
-export const BookItem = ({ book }: { book: BookType }) => {
+interface BookItemProps {
+    book: BookType;
+}
+
+export const BookItem = (props: BookItemProps) => {
+    const { book } = props;
     const dispatch = useAppDispatch();
     const wishList = useAppSelector((state) => state.book.wishListItems);
     const [isInWishList, setIsInWishList] = useState(wishList.some((item) => item.ISBN === book.ISBN));

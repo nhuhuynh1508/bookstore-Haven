@@ -4,12 +4,14 @@ export interface BookState {
     cartItems: any[];
     wishListItems: any[];
     cartTotalAmount: number;
+    wishListTotalAmount: number;
 }
 
 const initialState: BookState = {
     cartItems: [],
     wishListItems: [],
     cartTotalAmount: 0,
+    wishListTotalAmount: 0,
 };
 
 const bookSlice = createSlice({
