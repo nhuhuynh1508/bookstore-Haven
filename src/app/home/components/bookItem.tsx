@@ -4,9 +4,6 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useEffect, useState } from 'react';
 import { BookType } from "../page";
 
-// Define your BookType interface here
-
-
 interface BookItemProps {
     book: BookType;
 }

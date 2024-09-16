@@ -5,7 +5,7 @@ import { Header } from '@/app/home/components/header';
 
 import { useEffect, useState } from 'react';
 
-interface BookType {
+export interface BookType {
     author: string;
     cover_image: string;
     description: string;
