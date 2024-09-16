@@ -4,7 +4,7 @@ import { clearCart, removeFromCart, updateQuantity } from "@/lib/features/bookSl
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Link from "next/link";
 
-export const Cart = () => {
+export const Cart = ({ book }: any) => {
     const dispatch = useAppDispatch();
     const cartItems = useAppSelector((state) => state.book.cartItems);
     const cartTotalAmount = cartItems.reduce((total, item) => total + item.quantity * item.Price, 0);
@@ -13,7 +13,7 @@ export const Cart = () => {
         dispatch(clearCart());
     };
 
-    const handleRemoveFromCart = ({book}: any) => {
+    const handleRemoveFromCart = () => {
         dispatch(removeFromCart(book));
     };
 
@@ -40,13 +40,13 @@ export const Cart = () => {
                             <tr key={index} className="border-b border-gray-200">
                                 <td className="p-3">
                                     <img
-                                        src={item.cover_image}
-                                        alt={item.title}
+                                        src={item["Image-URL-M"]}
+                                        alt={item["Book-Title"]}
                                         className="w-24 h-32 object-cover"
                                     />
                                 </td>
                                 <td className="p-4">
-                                    <h1 className="text-lg font-bold">{item.title}</h1>
+                                    <h1 className="text-lg font-bold">{item["Book-Title"]}</h1>
                                 </td>
                                 <td className="p-4">
                                     <span>{item["Price"]}₫</span>
