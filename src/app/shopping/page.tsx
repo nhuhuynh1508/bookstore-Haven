@@ -34,9 +34,9 @@ function ShoppingCart() {
                 </div>
                 <div className="flex items-center ml-auto">
                     <img
-                        src="/assets/wishlist.png"
+                        src="/assets/heart.png"
                         alt="wishlist"
-                        style={{ width: '40px', height: '40px' }}
+                        style={{ width: '30px', height: '30px' }}
                     />
                 </div>
             </div>

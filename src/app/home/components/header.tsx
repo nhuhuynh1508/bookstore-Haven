@@ -6,10 +6,10 @@ export const Header = () => {
     const cartItems = useAppSelector((state) => state.book.cartItems);
     const wishListItems = useAppSelector((state) => state.book.wishListItems);
     const cartTotalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-    const wishListTotalQuantity = wishListItems.reduce((total, item) => total + item.quantity, 0);
-    
+    const wishListTotalQuantity = wishListItems.length; // Assuming wishListItems do not have quantity
+
     return (
-    <div className="left-0 top-0 w-full absolute bg-slate-300 h-16 sm:h-20 flex items-center px-4 sm:px-8 justify-between">
+        <div className="w-full bg-slate-300 h-16 sm:h-20 flex items-center px-4 sm:px-8 justify-between fixed top-0 left-0 z-50">
             <div className="flex items-center">
                 <Link href="/home" className="flex items-center">
                     <span className="text-black text-2xl sm:text-4xl font-pacifico">Book Haven</span>
@@ -20,34 +20,38 @@ export const Header = () => {
                     />
                 </Link>
             </div>
-            <div className="flex items-center ml-auto space-x-4 sm:space-x-8">
+            <div className="flex items-center space-x-4 sm:space-x-8">
                 <Link href="/shopping" className="relative inline-block">
                     <img
                         src="/assets/cart.png"
                         alt="cart"
-                        className="w-8 h-8 sm:w-12 sm:h-10"
+                        className="w-10 h-8 sm:w-12 sm:h-10"
                     />
-                    <span
-                        className="absolute top-0 right-0 sm:top-2 sm:right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center"
-                        style={{ transform: 'translate(50%, -50%)', zIndex: 1 }}
-                    >
-                        {cartTotalQuantity}
-                    </span>
+                    {cartTotalQuantity > 0 && (
+                        <span
+                            className="absolute top-1 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center"
+                            style={{ transform: 'translate(50%, -50%)' }}
+                        >
+                            {cartTotalQuantity}
+                        </span>
+                    )}
                 </Link>
                 <Link href="/wishlist" className="relative inline-block">
-                <img
-                    src="/assets/heart.png"
-                    alt="wishlist"
-                    className='w-6 h-6 sm:w-8 sm:h-8'
-                />
-                <span
-                    className="absolute top-5 right-0 sm:top-4 sm:right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center"
-                    style={{ transform: 'translate(50%, -50%)', zIndex: 1 }}
-                >
-                    {wishListTotalQuantity}
-                </span>
+                    <img
+                        src="/assets/heart.png"
+                        alt="wishlist"
+                        className="w-6 h-6 sm:w-8 sm:h-8"
+                    />
+                    {wishListTotalQuantity > 0 && (
+                        <span
+                            className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center"
+                            style={{ transform: 'translate(50%, -50%)' }}
+                        >
+                            {wishListTotalQuantity}
+                        </span>
+                    )}
                 </Link>
             </div>
         </div>
-    )
+    );
 }
