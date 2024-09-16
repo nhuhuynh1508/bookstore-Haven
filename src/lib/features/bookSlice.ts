@@ -1,8 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+interface CartItem {
+    id: number;
+    title: string;
+    author: string;
+    publication_year: string;
+    genre: string[];
+    description: string;
+    cover_image: string;
+    Publisher: string;
+    Price: number;
+    quantity: number;
+}
+
+interface WishListItem {
+    quantity: number;
+    id: number;
+}
 export interface BookState {
-    cartItems: any[];
-    wishListItems: any[];
+    cartItems: CartItem[];
+    wishListItems: WishListItem[];
     cartTotalAmount: number;
     wishListTotalAmount: number;
 }
@@ -20,7 +37,7 @@ const bookSlice = createSlice({
     reducers: {
         addToCart(state, action) {
             const bookIndex = state.cartItems.findIndex(
-                (book) => book.ISBN === action.payload.ISBN);
+                (book) => book.id === action.payload.id);
             if (bookIndex >= 0) {
                 state.cartItems[bookIndex].quantity += 1;
             }
@@ -33,16 +50,18 @@ const bookSlice = createSlice({
         },
 
         removeFromCart(state, action) {
+            console.log('Payload in removeFromCart:', action.payload);
             const bookIndex = state.cartItems.findIndex(
-                (book) => book.ISBN === action.payload.ISBN);
+                (book) => book.id === action.payload.id);
             if (bookIndex >= 0) {
                 state.cartItems[bookIndex].quantity -= 1;
                 if (state.cartItems[bookIndex].quantity === 0) {
                     state.cartItems.splice(bookIndex, 1);
                 }
             }
-            state.cartTotalAmount -= state.cartItems.reduce(
-                (total, item) => total + item.quantity * item.Price, 0);
+            state.cartTotalAmount = state.cartItems.reduce(
+                (total, item) => total + item.quantity * item.Price, 0
+            );
         },
 
         clearCart(state) {
@@ -51,7 +70,7 @@ const bookSlice = createSlice({
 
         updateQuantity(state, action) {
             const bookIndex = state.cartItems.findIndex(
-                (book) => book.ISBN === action.payload.ISBN);
+                (book) => book.id === action.payload.id);
             if (bookIndex >= 0) {
                 state.cartItems[bookIndex].quantity = action.payload.quantity;
             }
@@ -61,13 +80,22 @@ const bookSlice = createSlice({
 
         addToWishList(state, action) {
             const bookIndex = state.wishListItems.findIndex(
-                (book) => book.ISBN === action.payload.ISBN);
+                (book) => book.id === action.payload.id);
             // if the book isn;'t added to the wishlist
             if (bookIndex === -1) {
                 state.wishListItems.push(action.payload);
             }
             state.wishListItems = [...state.wishListItems];
-        }
+        },
+
+        removeFromWishList(state, action) {
+            const bookIndex = state.wishListItems.findIndex(
+                (book) => book.id === action.payload
+            );
+            if (bookIndex >= 0) {
+                state.wishListItems.splice(bookIndex, 1);
+            }
+        },
     }
 });
 
