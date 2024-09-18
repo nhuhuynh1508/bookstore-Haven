@@ -22,6 +22,8 @@ const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
 
+    const [search, setSearch] = useState("");
+
     // random price generator
     const generateRandomPrice = (min: number, max: number) => {
         return Math.floor(Math.random() * (max - min + 1) + min);
@@ -39,12 +41,12 @@ const Home = () => {
                 const data:BookType[] = await response.json();
                 console.log('hi', data);
                 const bookList = data.map((book) => {
+                    const randomPrice = generateRandomPrice(100000, 500000);
                     return {
                         ...book,
-                        price: generateRandomPrice(100, 500),
+                        price: randomPrice
                     };
                 });
-                console.log('bookList', bookList);
                 setBookList(bookList);
 
                 

@@ -55,7 +55,7 @@ export const BookItem = (props: BookItemProps) => {
                 <p className="text-gray-700">Author: {book.author}</p>
                 <p className="text-gray-700">Year: {book.publication_year}</p>
                 <p className="text-gray-700">Description: {book.description}</p>
-                <p className="text-gray-700 font-bold pt-2 text-lg">{book.price}đ</p>
+                <p className="text-gray-700 font-bold pt-2 text-lg">{book.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
 
                 <div className="flex items-center justify-between mt-4">
                     

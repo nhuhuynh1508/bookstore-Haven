@@ -1,5 +1,6 @@
 'use client';
 
+import { BookType } from "@/app/home/page";
 import { clearCart, removeFromCart, updateQuantity } from "@/lib/features/bookSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Link from "next/link";
@@ -7,17 +8,18 @@ import Link from "next/link";
 export const Cart = () => {
     const dispatch = useAppDispatch();
     const cartItems = useAppSelector((state) => state.book.cartItems);
-    const cartTotalAmount = cartItems.reduce((total, item) => total + item.quantity * item.Price, 0);
+    const cartTotalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
 
     const handleClearCart = () => {
         dispatch(clearCart());
     };
 
-    const handleRemoveFromCart = ({book}: any) => {
+    const handleRemoveFromCart = (book: BookType) => {
         dispatch(removeFromCart(book));
     };
 
-    const handleQuantityChange = (book: any, quantity: string) => {
+    const handleQuantityChange = (book: BookType, quantity: string) => {
         dispatch(updateQuantity({ book, quantity }));
     };
 
@@ -49,24 +51,24 @@ export const Cart = () => {
                                     <h1 className="text-lg font-bold">{item.title}</h1>
                                 </td>
                                 <td className="p-4">
-                                    <span>{item["Price"]}₫</span>
+                                    <span>{item.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
                                 </td>
                                 <td className="p-4">
                                     <input
                                         type="number"
                                         value={item.quantity}
                                         className="border p-2 text-center w-12"
-                                        min="1"
+                                        readOnly={false}
                                         onChange={(e) => handleQuantityChange(item, e.target.value)}
                                     />
                                 </td>
                                 <td className="p-4">
-                                    <span>{((item["Price"]) * item.quantity).toFixed(3)} ₫</span>
+                                    <span>{(item.price * item.quantity).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
                                 </td>
                                 <td className="p-4">
                                     <button
                                         className="text-red-500 hover:text-red-600 text-2xl font-bold font-sans"
-                                        onClick={handleRemoveFromCart}
+                                        onClick={() => handleRemoveFromCart(item)}
                                     >
                                         &times;
                                     </button>
@@ -83,7 +85,7 @@ export const Cart = () => {
                         >
                             Clear Cart
                         </button>
-                        <div className="text-lg font-bold border-2 p-4">Total: {cartTotalAmount.toFixed(3)}₫</div>
+                        <div className="text-lg font-bold border-2 p-4">Total: {cartTotalAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</div>
                     </div>
                 )}
             </div>
