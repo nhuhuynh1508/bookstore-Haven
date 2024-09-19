@@ -25,10 +25,10 @@ export const Header = () => {
                     <img
                         src="/assets/cart.png"
                         alt="cart"
-                        className="w-8 h-8 sm:w-12 sm:h-10"
+                        className="w-10 h-10 sm:w-12 sm:h-10"
                     />
                     <span
-                        className="absolute top-1 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center"
+                        className="absolute top-2 right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center"
                         style={{ transform: 'translate(50%, -50%)', zIndex: 1 }}
                     >
                         {cartTotalQuantity}

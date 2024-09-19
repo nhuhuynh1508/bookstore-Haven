@@ -1,15 +1,8 @@
+import { BookType } from '@/app/home/page';
 import { createSlice } from '@reduxjs/toolkit';
 
-interface CartItem {
-    id: number;
-    title: string;
-    author: string;
-    publication_year: string;
-    genre: string[];
-    description: string;
-    cover_image: string;
-    Publisher: string;
-    Price: number;
+
+interface CartItem extends BookType {
     quantity: number;
 }
 
@@ -17,17 +10,16 @@ interface WishListItem {
     quantity: number;
     id: number;
 }
+
 export interface BookState {
     cartItems: CartItem[];
     wishListItems: WishListItem[];
-    cartTotalAmount: number;
     wishListTotalAmount: number;
 }
 
 const initialState: BookState = {
     cartItems: [],
     wishListItems: [],
-    cartTotalAmount: 0,
     wishListTotalAmount: 0,
 };
 
@@ -45,8 +37,6 @@ const bookSlice = createSlice({
                 const tempBook = {...action.payload, quantity: 1};
                 state.cartItems.push(tempBook);
             }
-            state.cartTotalAmount += state.cartItems.reduce(
-                (total, item) => total + item.quantity * item.Price, 0);
         },
 
         removeFromCart(state, action) {
@@ -59,9 +49,6 @@ const bookSlice = createSlice({
                     state.cartItems.splice(bookIndex, 1);
                 }
             }
-            state.cartTotalAmount = state.cartItems.reduce(
-                (total, item) => total + item.quantity * item.Price, 0
-            );
         },
 
         clearCart(state) {
@@ -74,14 +61,12 @@ const bookSlice = createSlice({
             if (bookIndex >= 0) {
                 state.cartItems[bookIndex].quantity = action.payload.quantity;
             }
-            state.cartTotalAmount = state.cartItems.reduce(
-                (total, item) => total + item.quantity * item.Price, 0);
         },
 
         addToWishList(state, action) {
             const bookIndex = state.wishListItems.findIndex(
                 (book) => book.id === action.payload.id);
-            // if the book isn;'t added to the wishlist
+            // if the book isn't added to the wishlist
             if (bookIndex === -1) {
                 state.wishListItems.push(action.payload);
             }

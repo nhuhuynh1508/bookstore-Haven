@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         'sans': ['Inter', 'sans-serif'],
         'pacifico': ['Pacifico'],
+        'bodoni_moda': ['Bodoni Moda'],
       },
     },
   },
