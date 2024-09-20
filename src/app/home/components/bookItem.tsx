@@ -1,11 +1,12 @@
 'use client';
 import { addToCart, addToWishList } from "@/lib/features/bookSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import Link from "next/link";
 import { useEffect, useState } from 'react';
 import { BookType } from "../page";
 
 interface BookItemProps {
-    book: BookType;
+    book: BookType,
 }
 
 export const BookItem = (props: BookItemProps) => {
@@ -34,6 +35,7 @@ export const BookItem = (props: BookItemProps) => {
     };
 
     return (
+        <Link href={`/book/${book.id}`}>
         <div className="bg-white rounded-lg shadow-md overflow-hidden relative">
             <img
                 src={book.cover_image}
@@ -73,5 +75,6 @@ export const BookItem = (props: BookItemProps) => {
                 </div>
             </div>
         </div>
+        </Link>
     );
 };

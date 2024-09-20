@@ -23,7 +23,7 @@ const generateRandomPrice = (min: number, max: number) => {
 
 
 const Home = () => {
-    const {data:book, error:err} = useSWR('https://freetestapi.com/api/v1/books', async (url) => {
+    const {data:book, error} = useSWR('https://freetestapi.com/api/v1/books', async (url) => {
         const response = await fetch(url);
             return response.json();
     })
@@ -52,7 +52,7 @@ const Home = () => {
             <div className="p-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {BookList?.map((book: BookType) => (
-                        <BookItem key={book.id} book={book} />
+                            <BookItem book={book} />
                     ))}
                 </div>
             </div>
