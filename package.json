@@ -6,11 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serve": "nodemon index.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.7",
+    "express": "^4.21.0",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.6.3",
     "next": "14.2.9",
     "react": "^18",
     "react-dom": "^18",
@@ -25,6 +29,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^8",
     "eslint-config-next": "14.2.9",
+    "nodemon": "^3.1.7",
     "postcss": "^8.4.45",
     "tailwindcss": "^3.4.10",
     "typescript": "^5"

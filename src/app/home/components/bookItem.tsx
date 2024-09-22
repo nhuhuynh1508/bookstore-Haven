@@ -37,7 +37,7 @@ export const BookItem = (props: BookItemProps) => {
 
     return (
         <Link href={`/book/${book.id}`}>
-         <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full relative">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full relative">
                 <img
                     src={book.cover_image}
                     alt='book cover'

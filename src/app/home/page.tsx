@@ -68,7 +68,7 @@ const Home = () => {
             <div className="p-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {BookList?.map((book: BookType) => (
-                            <BookItem book={book} />
+                            <BookItem book={book} key={book.id} />
                     ))}
                 </div>
             </div>
