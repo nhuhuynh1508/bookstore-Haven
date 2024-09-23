@@ -22,7 +22,7 @@ function ShoppingCart() {
             </div>
             <div className="left-0 top-0 w-full absolute bg-slate-300 h-20 flex items-center sm:px-8 justify-between">
                 <div className="flex items-center">
-                    <Link href="/home" className="flex items-center">
+                    <Link href="/" className="flex items-center">
                         <span className="text-black text-2xl sm:text-4xl font-pacifico">Book Haven</span>
                         <img
                             src="/assets/book-icon.png"

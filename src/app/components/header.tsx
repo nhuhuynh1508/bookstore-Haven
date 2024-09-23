@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import { useAppSelector } from "../../lib/hooks";
 
+import { SearchBar } from './searchBar';
+
 export const Header = () => {
     const cartItems = useAppSelector((state) => state.book.cartItems);
     const wishListItems = useAppSelector((state) => state.book.wishListItems);
@@ -20,6 +22,10 @@ export const Header = () => {
                     />
                 </Link>
             </div>
+
+            
+            <SearchBar />
+
             <div className="flex items-center space-x-4 sm:space-x-8">
                 <Link href="/shopping" className="relative inline-block">
                     <img

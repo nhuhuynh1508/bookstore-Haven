@@ -1,6 +1,6 @@
 'use client';
 
-import { BookType } from "@/app/home/page";
+import { BookType } from "@/app/type";
 import { clearCart, removeFromCart, updateQuantity } from "@/lib/features/bookSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Link from "next/link";
@@ -25,8 +25,8 @@ export const Cart = () => {
 
     return (
         <>
-            <div className="container p-4">
-                <table className="min-w-full p-0 bg-white border border-gray-200">
+            <div className="container p-4 w-full mx-auto">
+                <table className="w-full bg-white border border-gray-200">
                     <thead>
                         <tr className="w-full text-left bg-gray-100 border-b border-gray-200">
                             <th className="p-3">Thumbnail</th>
@@ -94,7 +94,7 @@ export const Cart = () => {
                     <span className="text-4xl font-serif text-center">
                         Your cart seems to be empty for now. Let's fix that!
                     </span>
-                    <Link href="/home">
+                    <Link href="/">
                         <div className="text-2xl font-serif text-gray-600 hover:underline flex items-center p-4">
                             <div className="relative flex items-center">
                                 <div className="h-0 w-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-[16px] border-black"></div>

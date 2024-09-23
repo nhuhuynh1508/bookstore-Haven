@@ -11,7 +11,7 @@ export const Background = () => {
                 <span className="p-2 font-eb_garamond font-bold text-white text-3xl sm:text-4xl md:text-5xl">
                     Welcome to Book Haven
                 </span>
-                <p className="p-4 text-white text-sm sm:text-base md:text-xl font-bodoni_moda sm:max-w-[50%] md:max-w-[90%]">
+                <p className="p-4 text-white text-sm sm:text-base md:text-2xl font-bodoni_moda sm:max-w-[50%] md:max-w-[90%]">
                     Discover a world of stories, knowledge, and inspiration. Whether you're looking for the latest bestsellers, timeless classics, or hidden gems, we have something for every reader. Dive into your next great read today!
                 </p>
             </div>

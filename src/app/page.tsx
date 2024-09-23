@@ -6,12 +6,12 @@ import { Header } from '@/app/components/header';
 import useSWR from 'swr';
 import { BookType } from './type';
 
-
-
 // random price generator
 const generateRandomPrice = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
+
+
 
 // random ISBN generator
 const generateRandomISBN = (min: number, max: number) => {
@@ -19,7 +19,18 @@ const generateRandomISBN = (min: number, max: number) => {
 };
 
 const Home = () => {
-    const {data:book, error} = useSWR('https://freetestapi.com/api/v1/books', async (url) => {
+
+    // useEffect(()=>{
+    //     const fetcher = async () => {
+    //         console.log('resultData1')
+    //         const resultData = await fetch('https://api.itbook.store/1.0/search/mongodb');
+    //         console.log('resultData')
+    //         return resultData;
+    //     }
+    
+    //     fetcher();
+    // },[])
+    const {data:book, error} = useSWR('https://freetestapi.com/api/v1/book', async (url) => {
         const response = await fetch(url);
             return response.json();
     })
@@ -40,8 +51,6 @@ const Home = () => {
         if (!storedISBN[book.id]) {
             localStorage.setItem('ISBN', JSON.stringify({ ...storedISBN, [book.id]: randomISBN }));
         }
-
-        console.log(randomISBN)
         return {
             ...book,
             price: randomPrice,
