@@ -1,7 +1,7 @@
 'use client'
 
 
-import { Header } from '@/app/home/components/header';
+import { Header } from '@/app/components/header';
 import { useParams } from 'next/navigation';
 import useSWR from "swr";
 

@@ -3,8 +3,9 @@ import { addToCart, addToWishList } from "@/lib/features/bookSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
-import { BookType } from "../page";
+import { BookType } from '../type';
 
+// in case of having a lot of different types
 interface BookItemProps {
     book: BookType,
 }
