@@ -9,7 +9,7 @@ export const Header = () => {
     const wishListTotalQuantity = wishListItems.length;
     
     return (
-    <div className="w-full bg-slate-300 h-16 sm:h-20 flex items-center px-4 sm:px-8 justify-between fixed top-0 left-0 z-50">
+    <div className="w-full bg-blue-100 h-16 sm:h-20 flex items-center px-4 sm:px-8 justify-between fixed top-0 left-0 z-50">
             <div className="flex items-center">
                 <Link href="/home" className="flex items-center">
                     <span className="text-black text-2xl sm:text-4xl font-pacifico">Book Haven</span>

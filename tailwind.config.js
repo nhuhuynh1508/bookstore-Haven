@@ -7,6 +7,7 @@ module.exports = {
         'sans': ['Inter', 'sans-serif'],
         'pacifico': ['Pacifico'],
         'bodoni_moda': ['Bodoni Moda'],
+        'eb_garamond': ['EB Garamond']
       },
     },
   },
