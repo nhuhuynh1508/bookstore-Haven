@@ -25,15 +25,16 @@ export const Cart = () => {
 
     return (
         <>
-            <div className="container p-4 w-full mx-auto">
+            <div className="container p-2 sm:p-4 w-full mx-auto">
+                <div className="overflow-x-auto">
                 <table className="w-full bg-white border border-gray-200">
                     <thead>
                         <tr className="w-full text-left bg-gray-100 border-b border-gray-200">
-                            <th className="p-3">Thumbnail</th>
-                            <th className="p-4">Product Title</th>
-                            <th className="p-4">Price</th>
-                            <th className="p-4">Quantity</th>
-                            <th className="p-7">Total</th>
+                            <th className="p-2 sm:p-3 text-xs sm:text-base">Thumbnail</th>
+                            <th className="p-2 sm:p-3 text-xs sm:text-base">Product Title</th>
+                            <th className="p-2 sm:p-3 text-xs sm:text-base">Price</th>
+                            <th className="p-2 sm:p-3 text-xs sm:text-base">Quantity</th>
+                            <th className="p-2 sm:p-3 text-xs sm:text-base">Total</th>
                             <th className="p-1"></th>
                         </tr>
                     </thead>
@@ -44,28 +45,27 @@ export const Cart = () => {
                                     <img
                                         src={item.cover_image}
                                         alt={item.title}
-                                        className="w-24 h-32 object-cover"
+                                        className="sm:w-24 sm:h-32 xs:w-14 xs:h-20"
                                     />
                                 </td>
-                                <td className="p-4">
-                                    <h1 className="text-lg font-bold">{item.title}</h1>
+                                <td className="p-1 sm:p-3 text-[10px] sm:text-base">
+                                    <h1 className="font-bold">{item.title}</h1>
                                 </td>
-                                <td className="p-4">
+                                <td className="p-1 sm:p-3 text-[10px] sm:text-base">
                                     <span>{item.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
                                 </td>
-                                <td className="p-4">
+                                <td className="p-1 sm:p-3 xs:text-[10px] sm:text-base">
                                     <input
                                         type="number"
                                         value={item.quantity}
-                                        className="border p-2 text-center w-12"
-                                        readOnly={false}
+                                        className="border m-3 text-center w-8"
                                         onChange={(e) => handleQuantityChange(item, e.target.value)}
                                     />
                                 </td>
-                                <td className="p-4">
+                                <td className="p-1 sm:p-3 text-[10px] sm:text-base">
                                     <span>{(item.price * item.quantity).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
                                 </td>
-                                <td className="p-4">
+                                <td className="p-1 sm:p-3 text-[10px] sm:text-base">
                                     <button
                                         className="text-red-500 hover:text-red-600 text-2xl font-bold font-sans"
                                         onClick={() => handleRemoveFromCart(item)}
@@ -77,15 +77,16 @@ export const Cart = () => {
                         ))}
                     </tbody>
                 </table>
+                </div>
                 {cartItems.length > 0 && (
-                    <div className="flex justify-between items-center mt-4">
+                    <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
                         <button
-                            className="text-black px-4 py-2 border-2 rounded hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
+                            className="text-black m-2 px-4 py-2 border-2 rounded hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
                             onClick={handleClearCart}
                         >
                             Clear Cart
                         </button>
-                        <div className="text-lg font-bold border-2 p-4">Total: {cartTotalAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</div>
+                        <div className="text-base sm:text-lg font-bold border-2 p-2 sm:p-4">Total: {cartTotalAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</div>
                     </div>
                 )}
             </div>
