@@ -8,11 +8,11 @@ export const CartHeader = () => {
     return (
         <>
         
-        <div className="mt-12">
+        <div className="mt-20">
                 <img
                     src="/assets/bookcart.jpg"
                     alt="bookstore"
-                    className="w-full h-56"
+                    className="w-full h-64"
                 />
             </div>
             <div className="w-full bg-blue-100 h-16 sm:h-20 flex items-center px-4 justify-between fixed top-0 z-50">

@@ -5,7 +5,7 @@ interface CartItem extends BookType {
     quantity: number;
 }
 
-interface WishListItem {
+interface WishListItem extends BookType{
     quantity: number;
     id: number;
 }

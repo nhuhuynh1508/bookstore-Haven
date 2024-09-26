@@ -14,9 +14,9 @@ function ShoppingCart() {
     return (
         <>
             <CartHeader />
-            <div className="flex justify-between items-center p-4">
+            <div className="flex justify-between items-center p-2">
                 <div className="flex items-center">
-                    <span className="text-5xl font-serif border-b-2 border-gray-300 pb-2">Cart</span>
+                    <span className="xs:text-3xl sm:text-5xl font-serif border-b-4 border-gray-300 pb-2 p-2">Cart</span>
                 </div>
                 <span className="font-serif text-black pt-6">Total Quantity: {cartTotalQuantity}</span>
             </div>
