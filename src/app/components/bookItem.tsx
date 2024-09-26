@@ -1,5 +1,5 @@
 'use client';
-import { addToCart, addToWishList } from "@/lib/features/bookSlice";
+import { addToCart, addToWishList, removeFromWishList } from "@/lib/features/bookSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
@@ -26,6 +26,7 @@ export const BookItem = (props: BookItemProps) => {
 
     const handleAddToWishList = () => {
         if (isInWishList) {
+            dispatch(removeFromWishList(book.id));
             setIsInWishList(false);
         } else {
             dispatch(addToWishList(book));
