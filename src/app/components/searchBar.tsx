@@ -1,17 +1,9 @@
-"use client"
-
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import useSWR from "swr";
 
 export const SearchBar = () => {
     const [input, setInput] = useState("")
     const router = useRouter()
-
-    const {data, error} = useSWR(`https://freetestapi.com/api/v1/books?search=${input}`, async (url) => {
-        const response = await fetch(url);
-            return response.json()
-    })
 
     const handleChange = (e) => {
         const value = e.target.value

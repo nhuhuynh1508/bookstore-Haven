@@ -65,7 +65,7 @@ export const BookItem = (props: BookItemProps) => {
                     <p className="text-gray-700 font-bold pt-2 text-lg">{book.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
                 </div>
                 <div className="flex items-center justify-between p-4 border-t">
-                    <p className="text-gray-700">ISBN: {book.ISBN}</p>
+                    <p className="text-gray-700 truncate">ISBN: {book.ISBN}</p>
                     
                     <button
                         className="ml-4 bg-blue-500 text-white text-lg px-3 py-1 rounded-full hover:bg-blue-700 flex items-center"
@@ -74,9 +74,9 @@ export const BookItem = (props: BookItemProps) => {
                         <img
                             src="/assets/shopping-cart.png"
                             alt="cart"
-                            style={{ width: '20px', height: '20px' }}
+                            className="w-5 h-5"
                         />
-                        <span className="ml-2">Add to Cart</span>
+                        <span className="ml-2 sm:text-base xs:text-xs">Add to Cart</span>
                     </button>
                 </div>
             </div>
