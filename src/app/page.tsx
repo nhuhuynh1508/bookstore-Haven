@@ -5,14 +5,12 @@ import { Header } from '@/app/components/header';
 import { Footer } from './components/footer';
 import { processedBook } from './home/components/bookProcessor';
 
+import { useState } from 'react';
 import useSWR from 'swr';
 import { BookType } from './type';
 
-
-
-
 const Home = () => {
-    const limit = 5;
+    const [limit, setLimit] = useState(5);
 
     const {data:book, error} = useSWR(`https://freetestapi.com/api/v1/books?limit=${limit}`, async (url) => {
         const response = await fetch(url);
@@ -23,8 +21,10 @@ const Home = () => {
 
     if (error) return <div>Error loading results.</div>;
 
-    
-    
+    const handleLoadMore = () => {
+        setLimit(limit + 5);
+    }
+
     return (
         <>
             <Background />
@@ -39,7 +39,7 @@ const Home = () => {
             {book?.length && (
                 <div className="mt-4 flex justify-center pb-4">
                 <button
-                    // onClick={handleLoadMore}
+                    onClick={handleLoadMore}
                     className="bg-gray-300 text-black px-4 py-2 rounded">
                     Load More
                 </button>

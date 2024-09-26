@@ -68,15 +68,15 @@ export const BookItem = (props: BookItemProps) => {
                     <p className="text-gray-700 truncate">ISBN: {book.ISBN}</p>
                     
                     <button
-                        className="ml-4 bg-blue-500 text-white text-lg px-3 py-1 rounded-full hover:bg-blue-700 flex items-center"
+                        className="ml-4 bg-blue-500 text-white text-lg px-4 py-2 rounded-full hover:bg-blue-700 flex items-center"
                         onClick={handleAddToCart}
                     >
                         <img
                             src="/assets/shopping-cart.png"
                             alt="cart"
-                            className="w-5 h-5"
+                            className="w-5 h-5 pr-1"
                         />
-                        <span className="ml-2 sm:text-base xs:text-xs">Add to Cart</span>
+                        <span className="pr-2 md:ml-3 md:pr-3 md:text-base xs:text-xs">Add</span>
                     </button>
                 </div>
             </div>
