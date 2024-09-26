@@ -3,6 +3,7 @@ import { Background } from '@/app/components/background';
 import { BookItem } from '@/app/components/bookItem';
 import { Header } from '@/app/components/header';
 
+import { useState } from 'react';
 import useSWR from 'swr';
 import { BookType } from './type';
 
@@ -11,14 +12,14 @@ const generateRandomPrice = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-
-
 // random ISBN generator
 const generateRandomISBN = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 100000) + min);
 };
 
 const Home = () => {
+    const [pageIndex, setPageIndex] = useState(1);
+    const limit = 5;
 
     // useEffect(()=>{
     //     const fetcher = async () => {
@@ -30,13 +31,13 @@ const Home = () => {
     
     //     fetcher();
     // },[])
-    const {data:book, error} = useSWR('https://freetestapi.com/api/v1/book', async (url) => {
+    const {data:book, error} = useSWR('https://freetestapi.com/api/v1/books', async (url) => {
         const response = await fetch(url);
             return response.json();
     })
 
 
-    const BookList = book?.map((book: BookType) => {
+    const BookList = book?.slice((pageIndex - 1) * limit, pageIndex * limit).map((book: BookType) => {
         const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
         const storedISBN = JSON.parse(localStorage.getItem('ISBN')) || {};
         // retrieve the price from local storage if it exists, if not generate a random price
@@ -59,6 +60,20 @@ const Home = () => {
         }
     );
     
+    const totalPages = Math.ceil(book?.length / limit);
+        
+    const handleNextPage = () => {
+        if (pageIndex < totalPages) {
+            setPageIndex((prev) => prev + 1);
+        }
+    };
+    
+    const handlePreviousPage = () => {
+        if (pageIndex > 1) {
+            setPageIndex((prev) => prev - 1);
+        }
+    };
+    
     return (
         <>
             <Background />
@@ -69,6 +84,11 @@ const Home = () => {
                             <BookItem book={book} key={book.id} />
                     ))}
                 </div>
+            </div>
+            <div className="mt-4 flex justify-between">
+                    <button onClick={handlePreviousPage} className="bg-gray-300 text-black px-4 py-2 rounded">Previous</button>
+                    <button>Page {pageIndex}</button>
+                    <button onClick={handleNextPage} className="bg-gray-300 text-black px-4 py-2 rounded">Next</button>
             </div>
         </>
     );
