@@ -3,9 +3,10 @@ import { Background } from '@/app/components/background';
 import { Header } from '@/app/components/header';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import useSWR from 'swr';
 
-export default function Result() {
+const Result = () => {
     const searchParams = useSearchParams()
     const search = searchParams.get("search")
 
@@ -45,4 +46,12 @@ export default function Result() {
             </div>
         </>
     )
+}
+
+export default function HomeSearch() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <Result />
+        </Suspense>
+    );
 }
