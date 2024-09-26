@@ -1,6 +1,5 @@
-import { BookType } from '@/app/home/page';
+import { BookType } from '@/app/type';
 import { createSlice } from '@reduxjs/toolkit';
-
 
 interface CartItem extends BookType {
     quantity: number;
@@ -31,6 +30,7 @@ const bookSlice = createSlice({
             const bookIndex = state.cartItems.findIndex(
                 (book) => book.id === action.payload.id);
             if (bookIndex >= 0) {
+                state.cartItems[bookIndex].quantity
                 state.cartItems[bookIndex].quantity += 1;
             }
             else {

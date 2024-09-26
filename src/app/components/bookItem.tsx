@@ -3,8 +3,9 @@ import { addToCart, addToWishList } from "@/lib/features/bookSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
-import { BookType } from "../page";
+import { BookType } from '../type';
 
+// in case of having a lot of different types
 interface BookItemProps {
     book: BookType,
 }
@@ -36,13 +37,15 @@ export const BookItem = (props: BookItemProps) => {
     const ISBN = storedISBN[book?.id] || 0;
 
     return (
-        <Link href={`/book/${book.id}`}>
-         <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full relative">
+        
+        <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full relative">
+                <Link href={`/book/${book.id}`}>
                 <img
                     src={book.cover_image}
                     alt='book cover'
-                    className="w-full h-72 object-cover"
+                    className="w-full h-72 object-cover hover:opacity-35"
                 />
+                </Link>
                 <button
                     className="absolute top-2 right-2"
                     onClick={handleAddToWishList}
@@ -76,6 +79,5 @@ export const BookItem = (props: BookItemProps) => {
                     </button>
                 </div>
             </div>
-        </Link>
     );
 };

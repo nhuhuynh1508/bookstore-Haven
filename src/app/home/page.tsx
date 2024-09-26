@@ -1,79 +1,57 @@
 'use client';
-import { Background } from '@/app/home/components/background';
-import { BookItem } from '@/app/home/components/bookItem';
-import { Header } from '@/app/home/components/header';
-
+import { Background } from '@/app/components/background';
+import { Header } from '@/app/components/header';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import useSWR from 'swr';
 
-export interface BookType {
-    author: string;
-    cover_image: string;
-    description: string;
-    genre: string[];
-    id: number;
-    publication_year: number;
-    title: string;
-    price: number;
-    ISBN: number;
-}
+const Result = () => {
+    const searchParams = useSearchParams()
+    const search = searchParams.get("search")
 
-// random price generator
-const generateRandomPrice = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-// random ISBN generator
-const generateRandomISBN = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min + 100000) + min);
-};
-
-
-
-const Home = () => {
-    const {data:book, error} = useSWR('https://freetestapi.com/api/v1/books', async (url) => {
+    const {data:book, error} = useSWR(`https://freetestapi.com/api/v1/books?search=${search}`, async (url) => {
         const response = await fetch(url);
             return response.json();
     })
+    const totalBook = book?.length;
 
+    if (error) return <div>Error loading results.</div>;
 
-    const BookList = book?.map((book: BookType) => {
-        const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
-        const storedISBN = JSON.parse(localStorage.getItem('ISBN')) || {};
-        // retrieve the price from local storage if it exists, if not generate a random price
-        const randomPrice = storedPrice[book.id] || generateRandomPrice(100000, 500000);
-        // retrieve the ISBN from local storage if exists, if not generate a random price
-        const randomISBN = storedISBN[book.id] || generateRandomISBN(100000000000, 900000000000);
-
-        if (!storedPrice[book.id]) {
-            localStorage.setItem('price', JSON.stringify({ ...storedPrice, [book.id]: randomPrice }));
-        }
-        
-        if (!storedISBN[book.id]) {
-            localStorage.setItem('ISBN', JSON.stringify({ ...storedISBN, [book.id]: randomISBN }));
-        }
-
-        console.log(randomISBN)
-        return {
-            ...book,
-            price: randomPrice,
-            ISBN: randomISBN,
-            };
-        }
-    );
-    
     return (
         <>
             <Background />
             <Header />
+            <h1 className="font-eb_garamond font-bold text-2xl p-4">Search Results</h1>
+            <h2 className='text-lg pl-4 font-serif'>There are {totalBook} relevant search results for "{search}"</h2>
             <div className="p-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    {BookList?.map((book: BookType) => (
-                            <BookItem book={book} />
-                    ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-6">
+                {book?.map((book) => (
+                    <div key={book.id}
+                        className='bg-white rounded-lg shadow-md p-4 hover:shadow-lg'>
+                        <Link href={`/book/${book.id}`}>
+                        <img
+                            src={book.cover_image}
+                            alt='book cover'
+                            className="w-full h-48 object-cover rounded mb-4"
+                        />
+                        </Link>
+                        <h3 className="text-xl font-semibold mb-2">{book.title}</h3>
+                        <p className="text-gray-700 mb-1">Author: {book.author}</p>
+                        <p className="text-gray-700 mb-2">Year: {book.publication_year}</p>
+                        
+                    </div>
+                ))}
                 </div>
             </div>
         </>
-    );
+    )
 }
 
-export default Home;
+export default function HomeSearch() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <Result />
+        </Suspense>
+    );
+}
