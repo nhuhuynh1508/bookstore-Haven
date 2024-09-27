@@ -41,14 +41,7 @@ const bookSlice = createSlice({
 
         removeFromCart(state, action) {
             console.log('Payload in removeFromCart:', action.payload);
-            const bookIndex = state.cartItems.findIndex(
-                (book) => book.id === action.payload.id);
-            if (bookIndex >= 0) {
-                state.cartItems[bookIndex].quantity -= 1;
-                if (state.cartItems[bookIndex].quantity === 0) {
-                    state.cartItems.splice(bookIndex, 1);
-                }
-            }
+            state.cartItems = state.cartItems.filter((book) => book.id !== action.payload.id);
         },
 
         clearCart(state) {
