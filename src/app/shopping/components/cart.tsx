@@ -20,7 +20,7 @@ export const Cart = () => {
     };
 
     const handleQuantityChange = (book: BookType, quantity: string) => {
-        dispatch(updateQuantity({ book, quantity }));
+        dispatch(updateQuantity({ id: book.id, quantity: parseInt(quantity) }));
     };
 
     return (
@@ -58,7 +58,8 @@ export const Cart = () => {
                                     <input
                                         type="number"
                                         value={item.quantity}
-                                        className="border m-3 text-center w-8"
+                                        className="border text-center w-16"
+                                        min="1"
                                         onChange={(e) => handleQuantityChange(item, e.target.value)}
                                     />
                                 </td>
