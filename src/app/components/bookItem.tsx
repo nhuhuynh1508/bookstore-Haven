@@ -1,8 +1,8 @@
 'use client';
-import { addToCart, addToWishList, removeFromWishList } from "@/lib/features/bookSlice";
+import { addToCart, addToWishList } from "@/lib/features/bookSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Link from "next/link";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BookType } from '../type';
 
 // in case of having a lot of different types
@@ -14,24 +14,19 @@ export const BookItem = (props: BookItemProps) => {
     const { book } = props;
     const dispatch = useAppDispatch();
     const wishList = useAppSelector((state) => state.book.wishListItems);
-    const [isInWishList, setIsInWishList] = useState(false);
-
-    useEffect(() => {
-        setIsInWishList(wishList.some((item) => item.id === book.id));
-    }, [wishList, book.id]);
+    const [isInWishList, setIsInWishList] = useState(false);;
     
     const handleAddToCart = () => {
         dispatch(addToCart(book));
     };
 
     const handleAddToWishList = () => {
-        if (isInWishList) {
-            dispatch(removeFromWishList(book.id));
-            setIsInWishList(false);
+        if (!isInWishList) {
+            dispatch(addToWishList(book));
         } else {
             dispatch(addToWishList(book));
-            setIsInWishList(true);
         }
+        setIsInWishList(!isInWishList)
     };
 
     const storedISBN = JSON.parse(localStorage.getItem('ISBN')) || {};

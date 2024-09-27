@@ -26,7 +26,7 @@ const bookSlice = createSlice({
     name: 'book',
     initialState,
     reducers: {
-        addToCart(_state, action) {
+        addToCart(state, action) {
             const existedItems = JSON.parse(localStorage.getItem('CartItems')) || [];
             const itemIndex = existedItems.findIndex((item: BookType) => item.id === action.payload.id);
 
@@ -36,6 +36,16 @@ const bookSlice = createSlice({
             } else {
                 existedItems.push({ id: action.payload.id, quantity: 1 });
                 alert(`${action.payload.title} has been added!`)
+            }
+
+            const bookIndex = state.cartItems.findIndex(
+                (book) => book.id === action.payload.id);
+            if (bookIndex >= 0) {
+                state.cartItems[bookIndex].quantity += 1;
+            }
+            else {
+                const tempBook = {...action.payload, quantity: 1};
+                state.cartItems.push(tempBook);
             }
 
             localStorage.setItem('CartItems', JSON.stringify(existedItems));
@@ -58,26 +68,29 @@ const bookSlice = createSlice({
         },
 
         addToWishList(state, action) {
+            const existedWishItems = JSON.parse(localStorage.getItem('WishListItems')) || [];
+            const itemIndex = existedWishItems.findIndex((item: BookType) => item.id === action.payload.id);
+            
+            if (itemIndex === -1) {
+                existedWishItems.push({id: action.payload.id});
+            } else {
+                existedWishItems.splice(itemIndex, 1)
+            }
+            
+            
+            localStorage.setItem('WishListItems', JSON.stringify(existedWishItems));
+
             const bookIndex = state.wishListItems.findIndex(
                 (book) => book.id === action.payload.id);
-            // if the book isn't added to the wishlist
             if (bookIndex === -1) {
                 state.wishListItems.push(action.payload);
-            }
-            state.wishListItems = [...state.wishListItems];
-        },
-
-        removeFromWishList(state, action) {
-            const bookIndex = state.wishListItems.findIndex(
-                (book) => book.id === action.payload
-            );
-            if (bookIndex >= 0) {
-                state.wishListItems.splice(bookIndex, 1);
+            } else {
+                state.wishListItems.splice(bookIndex, 1)
             }
         },
     }
 });
 
-export const { addToCart, removeFromCart, clearCart, updateQuantity, addToWishList, removeFromWishList } = bookSlice.actions;
+export const { addToCart, removeFromCart, clearCart, updateQuantity, addToWishList} = bookSlice.actions;
 
 export default bookSlice.reducer;
