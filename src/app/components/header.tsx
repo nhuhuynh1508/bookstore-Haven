@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useAppSelector } from "../../lib/hooks";
 
+import { HamburgerMenu } from './hamburgerMenu';
 import { SearchBar } from './searchBar';
 
 export const Header = () => {
@@ -12,9 +13,11 @@ export const Header = () => {
     
     return (
     <div className="w-full bg-blue-100 h-16 sm:h-20 flex items-center px-4 justify-between fixed top-0 z-50">
+            <HamburgerMenu />
+            
             <div className="flex items-center">
                 <Link href="/" className="flex items-center">
-                    <span className="pl-10 text-black text-2xl sm:text-4xl xs:text-sm font-pacifico">Book Haven</span>
+                    <span className="text-black text-2xl sm:text-4xl xs:text-sm font-pacifico pl-3">Book Haven</span>
                     <img
                         src="/assets/book-icon.png"
                         alt="icon"

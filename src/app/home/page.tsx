@@ -30,16 +30,15 @@ const Result = () => {
                     <div key={book.id}
                         className='bg-white rounded-lg shadow-md p-4 hover:shadow-lg'>
                         <Link href={`/book/${book.id}`}>
-                        <img
-                            src={book.cover_image}
-                            alt='book cover'
-                            className="w-full h-48 object-cover rounded mb-4"
-                        />
+                            <img
+                                src={book.cover_image}
+                                alt={book.title}
+                                className="w-full h-48 object-cover rounded mb-4"
+                            />
                         </Link>
                         <h3 className="text-xl font-semibold mb-2">{book.title}</h3>
                         <p className="text-gray-700 mb-1">Author: {book.author}</p>
                         <p className="text-gray-700 mb-2">Year: {book.publication_year}</p>
-                        
                     </div>
                 ))}
                 </div>

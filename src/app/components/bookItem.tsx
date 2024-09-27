@@ -1,5 +1,5 @@
 'use client';
-import { addToCart, addToWishList } from "@/lib/features/bookSlice";
+import { addToCart, addToWishList, removeFromWishList } from "@/lib/features/bookSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
@@ -26,6 +26,7 @@ export const BookItem = (props: BookItemProps) => {
 
     const handleAddToWishList = () => {
         if (isInWishList) {
+            dispatch(removeFromWishList(book.id));
             setIsInWishList(false);
         } else {
             dispatch(addToWishList(book));
@@ -64,18 +65,18 @@ export const BookItem = (props: BookItemProps) => {
                     <p className="text-gray-700 font-bold pt-2 text-lg">{book.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
                 </div>
                 <div className="flex items-center justify-between p-4 border-t">
-                    <p className="text-gray-700">ISBN: {book.ISBN}</p>
+                    <p className="text-gray-700 truncate">ISBN: {book.ISBN}</p>
                     
                     <button
-                        className="ml-4 bg-blue-500 text-white text-lg px-3 py-1 rounded-full hover:bg-blue-700 flex items-center"
+                        className="ml-4 bg-blue-500 text-white text-lg px-4 py-2 rounded-full hover:bg-blue-700 flex items-center"
                         onClick={handleAddToCart}
                     >
                         <img
                             src="/assets/shopping-cart.png"
                             alt="cart"
-                            style={{ width: '20px', height: '20px' }}
+                            className="w-5 h-5 pr-1"
                         />
-                        <span className="ml-2">Add to Cart</span>
+                        <span className="pr-2 md:ml-3 md:pr-3 md:text-base xs:text-xs">Add</span>
                     </button>
                 </div>
             </div>

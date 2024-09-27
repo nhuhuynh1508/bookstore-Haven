@@ -2,46 +2,41 @@
 import { Background } from '@/app/components/background';
 import { BookItem } from '@/app/components/bookItem';
 import { Header } from '@/app/components/header';
+import { Footer } from './components/footer';
 import { processedBook } from './home/components/bookProcessor';
 
 import { useState } from 'react';
 import useSWR from 'swr';
 import { BookType } from './type';
 
-
-
 const Home = () => {
-    const [visibleBookCount, setvisibleBookCount] = useState(5);
-    const limit = 5;
+    const [limit, setLimit] = useState(5);
 
-    const {data:book, error} = useSWR('https://freetestapi.com/api/v1/books', async (url) => {
+    const {data:book, error} = useSWR(`https://freetestapi.com/api/v1/books?limit=${limit}`, async (url) => {
         const response = await fetch(url);
             return response.json();
     })
 
-    const processedBooks = (() => {
-        if (book) {
-            return book.map(processedBook);
-        }
-        return [];
-    })();
+    const BookList = book ? book.map((book: BookType) => processedBook(book)) : [];
+
+    if (error) return <div>Error loading results.</div>;
 
     const handleLoadMore = () => {
-        setvisibleBookCount((prevCount) => prevCount + limit)
+        setLimit(limit + 5);
     }
-    
+
     return (
         <>
             <Background />
             <Header />
             <div className="p-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    {processedBooks.slice(0, visibleBookCount).map((book: BookType) => (
+                    {BookList?.map((book: BookType) => (
                         <BookItem book={book} key={book.id} />
                     ))}
                 </div>
             </div>
-            {visibleBookCount < book?.length && (
+            {book?.length && (
                 <div className="mt-4 flex justify-center pb-4">
                 <button
                     onClick={handleLoadMore}
@@ -50,6 +45,7 @@ const Home = () => {
                 </button>
             </div>
             )}
+            <Footer />
         </>
     );
 }
