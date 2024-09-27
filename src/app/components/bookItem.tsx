@@ -43,7 +43,7 @@ export const BookItem = (props: BookItemProps) => {
                 <Link href={`/book/${book.id}`}>
                 <img
                     src={book.cover_image}
-                    alt='book cover'
+                    alt={book.title}
                     className="w-full h-72 object-cover hover:opacity-35"
                 />
                 </Link>
