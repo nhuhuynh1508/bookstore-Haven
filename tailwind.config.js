@@ -7,7 +7,8 @@ module.exports = {
         'sans': ['Inter', 'sans-serif'],
         'pacifico': ['Pacifico'],
         'bodoni_moda': ['Bodoni Moda'],
-        'eb_garamond': ['EB Garamond']
+        'eb_garamond': ['EB Garamond'],
+        'IBM': ['IBM Plex Sans']
       },
       screens: {
         'xs': '375px',
