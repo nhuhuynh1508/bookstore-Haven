@@ -1,7 +1,7 @@
 'use client'
-import { BookItem } from '@/app/components/bookItem';
 // import components
 import { Header } from '@/app/components/header';
+import { HorizontalDisplay } from '@/app/components/horizontalDisplay';
 import { useParams } from 'next/navigation';
 import useSWR from "swr";
 
@@ -30,9 +30,9 @@ export default function BookDetail() {
                             className="w-full h-auto rounded-lg shadow-md"
                         />
                     </div>
-                        <BookItem book={book} key={book.id} />
-                    </div>
+                    <HorizontalDisplay book={book} key={book.id}/>
                 </div>
-            </>
+            </div>
+        </>
         )
 }

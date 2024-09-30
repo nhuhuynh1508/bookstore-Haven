@@ -27,7 +27,7 @@ export const SearchBar = () => {
                 onKeyDown={(e) => e.key == "Enter" && handleSearch()}
             />
             <img
-                src='./assets/search.png'
+                src='/assets/search.png'
                 alt='icon'
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
             />

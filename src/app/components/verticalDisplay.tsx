@@ -7,7 +7,9 @@ import { addToCart } from "@/lib/features/cartSlice";
 import { addToWishList } from '@/lib/features/wishlistSlice';
 // import hooks
 import { useAppDispatch } from "@/lib/hooks";
+import { LoadingButton } from '@mui/lab';
 // import components
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Link from "next/link";
 import { useState } from 'react';
 
@@ -16,13 +18,21 @@ interface BookItemProps {
     book: BookType,
 }
 
-export const BookItem = (props: BookItemProps) => {
+export const VerticalDisplay = (props: BookItemProps) => {
     const { book } = props;
     const dispatch = useAppDispatch();
-    const [isInWishList, setIsInWishList] = useState(false);;
+    const [isInWishList, setIsInWishList] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
     
     const handleAddToCart = () => {
-        dispatch(addToCart(book));
+        if (book) {
+            dispatch(addToCart(book));
+            setIsLoading(true)
+
+            setTimeout(() => {
+                setIsLoading(false) 
+            }, 1000);
+        }
     };
 
     const handleAddToWishList = () => {
@@ -62,23 +72,21 @@ export const BookItem = (props: BookItemProps) => {
                     <p className="text-gray-700"><strong>Author:</strong> {book.author}</p>
                     <p className="text-gray-700"><strong>Year:</strong> {book.publication_year}</p>
                     <p className="text-gray-700"><strong>Description:</strong> {book.description}</p>
-                    <p className="text-gray-700"><strong>Genres:</strong> {book.genre.join(', ')}</p>
-                    <p className="text-gray-700 font-bold pt-2 text-lg font-IBM">{book.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                    <p className="text-gray-700"><strong>Genres:</strong> {(book?.genre || []).join(', ')}</p>
+                    <p className="text-gray-700 font-bold pt-2 text-lg font-IBM">{(book?.price || []).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
                 </div>
                 <div className="flex items-center justify-between p-4 border-t">
                     <p className="text-gray-700 truncate"><strong>ISBN:</strong> {book.ISBN}</p>
-                    
-                    <button
-                        className="ml-4 bg-blue-500 text-white text-lg px-4 py-2 rounded-full hover:bg-blue-700 flex items-center"
+                    <LoadingButton
+                        loading={isLoading}
+                        sx={{ borderRadius: '50px'}}
+                        variant="contained"
+                        color="primary"
                         onClick={handleAddToCart}
+                        startIcon={<ShoppingCartIcon />}
                     >
-                        <img
-                            src="/assets/shopping-cart.png"
-                            alt="cart"
-                            className="w-5 h-5 pr-1"
-                        />
-                        <span className="pr-2 md:ml-3 md:pr-3 md:text-base xs:text-xs">Add</span>
-                    </button>
+                    Add
+                    </LoadingButton>
                 </div>
             </div>
     );

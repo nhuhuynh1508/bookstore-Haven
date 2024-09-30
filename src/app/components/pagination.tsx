@@ -4,7 +4,7 @@ import { Pagination } from '@mui/material';
 import { useRouter, useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 import { processedBook } from '../home/components/bookProcessor';
-import { BookItem } from './bookItem';
+import { VerticalDisplay } from './verticalDisplay';
 
 
 export const Page = () => {
@@ -34,7 +34,7 @@ export const Page = () => {
             <div className="p-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {BookList?.map((book: BookType) => (
-                        <BookItem book={book} key={book.id} />
+                        <VerticalDisplay book={book} key={book.id} />
                     ))}
                 </div>
             </div>

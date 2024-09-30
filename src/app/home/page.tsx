@@ -4,7 +4,7 @@ import { Header } from '@/app/components/header';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import useSWR from 'swr';
-import { BookItem } from '../components/bookItem';
+import { VerticalDisplay } from '../components/verticalDisplay';
 import { BookType } from '../type';
 import { processedBook } from './components/bookProcessor';
 
@@ -30,7 +30,7 @@ const Result = () => {
             <div className="p-4">
             <div className="grid md:grid-cols-3 xs:grid-cols-1 gap-8 mt-6">
                     {BookList?.map((book: BookType) => (
-                        <BookItem book={book} key={book.id} />
+                        <VerticalDisplay book={book} key={book.id} />
                     ))}
                 
                 </div>

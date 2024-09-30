@@ -1,21 +1,30 @@
 // import MUI components
-import { Button } from "@mui/material";
 // import hook
 import { useState } from "react";
+// import LoadingButton
+import { LoadingButton } from "@mui/lab";
 
 export const Footer = () => {
     const [email, setEmail] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubscribeButton = () => {
         if (email) {
             const existedEmails = JSON.parse(localStorage.getItem('emails')) || [];
+            setIsLoading(true)
 
             if (!existedEmails.includes(email)){
                 existedEmails.push(email);
                 localStorage.setItem('emails', JSON.stringify(existedEmails));
-                setEmail('');
-                alert('Email subscribed');
+            setTimeout(() => {
+                setIsLoading(false)
+                setEmail('')
+                alert('Email subscribed')
+            }, 1000);
+
+
             } else {
+                setIsLoading(false)
                 alert('Email already subscribed');
             }
         }
@@ -23,7 +32,7 @@ export const Footer = () => {
     }
 
     return(
-        <footer className="bg-blue-100 py-4">
+        <footer className="bg-blue-300 py-4">
             <div className="container mx-auto flex flex-row items-center justify-start">
                     <img
                         src="/assets/book-icon.png"
@@ -47,14 +56,16 @@ export const Footer = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <Button
+                    <LoadingButton
+                        loading={isLoading}
+                        loadingIndicator="Loading…"
                         className="ml-2"
                         variant="contained"
                         color="primary"
                         onClick={handleSubscribeButton}
                     >
                     Subscribe
-                    </Button>
+                    </LoadingButton>
             </div>
         </footer>
     )

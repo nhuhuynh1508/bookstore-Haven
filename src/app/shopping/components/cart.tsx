@@ -6,13 +6,14 @@ import { clearCart, removeFromCart, updateQuantity } from "@/lib/features/cartSl
 // import hooks
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 // import components
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Button } from "@mui/material";
 import Link from "next/link";
 
 export const Cart = () => {
     const dispatch = useAppDispatch();
     const cartItems = useAppSelector((state) => state.book.cart.cartItems);
     const cartTotalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
 
     const handleClearCart = () => {
         dispatch(clearCart());
@@ -83,14 +84,27 @@ export const Cart = () => {
                 </table>
                 </div>
                 {cartItems.length > 0 && (
-                    <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
-                        <button
+                    <div className="flex flex-col sm:flex-row justify-between items-center mt-6">
+                        {/* <button
                             className="text-black mb-2 px-4 py-2 border-2 rounded hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
                             onClick={handleClearCart}
                         >
                             Clear Cart
-                        </button>
-                        <div className="text-base sm:text-lg font-bold border-2 p-2 sm:p-4">Total: {cartTotalAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</div>
+                        </button> */}
+                        <Button
+                            variant="contained"
+                            color="error"
+                            size="medium"
+                            onClick={handleClearCart}
+                            startIcon={<DeleteIcon />}
+                            sx={{
+                                fontSize: '18px',
+                                padding: '5px 8px',
+                            }}
+                        >
+                        Clear All
+                        </Button>
+                        <div className="text-base sm:text-lg font-bold border-2 mt-4 p-2 sm:p-4">Total: {cartTotalAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</div>
                     </div>
                 )}
             </div>
