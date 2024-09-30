@@ -44,8 +44,8 @@ export const PageRender = () => {
 
     const limit = 5;
 
-    let sortedBooks = book ? sortBooks(book.map((book: BookType) => processedBook(book))) : [];
-    let paginationBooks = sortedBooks.slice(0 + limit*page, limit + limit*page);
+    const sortedBooks = book ? sortBooks(book.map((book: BookType) => processedBook(book))) : [];
+    const paginationBooks = sortedBooks.slice(0 + limit*page, limit + limit*page);
 
     if (error) return <div>Error loading results.</div>;
 
