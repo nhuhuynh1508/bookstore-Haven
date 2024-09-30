@@ -14,7 +14,7 @@ export const PageRender = () => {
     
     const page = Number.parseInt(searchParams.get("page")) || 1
 
-    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
         router.push(`/?page=${value}`);
     }
 
@@ -44,16 +44,13 @@ export const PageRender = () => {
 
     const limit = 5;
 
-    let BookList = book ? book.map((book: BookType) => processedBook(book)) : [];
-    BookList = BookList.slice(0 + limit*page, limit + limit*page);
-    BookList = sortBooks(BookList)
+    let sortedBooks = book ? sortBooks(book.map((book: BookType) => processedBook(book))) : [];
+    let paginationBooks = sortedBooks.slice(0 + limit*page, limit + limit*page);
 
     if (error) return <div>Error loading results.</div>;
 
     return (
         <>
-
-
             <div className='p-4'>
                 <div className="mb-4">
                     <label className="mr-2">Sort By:</label>
@@ -71,7 +68,7 @@ export const PageRender = () => {
 
                 <div className="p-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        {BookList?.map((book: BookType) => (
+                        {paginationBooks?.map((book: BookType) => (
                             <VerticalDisplay book={book} key={book.id} />
                         ))}
                     </div>
@@ -82,7 +79,7 @@ export const PageRender = () => {
                     variant="outlined"
                     shape="rounded"
                     page={page}
-                    onChange={handleChange}
+                    onChange={handlePageChange}
                     className='flex justify-center m-4'
                 />
         </div>
