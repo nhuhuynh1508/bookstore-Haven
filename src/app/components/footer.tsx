@@ -1,4 +1,6 @@
+// import MUI components
 import { Button } from "@mui/material";
+// import hook
 import { useState } from "react";
 
 export const Footer = () => {

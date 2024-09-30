@@ -1,9 +1,12 @@
+// import components
 import { HamburgerMenu } from "@/app/components/hamburgerMenu";
-import { useAppSelector } from "@/lib/hooks";
 import Link from "next/link";
+// import hooks
+import { useAppSelector } from "@/lib/hooks";
+
 
 export const CartHeader = () => {
-    const wishListItems = useAppSelector((state) => state.book.wishListItems);
+    const wishListItems = useAppSelector((state) => state.book.wishlist.wishListItems);
     const wishListTotalQuantity = wishListItems.length;
     return (
         <>

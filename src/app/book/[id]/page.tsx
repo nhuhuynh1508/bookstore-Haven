@@ -1,4 +1,6 @@
 'use client'
+import { BookItem } from '@/app/components/bookItem';
+// import components
 import { Header } from '@/app/components/header';
 import { useParams } from 'next/navigation';
 import useSWR from "swr";
@@ -28,30 +30,7 @@ export default function BookDetail() {
                             className="w-full h-auto rounded-lg shadow-md"
                         />
                     </div>
-                        <div className="md:w-2/3 md:pl-8">
-                            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                                {book?.title}
-                            </h2>
-
-                            <p className="text-gray-600 text-sm mb-1">
-                                <strong>ISBN:</strong> {ISBN}
-                            </p>
-                            <p className="text-gray-600 text-sm mb-1">
-                                <strong>Genres:</strong> {(book?.genre || []).join(', ')}
-                            </p>
-
-                            <p className="text-lg font-semibold text-gray-800 mt-4">
-                            by {book?.author}
-                            </p>
-
-                            <p className="text-gray-700 mt-4">
-                            {book?.description}
-                            </p>
-
-                            <p className="text-lg font-semibold text-gray-900 mt-6">
-                            <strong>Price:</strong> {price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
-                            </p>
-                        </div>
+                        <BookItem book={book} key={book.id} />
                     </div>
                 </div>
             </>

@@ -1,13 +1,16 @@
 'use client';
-
+// import type
 import { BookType } from "@/app/type";
-import { clearCart, removeFromCart, updateQuantity } from "@/lib/features/bookSlice";
+// import reducers
+import { clearCart, removeFromCart, updateQuantity } from "@/lib/features/cartSlice";
+// import hooks
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+// import components
 import Link from "next/link";
 
 export const Cart = () => {
     const dispatch = useAppDispatch();
-    const cartItems = useAppSelector((state) => state.book.cartItems);
+    const cartItems = useAppSelector((state) => state.book.cart.cartItems);
     const cartTotalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
 

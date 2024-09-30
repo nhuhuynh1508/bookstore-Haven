@@ -1,4 +1,6 @@
+// import component
 import Link from "next/link";
+// import hook
 import { useState } from "react";
 
 export const HamburgerMenu = () => {

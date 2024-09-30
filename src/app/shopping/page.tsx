@@ -8,7 +8,7 @@ import { Cart } from './components/cart';
 import { CartHeader } from './components/cartHeader';
 
 function ShoppingCart() {
-    const cartItems = useAppSelector((state) => state.book.cartItems);
+    const cartItems = useAppSelector((state) => state.cart.cartItems);
     const cartTotalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
     return (

@@ -1,9 +1,15 @@
 'use client';
-import { addToCart, addToWishList } from "@/lib/features/bookSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+
+// import type
+import { BookType } from '@/app/type';
+// import reducers
+import { addToCart } from "@/lib/features/cartSlice";
+import { addToWishList } from '@/lib/features/wishlistSlice';
+// import hooks
+import { useAppDispatch } from "@/lib/hooks";
+// import components
 import Link from "next/link";
 import { useState } from 'react';
-import { BookType } from '../type';
 
 // in case of having a lot of different types
 interface BookItemProps {
@@ -13,7 +19,6 @@ interface BookItemProps {
 export const BookItem = (props: BookItemProps) => {
     const { book } = props;
     const dispatch = useAppDispatch();
-    const wishList = useAppSelector((state) => state.book.wishListItems);
     const [isInWishList, setIsInWishList] = useState(false);;
     
     const handleAddToCart = () => {
