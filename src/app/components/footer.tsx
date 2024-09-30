@@ -30,7 +30,7 @@ export const Footer = () => {
                         alt="icon"
                         className="ml-2 sm:ml-4 xs:mr-2 w-10 h-10 sm:w-16 sm:h-16"
                     />
-                    <div className="pl-4">
+                    <div className="pl-2">
                         <span className="text-black text-2xl sm:text-4xl xs:text-sm font-pacifico pl-0">Book Haven</span>
                     </div>
                     

@@ -59,13 +59,14 @@ export const BookItem = (props: BookItemProps) => {
                 </button>
                 <div className="p-4 flex flex-col flex-grow">
                     <h3 className="text-xl font-semibold mb-2">{book.title}</h3>
-                    <p className="text-gray-700">Author: {book.author}</p>
-                    <p className="text-gray-700">Year: {book.publication_year}</p>
-                    <p className="text-gray-700">Description: {book.description}</p>
-                    <p className="text-gray-700 font-bold pt-2 text-lg">{book.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                    <p className="text-gray-700"><strong>Author:</strong> {book.author}</p>
+                    <p className="text-gray-700"><strong>Year:</strong> {book.publication_year}</p>
+                    <p className="text-gray-700"><strong>Description:</strong> {book.description}</p>
+                    <p className="text-gray-700"><strong>Genres:</strong> {book.genre.join(', ')}</p>
+                    <p className="text-gray-700 font-bold pt-2 text-lg font-IBM">{book.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
                 </div>
                 <div className="flex items-center justify-between p-4 border-t">
-                    <p className="text-gray-700 truncate">ISBN: {book.ISBN}</p>
+                    <p className="text-gray-700 truncate"><strong>ISBN:</strong> {book.ISBN}</p>
                     
                     <button
                         className="ml-4 bg-blue-500 text-white text-lg px-4 py-2 rounded-full hover:bg-blue-700 flex items-center"
