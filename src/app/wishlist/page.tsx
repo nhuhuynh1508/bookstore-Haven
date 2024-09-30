@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Header } from "../components/header";
 
 function Wishlist() {
-    const wishListItems = useAppSelector((state) => state.book.wishListItems);
+    const wishListItems = useAppSelector((state) => state.book.wishlist.wishListItems);
     return (
         <>
         <Header />

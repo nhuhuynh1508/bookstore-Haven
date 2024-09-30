@@ -1,13 +1,18 @@
 'use client';
+// import components
 import { Background } from '@/app/components/background';
 import { BookItem } from '@/app/components/bookItem';
 import { Header } from '@/app/components/header';
 import { Footer } from './components/footer';
 import { processedBook } from './home/components/bookProcessor';
 
+// import state
 import { useState } from 'react';
-import useSWR from 'swr';
+
+// import type
 import { BookType } from './type';
+
+import useSWR from 'swr';
 
 const Home = () => {
     const [limit, setLimit] = useState(5);

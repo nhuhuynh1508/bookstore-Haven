@@ -20,7 +20,7 @@ export const HamburgerMenu = () => {
 
         {isOpen && (
                 <div className="absolute mt-4 w-40 bg-white border border-gray-300 rounded shadow-lg">
-                    <Link href="/link1" className="block px-4 py-2 text-black hover:bg-gray-200">Link 1</Link>
+                    <Link href="/to-do-list" className="block px-4 py-2 text-black hover:bg-gray-200 font-IBM">To-Do List</Link>
                     <Link href="/link2" className="block px-4 py-2 text-black hover:bg-gray-200">Link 2</Link>
                     <Link href="/link3" className="block px-4 py-2 text-black hover:bg-gray-200">Link 3</Link>
                     <Link href="/link4" className="block px-4 py-2 text-black hover:bg-gray-200">Link 4</Link>

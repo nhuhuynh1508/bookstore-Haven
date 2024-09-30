@@ -1,6 +1,7 @@
+import { BookType } from '@/app/type';
 import { createSlice } from '@reduxjs/toolkit';
 
-interface WishListItem {
+interface WishListItem extends BookType{
     quantity: number;
     id: number;
 }
