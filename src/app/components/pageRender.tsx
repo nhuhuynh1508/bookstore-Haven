@@ -12,7 +12,7 @@ export const PageRender = () => {
     const router = useRouter();
     const searchParams = useSearchParams()
     
-    const page = Number.parseInt(searchParams.get("page")) || 1
+    const page = Number.parseInt(searchParams.get("page")) - 1 || 0
 
     const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
         router.push(`/?page=${value}`);
@@ -24,7 +24,7 @@ export const PageRender = () => {
         const response = await fetch(url);
             return response.json();
     })
-
+    
     const sortBooks = (books) => {
         return books.sort((a, b) => {
             switch(sortOption) {
@@ -45,7 +45,9 @@ export const PageRender = () => {
     const limit = 5;
 
     const sortedBooks = book ? sortBooks(book.map((book: BookType) => processedBook(book))) : [];
+    console.log(sortedBooks)
     const paginationBooks = sortedBooks.slice(0 + limit*page, limit + limit*page);
+    console.log(paginationBooks)
 
     if (error) return <div>Error loading results.</div>;
 
