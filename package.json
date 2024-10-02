@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serve": "nodemon index.js"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -14,6 +15,7 @@
     "@fontsource/roboto": "^5.1.0",
     "@mui/material": "^6.1.1",
     "@reduxjs/toolkit": "^2.2.7",
+    "axios": "^1.7.7",
     "next": "14.2.9",
     "react": "^18",
     "react-dom": "^18",
@@ -28,6 +30,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^8",
     "eslint-config-next": "14.2.9",
+    "nodemon": "^3.1.7",
     "postcss": "^8.4.45",
     "tailwindcss": "^3.4.10",
     "typescript": "^5"
