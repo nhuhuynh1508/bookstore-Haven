@@ -12,7 +12,7 @@ export const HamburgerMenu = () => {
 
     return (
     <div className="relative">
-        <div className="flex flex-col items-center justify-center cursor-pointer" onClick={handleDropdown}>
+        <div className="flex flex-col items-center justify-center cursor-pointer hover:shadow-lg transition:transform duration-200 ease-in-out" onClick={handleDropdown}>
             <div className="w-8 xs:w-5 h-1 bg-black mb-2 xs:mb-1"></div>
             <div className="w-8 xs:w-5 h-1 bg-black mb-2 xs:mb-1"></div>
             <div className="w-8 xs:w-5 h-1 bg-black"></div>

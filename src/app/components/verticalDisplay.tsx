@@ -6,12 +6,12 @@ import { BookType } from '@/app/type';
 import { addToCart } from "@/lib/features/cartSlice";
 import { addToWishList } from '@/lib/features/wishlistSlice';
 // import hooks
-import { useAppDispatch } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { LoadingButton } from '@mui/lab';
 // import components
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Link from "next/link";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // in case of having a lot of different types
 interface BookItemProps {
@@ -21,17 +21,22 @@ interface BookItemProps {
 export const VerticalDisplay = (props: BookItemProps) => {
     const { book } = props;
     const dispatch = useAppDispatch();
+    const wishList = useAppSelector((state) => state.book.wishlist.wishListItems);
     const [isInWishList, setIsInWishList] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
+
+    useEffect(() => {
+        setIsInWishList(wishList.some((item) => item.id === book.id));
+    }, [wishList, book.id]);
     
     const handleAddToCart = () => {
         if (book) {
-            dispatch(addToCart(book));
-            setIsLoading(true)
-
             setTimeout(() => {
-                setIsLoading(false) 
+                setIsLoading(false)
+                dispatch(addToCart(book));
+                
             }, 1000);
+            setIsLoading(true)
         }
     };
 
@@ -49,14 +54,14 @@ export const VerticalDisplay = (props: BookItemProps) => {
 
     return (
         
-        <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full relative">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full relative hover:shadow-xl">
                 <Link href={`/book/${book.id}`}>
                 <img
                     src={book.cover_image}
                     alt={book.title}
                     className="w-full h-72 object-cover hover:opacity-35"
                 />
-                </Link>
+                
                 <button
                     className="absolute top-2 right-2"
                     onClick={handleAddToWishList}
@@ -88,6 +93,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                     Add
                     </LoadingButton>
                 </div>
+                </Link>
             </div>
     );
 };
