@@ -2,6 +2,7 @@
 import { BookType } from '@/app/type';
 import { useState } from 'react';
 import useSWR from 'swr';
+import { processedBook } from '../home/components/bookProcessor';
 import { VerticalDisplay } from './verticalDisplay';
 
 
@@ -14,12 +15,14 @@ export const PageRender = () => {
             return response.json();
     })
 
+    const BookList = book ? book.map((book: BookType) => processedBook(book)) : [];
+
     const handleLoadMore = () => {
         setLimit(limit + 5)
     }
     
-    const sortBooks = (book: BookType[], sortOption: string) => {
-        return book?.sort((a, b) => {
+    const sortBooks = (BookList: BookType[], sortOption: string) => {
+        return BookList?.sort((a, b) => {
             switch(sortOption) {
                 case 'priceAsc':
                     return a.price - b.price;
@@ -35,7 +38,7 @@ export const PageRender = () => {
         })
     }
 
-    const SortedBooks = sortBooks(book, sortOption)
+    const SortedBooks = sortBooks(BookList, sortOption)
     const PaginatedBooks = SortedBooks?.slice(0, limit)
 
     if (error) return <div>Error loading results.</div>;
@@ -43,17 +46,17 @@ export const PageRender = () => {
     return (
         <>
             <div className='p-4'>
-                <div className="mb-4">
-                    <label className="mr-2">Sort By:</label>
+                <div className="flex justify-end mb-4">
+                    <label className="flex items-center mr-2 font-bold">Sort By:</label>
                     <select
                         value={sortOption}
                         onChange={(e) => setSortOption(e.target.value)}
                         className="border rounded p-2"
                     >
-                        <option value="priceAsc">Price: Low to High</option>
-                        <option value="priceDesc">Price: High to Low</option>
                         <option value="titleAsc">Title: A to Z</option>
                         <option value="titleDesc">Title: Z to A</option>
+                        <option value="priceAsc">Price: Low to High</option>
+                        <option value="priceDesc">Price: High to Low</option>
                     </select>
                 </div>
 

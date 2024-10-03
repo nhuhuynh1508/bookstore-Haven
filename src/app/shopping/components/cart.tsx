@@ -56,7 +56,7 @@ export const Cart = () => {
                                     <h1 className="font-bold">{item.title}</h1>
                                 </td>
                                 <td className="p-1 sm:p-3 text-[10px] sm:text-base">
-                                    <span>{item.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+                                    <span>{(item?.price || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
                                 </td>
                                 <td className="p-1 sm:p-3 xs:text-[10px] sm:text-base">
                                     <input

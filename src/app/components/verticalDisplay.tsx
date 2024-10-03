@@ -81,7 +81,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                     <p className="text-gray-700 font-bold pt-2 text-lg font-IBM">{(book?.price || []).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
                 </div>
                 <div className="flex items-center justify-between p-4 border-t">
-                    <p className="text-gray-700 truncate"><strong>ISBN:</strong> {book.ISBN}</p>
+                    <p className="text-gray-700 truncate"><strong>ISBN:</strong> {ISBN}</p>
                     <LoadingButton
                         loading={isLoading}
                         sx={{ borderRadius: '50px'}}
