@@ -11,6 +11,8 @@ const generateRandomISBN = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 100000) + min);
 };
 
+
+
 export const processedBook = (book: BookType) => {
     const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
     const storedISBN = JSON.parse(localStorage.getItem('ISBN')) || {};

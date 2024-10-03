@@ -2,7 +2,7 @@
 import { HamburgerMenu } from "@/app/components/hamburgerMenu";
 import Link from "next/link";
 // import hooks
-import { SearchBar } from "@/app/components/searchBar";
+import { SearchBar } from "@/app/home/components/searchBar";
 import { useAppSelector } from "@/lib/hooks";
 
 

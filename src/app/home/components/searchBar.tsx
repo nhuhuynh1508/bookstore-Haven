@@ -16,6 +16,7 @@ export const SearchBar = () => {
             router.push(`/home?search=${input}`)
         }
     }
+    
 
     return (
         <div className="relative w-full max-w-md">
@@ -23,7 +24,7 @@ export const SearchBar = () => {
                 type="text"
                 placeholder="Search..."
                 className="w-full h-10 sm:h-10 xs:h-8 p-3 sm:p-3 pl-5 xs:pl-3 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border"
-                onChange={handleChange} value = {input}
+                onChange={handleChange}
                 onKeyDown={(e) => e.key == "Enter" && handleSearch()}
             />
             <img
