@@ -1,19 +1,30 @@
-import { Button } from "@mui/material";
+// import MUI components
+// import hook
 import { useState } from "react";
+// import LoadingButton
+import { LoadingButton } from "@mui/lab";
 
 export const Footer = () => {
     const [email, setEmail] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubscribeButton = () => {
         if (email) {
             const existedEmails = JSON.parse(localStorage.getItem('emails')) || [];
+            setIsLoading(true)
 
             if (!existedEmails.includes(email)){
                 existedEmails.push(email);
                 localStorage.setItem('emails', JSON.stringify(existedEmails));
-                setEmail('');
-                alert('Email subscribed');
+            setTimeout(() => {
+                setIsLoading(false)
+                setEmail('')
+                alert('Email subscribed')
+            }, 1000);
+
+
             } else {
+                setIsLoading(false)
                 alert('Email already subscribed');
             }
         }
@@ -21,14 +32,14 @@ export const Footer = () => {
     }
 
     return(
-        <footer className="bg-blue-100 py-4">
+        <footer className="bg-blue-300 py-4">
             <div className="container mx-auto flex flex-row items-center justify-start">
                     <img
                         src="/assets/book-icon.png"
                         alt="icon"
                         className="ml-2 sm:ml-4 xs:mr-2 w-10 h-10 sm:w-16 sm:h-16"
                     />
-                    <div className="pl-4">
+                    <div className="pl-2">
                         <span className="text-black text-2xl sm:text-4xl xs:text-sm font-pacifico pl-0">Book Haven</span>
                     </div>
                     
@@ -45,14 +56,16 @@ export const Footer = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <Button
+                    <LoadingButton
+                        loading={isLoading}
+                        loadingIndicator="Loading…"
                         className="ml-2"
                         variant="contained"
                         color="primary"
                         onClick={handleSubscribeButton}
                     >
                     Subscribe
-                    </Button>
+                    </LoadingButton>
             </div>
         </footer>
     )

@@ -1,13 +1,15 @@
 'use client';
-import Link from 'next/link';
-import { useAppSelector } from "../../lib/hooks";
+// import hooks
+import { useAppSelector } from "@/lib/hooks";
 
-import { HamburgerMenu } from './hamburgerMenu';
-import { SearchBar } from './searchBar';
+// import components
+import { HamburgerMenu } from "@/app/components/hamburgerMenu";
+import { SearchBar } from '@/app/components/searchBar';
+import Link from 'next/link';
 
 export const Header = () => {
-    const cartItems = useAppSelector((state) => state.book.cartItems);
-    const wishListItems = useAppSelector((state) => state.book.wishListItems);
+    const cartItems = useAppSelector((state) => state.book.cart.cartItems);
+    const wishListItems = useAppSelector((state) => state.book.wishlist.wishListItems);
     const cartTotalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
     const wishListTotalQuantity = wishListItems.length;
     
