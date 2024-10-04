@@ -85,12 +85,6 @@ export const Cart = () => {
                 </div>
                 {cartItems.length > 0 && (
                     <div className="flex flex-col sm:flex-row justify-between items-center mt-6">
-                        {/* <button
-                            className="text-black mb-2 px-4 py-2 border-2 rounded hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
-                            onClick={handleClearCart}
-                        >
-                            Clear Cart
-                        </button> */}
                         <Button
                             variant="contained"
                             color="error"
