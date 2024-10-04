@@ -1,21 +1,23 @@
 // import hooks
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export const SearchBar = () => {
-    const [input, setInput] = useState("")
+    const searchParams = useSearchParams()
+    const searchInput = searchParams.get("search") || ""
+    const [value, setValue] = useState(searchInput)
     const router = useRouter()
 
     const handleChange = (e) => {
-        const value = e.target.value
-        setInput(value)
+        setValue(e.target.value)
     }
 
     const handleSearch = () => {
-        if (input) {
-            router.push(`/home?search=${input}`)
+        if (value) {
+            router.push(`/home?search=${value}`)
         }
     }
+    
 
     return (
         <div className="relative w-full max-w-md">
@@ -23,7 +25,8 @@ export const SearchBar = () => {
                 type="text"
                 placeholder="Search..."
                 className="w-full h-10 sm:h-10 xs:h-8 p-3 sm:p-3 pl-5 xs:pl-3 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border"
-                onChange={handleChange} value = {input}
+                onChange={handleChange}
+                value={value}
                 onKeyDown={(e) => e.key == "Enter" && handleSearch()}
             />
             <img

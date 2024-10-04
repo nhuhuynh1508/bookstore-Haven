@@ -33,7 +33,7 @@ const wishlistSlice = createSlice({
             if (bookIndex === -1) {
                 state.wishListItems.push(action.payload);
             } else {
-                state.wishListItems.slice(bookIndex, 1)
+                state.wishListItems.splice(bookIndex, 1)
             }
 
             // localStorage.setItem('WishListItems', JSON.stringify(existedWishItems));

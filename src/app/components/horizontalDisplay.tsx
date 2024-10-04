@@ -29,12 +29,11 @@ export const HorizontalDisplay = (props: BookItemProps) => {
 
     const handleAddToCart = () => {
         if (book) {
-            dispatch(addToCart(book));
-            setIsLoading(true)
-
             setTimeout(() => {
                 setIsLoading(false)
+                dispatch(addToCart(book));
             }, 1000);
+            setIsLoading(true)
         }
     };
 
