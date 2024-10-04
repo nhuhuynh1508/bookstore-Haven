@@ -33,7 +33,7 @@ export const PageRender = () => {
         setTimeout(() => {
             window.location.reload()
             setLimit(5);
-        }, 1000);
+        }, 500);
         setIsLoading(true)
         localStorage.removeItem('bookLimit')
     }
