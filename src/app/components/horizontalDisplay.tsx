@@ -67,7 +67,7 @@ export const HorizontalDisplay = (props: BookItemProps) => {
                 variant="contained"
                 color="primary"
                 onClick={(e) => {
-                    e.preventDefault();
+                    e.stopPropagation();
                     handleAddToCart();
                 }}
                 startIcon={<ShoppingCartIcon />}

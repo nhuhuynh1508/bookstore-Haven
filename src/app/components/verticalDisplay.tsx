@@ -66,6 +66,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                     className="absolute top-2 right-2"
                     onClick={(e) => {
                         e.preventDefault();
+                        e.stopPropagation();
                         handleAddToWishList();
                     }}
                 >
@@ -91,6 +92,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                         color="primary"
                         onClick={(e) => {
                             e.preventDefault();
+                            e.stopPropagation();
                             handleAddToCart();
                         }}
                         startIcon={<ShoppingCartIcon />}
