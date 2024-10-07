@@ -20,6 +20,7 @@ export const PageRender = () => {
 
 
     const BookList = book ? book.map((book: BookType) => processedBook(book)) : [];
+    
 
     const handleLoadMore = () => {
         const newLimit = limit + 5;
@@ -48,25 +49,21 @@ export const PageRender = () => {
     const SortedBooks = sortBooks(BookList, sortOption)
     const PaginatedBooks = SortedBooks?.slice(0, limit)
 
-    if (error) return <div>Error loading results.</div>;
+    // reset cache on page reload
+    useEffect(() => {
+        localStorage.removeItem('bookLimit')
+    }, [])
+
+    
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // reset cache on page reload
-    useEffect(() => {
-        const resetCache = () => {
-            localStorage.removeItem('bookLimit')
-        }
-        window.addEventListener('beforeunload', resetCache);
-        return () => {
-            window.removeEventListener('beforeunload', resetCache);
-        };
-    }, [])
+    if (error) return <div>Error loading results.</div>;
 
     return (
-        <>
+    <>
             <div className='p-6'>
                 <div className="flex justify-between items-center mb-4">
                     <div className="flex items-center">
@@ -103,7 +100,7 @@ export const PageRender = () => {
                 </div>
                 )}
 
-                {limit >= 20 && (
+                {limit >= 10 && (
                 <button
                     onClick={scrollToTop}
                     className="fixed bottom-5 right-5 bg-white text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-400 transition"
