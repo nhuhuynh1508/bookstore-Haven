@@ -25,7 +25,9 @@ export const Cart = () => {
     };
 
     const handleQuantityChange = (book: BookType, quantity: string) => {
-        dispatch(updateQuantity({ id: book.id, quantity: parseInt(quantity) }));
+        const parsedQuantity = parseInt(quantity);
+        const validQuantity = (!isNaN(parsedQuantity) && parsedQuantity >= 1) ? parsedQuantity : 1;
+        dispatch(updateQuantity({ id: book.id, quantity: validQuantity }));
     };
 
     return (
@@ -67,7 +69,8 @@ export const Cart = () => {
                                                 value={item.quantity}
                                                 className="border text-center w-16"
                                                 min="1"
-                                                onChange={(e) => handleQuantityChange(item, e.target.value)} />
+                                                onChange={(e) => handleQuantityChange(item, e.target.value)} 
+                                            />
                                         </td>
                                         <td className="p-1 sm:p-3 text-[10px] sm:text-base">
                                             <span>{(item.price * item.quantity).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
