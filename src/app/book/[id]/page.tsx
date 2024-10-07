@@ -12,12 +12,7 @@ export default function BookDetail() {
         const response = await fetch(url);
             return response.json()
     })
-    const storedISBN = JSON.parse(localStorage.getItem('ISBN')) || {};
-    const ISBN = storedISBN[book?.id] || 0;
-    const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
-    const price = storedPrice[book?.id] || 0;
 
-    if (!book) return <h3>No Data</h3>
     return (
         <>
         <Header />
@@ -30,7 +25,7 @@ export default function BookDetail() {
                             className="w-full h-auto rounded-lg shadow-md"
                         />
                     </div>
-                    <HorizontalDisplay book={book} key={book.id}/>
+                    <HorizontalDisplay book={book} key={book?.id}/>
                 </div>
             </div>
         </>
