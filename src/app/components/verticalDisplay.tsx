@@ -7,9 +7,9 @@ import { addToCart } from "@/lib/features/cartSlice";
 import { addToWishList } from '@/lib/features/wishlistSlice';
 // import hooks
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { LoadingButton } from '@mui/lab';
 // import components
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Button } from '@mui/material';
 import Link from "next/link";
 import { useEffect, useState } from 'react';
 
@@ -85,8 +85,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                 </div>
                 <div className="flex items-center justify-between p-4 border-t">
                     <p className="text-gray-700 truncate"><strong>ISBN:</strong> {ISBN}</p>
-                    <LoadingButton
-                        loading={isLoading}
+                    <Button
                         sx={{ borderRadius: '50px'}}
                         variant="contained"
                         color="primary"
@@ -97,7 +96,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                         startIcon={<ShoppingCartIcon />}
                     >
                     Add
-                    </LoadingButton>
+                    </Button>
                 </div>
                 </Link>
             </div>

@@ -8,7 +8,7 @@ import { addToCart } from '@/lib/features/cartSlice';
 import { useAppDispatch } from '@/lib/hooks';
 // import components
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { LoadingButton } from '@mui/lab';
+import { Button } from '@mui/material';
 import { useState } from 'react';
 
 // in case of having a lot of different types
@@ -62,8 +62,7 @@ export const HorizontalDisplay = (props: BookItemProps) => {
         <strong>Price:</strong> {price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
         </p>
         <div className="absolute bottom-0 right-0">
-            <LoadingButton
-                loading={isLoading}
+            <Button
                 sx={{ borderRadius: '50px'}}
                 variant="contained"
                 color="primary"
@@ -74,7 +73,7 @@ export const HorizontalDisplay = (props: BookItemProps) => {
                 startIcon={<ShoppingCartIcon />}
             >
             Add
-            </LoadingButton>
+            </Button>
         </div>
 
     </div>
