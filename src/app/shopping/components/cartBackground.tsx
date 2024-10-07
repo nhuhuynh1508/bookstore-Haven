@@ -1,8 +1,6 @@
-import { useAppSelector } from "@/lib/hooks";
 
 export const CartBackground = () => {
-    const cartItems = useAppSelector((state) => state.book.cart.cartItems);
-    const cartTotalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+    
 
     return (
         <>
@@ -13,9 +11,10 @@ export const CartBackground = () => {
                 className="w-full h-80 object-cover"
             />
         </div>
-            <div className="flex justify-between items-center p-2">
-                <span className="xs:text-3xl sm:text-5xl font-serif border-gray-300 pb-2 p-2">Cart</span>
-                <span className="font-serif text-black pt-6 mr-2 text-xl">Total Quantity: {cartTotalQuantity}</span>
+            <div className="flex items-center p-4">
+                <span className="xs:text-3xl sm:text-5xl font-serif border-gray-300 pb-2 pt-2">Cart</span>
+                <hr className="w-full my-2 border-t-2 border-gray-300"/>
+                <hr></hr>
             </div>
         </>
     )

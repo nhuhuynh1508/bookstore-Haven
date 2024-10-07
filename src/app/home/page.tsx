@@ -1,12 +1,17 @@
 'use client';
+// import components
 import { Background } from '@/app/components/background';
 import { Header } from '@/app/components/header';
+import { Subheader } from '@/app/components/subheader';
+import { VerticalDisplay } from '../components/verticalDisplay';
+import { processedBook } from './components/bookProcessor';
+// import library
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useState } from 'react';
 import useSWR from 'swr';
-import { VerticalDisplay } from '../components/verticalDisplay';
+// import type
 import { BookType } from '../type';
-import { processedBook } from './components/bookProcessor';
+
 
 const SearchResult = () => {
     const searchParams = useSearchParams()
@@ -31,8 +36,9 @@ const SearchResult = () => {
 
     return (
         <>
-            <Background />
             <Header />
+            <Subheader />
+            <Background />
             <h1 className="font-eb_garamond font-bold text-4xl p-4">Search Results</h1>
             <h2 className='text-lg pl-4 font-serif'>There are {BookList.length} relevant search results for "{search}"</h2>
             <div className="p-4">

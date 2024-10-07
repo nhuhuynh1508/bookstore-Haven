@@ -67,9 +67,8 @@ export const PageRender = () => {
 
     return (
         <>
-            <div className='p-4'>
+            <div className='p-6'>
                 <div className="flex justify-between items-center mb-4">
-
                     <div className="flex items-center">
                         <label className="flex items-center mr-2 font-bold">Sort By:</label>
                         <select

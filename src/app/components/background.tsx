@@ -1,11 +1,9 @@
+import { ImageCarousel } from "./imageCarousel"
+
 export const Background = () => {
     return (
     <div className="mt-16 relative">
-            <img
-                src="/assets/bookstore_1.jpg"
-                alt="book"
-                className="w-full h-[30vh] md:h-[60vh] object-cover"
-            />
+            <ImageCarousel />
             <div className="absolute inset-0 flex flex-col justify-center pl-6 sm:pl-10 md:pl-16">
                 <span className="p-2 font-eb_garamond font-bold text-white text-3xl sm:text-4xl md:text-5xl">
                     Welcome to Book Haven

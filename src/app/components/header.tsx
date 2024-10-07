@@ -64,7 +64,7 @@ export const Header = () => {
                 >
                     {wishListTotalQuantity} */}
                 {/* </span> */}
-                <Badge badgeContent={wishListTotalQuantity} color="primary">
+                    <Badge badgeContent={wishListTotalQuantity} color="primary">
                         <FavoriteIcon color="action" sx={{
                                 fontSize: 40,
                             }}/>
