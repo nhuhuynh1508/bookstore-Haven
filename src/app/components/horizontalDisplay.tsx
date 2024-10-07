@@ -67,7 +67,10 @@ export const HorizontalDisplay = (props: BookItemProps) => {
                 sx={{ borderRadius: '50px'}}
                 variant="contained"
                 color="primary"
-                onClick={handleAddToCart}
+                onClick={(e) => {
+                    e.preventDefault();
+                    handleAddToCart();
+                }}
                 startIcon={<ShoppingCartIcon />}
             >
             Add

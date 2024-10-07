@@ -64,7 +64,10 @@ export const VerticalDisplay = (props: BookItemProps) => {
                 
                 <button
                     className="absolute top-2 right-2"
-                    onClick={handleAddToWishList}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        handleAddToWishList();
+                    }}
                 >
                     <img
                         src={isInWishList ? "/assets/red-heart.png" : "/assets/heart.png"}

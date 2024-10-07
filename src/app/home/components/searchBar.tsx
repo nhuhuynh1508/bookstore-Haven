@@ -24,7 +24,7 @@ export const SearchBar = () => {
             <input
                 type="text"
                 placeholder="Search..."
-                className="w-full h-10 sm:h-10 xs:h-8 p-3 sm:p-3 pl-5 xs:pl-3 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border"
+                className="bg-gray-100 w-full h-10 sm:h-10 xs:h-8 p-3 sm:p-3 pl-5 xs:pl-3 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-400 focus:border"
                 onChange={handleChange}
                 value={value}
                 onKeyDown={(e) => e.key == "Enter" && handleSearch()}
