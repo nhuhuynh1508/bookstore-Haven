@@ -9,13 +9,13 @@ import { Subheader } from './components/subheader';
 
 const Home = () => {
     return (
-        <>
+        <div className="bg-blue-50">
             <Header />
             <Subheader />
             <Background />
             <PageRender />
             <Footer />
-        </>
+        </div>
     );
 }
 

@@ -1,5 +1,5 @@
 // import components
-import { HamburgerMenu } from "@/app/components/hamburgerMenu";
+import { HamburgerMenu } from "@/app/components/drawerMenu";
 import { SearchBar } from "@/app/home/components/searchBar";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Link from "next/link";
