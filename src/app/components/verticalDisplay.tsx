@@ -59,7 +59,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                 <img
                     src={book.cover_image}
                     alt={book.title}
-                    className="w-full h-72 object-cover hover:opacity-35"
+                    className="w-full h-72 object-cover hover:opacity-75"
                 />
                 
                 <button

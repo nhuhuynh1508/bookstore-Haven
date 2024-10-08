@@ -1,5 +1,5 @@
 // import components
-import { HamburgerMenu } from "@/app/components/drawerMenu";
+import DrawerMenu from "@/app/components/drawerMenu";
 import { SearchBar } from "@/app/home/components/searchBar";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Link from "next/link";
@@ -14,7 +14,7 @@ export const CartHeader = () => {
     
     return (
     <div className="w-full bg-blue-100 h-16 sm:h-20 flex items-center px-4 justify-between">
-            <HamburgerMenu />
+            <DrawerMenu />
             
             <div className="flex items-center">
                 <Link href="/" className="flex items-center">

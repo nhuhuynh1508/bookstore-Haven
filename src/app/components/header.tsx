@@ -23,7 +23,7 @@ export const Header = () => {
             </div>
 
             <Link href="/" className="flex items-center">
-                <span className="text-black flex-shrink-0 text-2xl sm:text-4xl xs:text-sm font-eb_garamond top-0 font-bold">Book Haven</span>
+                <span className="text-slate-800 flex-shrink-0 text-2xl sm:text-4xl xs:text-sm font-eb_garamond top-0 font-bold">Book Haven</span>
                 <img
                     src="/assets/book-icon.png"
                     alt="icon"
