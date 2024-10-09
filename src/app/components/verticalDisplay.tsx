@@ -7,9 +7,9 @@ import { addToCart } from "@/lib/features/cartSlice";
 import { addToWishList } from '@/lib/features/wishlistSlice';
 // import hooks
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { LoadingButton } from '@mui/lab';
 // import components
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Button } from '@mui/material';
 import Link from "next/link";
 import { useEffect, useState } from 'react';
 
@@ -59,12 +59,16 @@ export const VerticalDisplay = (props: BookItemProps) => {
                 <img
                     src={book.cover_image}
                     alt={book.title}
-                    className="w-full h-72 object-cover hover:opacity-35"
+                    className="w-full h-72 object-cover hover:opacity-75"
                 />
                 
                 <button
                     className="absolute top-2 right-2"
-                    onClick={handleAddToWishList}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleAddToWishList();
+                    }}
                 >
                     <img
                         src={isInWishList ? "/assets/red-heart.png" : "/assets/heart.png"}
@@ -82,19 +86,19 @@ export const VerticalDisplay = (props: BookItemProps) => {
                 </div>
                 <div className="flex items-center justify-between p-4 border-t">
                     <p className="text-gray-700 truncate"><strong>ISBN:</strong> {ISBN}</p>
-                    <LoadingButton
-                        loading={isLoading}
+                    <Button
                         sx={{ borderRadius: '50px'}}
                         variant="contained"
                         color="primary"
                         onClick={(e) => {
                             e.preventDefault();
+                            e.stopPropagation();
                             handleAddToCart();
                         }}
                         startIcon={<ShoppingCartIcon />}
                     >
                     Add
-                    </LoadingButton>
+                    </Button>
                 </div>
                 </Link>
             </div>

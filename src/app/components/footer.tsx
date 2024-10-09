@@ -33,7 +33,7 @@ export const Footer = () => {
 
     return(
         <footer className="bg-blue-300 py-4">
-            <div className="container mx-auto flex flex-row items-center justify-start">
+            <div className="container flex flex-row items-center justify-start">
                     <img
                         src="/assets/book-icon.png"
                         alt="icon"
@@ -45,10 +45,14 @@ export const Footer = () => {
                     
             </div>
             
-            <div className="m-5 font-IBM">
-                <h3 className="text-lg text-blue-800 font-bold">Keep up to date</h3>
-                <p>Join our newsletter for regular updates.</p>
-                <div className="mt-3 font-bold">Your Email: <br/></div>
+
+
+            <div className="mt-5 grid grid-cols-1 md:grid-cols-4 gap-10 px-5 mx-auto justify-around">
+                <div className="ml-5 font-IBM">
+                    <h3 className="text-lg text-blue-800 font-bold">Keep up to date</h3>
+                    <p className="font-sans">Join our newsletter for regular updates.</p>
+                    <div className="mt-3 font-bold">Your Email: <br/>
+                </div>
                     <input
                         className="h-8 p-2"
                         type='email'
@@ -66,7 +70,33 @@ export const Footer = () => {
                     >
                     Subscribe
                     </LoadingButton>
+                </div>
+            
+                <div className="ml-5">
+                    <h4 className="font-bold text-blue-800">SHOPPING GUIDE</h4>
+                    <ul className="mt-2 space-y-1">
+                        <li>Return Policy</li>
+                        <li>Payments & Shipping</li>
+                    </ul>
+                </div>
+            
+                <div>
+                    <h4 className="font-bold text-blue-800">INFORMATION</h4>
+                    <ul className="mt-2 space-y-1">
+                        <li>Blog</li>
+                        <li>Privacy Policy</li>
+                        <li>Terms & Condition</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 className="font-bold text-blue-800">QUICK HELP</h4>
+                    <ul className="mt-2 space-y-1">
+                        <li>Help Center</li>
+                    </ul>
+                </div>
             </div>
+
         </footer>
     )
 }

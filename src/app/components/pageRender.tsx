@@ -1,7 +1,6 @@
 'use client';
 import { BookType } from '@/app/type';
-import { LoadingButton } from '@mui/lab';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { processedBook } from '../home/components/bookProcessor';
 import { VerticalDisplay } from './verticalDisplay';
@@ -11,32 +10,24 @@ export const PageRender = () => {
     const [limit, setLimit] = useState(() => {
         return Number(localStorage.getItem('bookLimit')) || 5;
     })
-    const [sortOption, setSortOption] = useState("titleAsc")
 
+    const [sortOption, setSortOption] = useState("titleAsc")
 
     const {data:book, error} = useSWR(`https://freetestapi.com/api/v1/books?limit=${limit}`, async (url) => {
         const response = await fetch(url);
             return response.json();
     })
-    
-    const [isLoading, setIsLoading] = useState(false)
+
 
     const BookList = book ? book.map((book: BookType) => processedBook(book)) : [];
+    
 
     const handleLoadMore = () => {
-        const newLimit = Number(limit + 5);
+        const newLimit = limit + 5;
         setLimit(newLimit)
         localStorage.setItem('bookLimit',  JSON.stringify(newLimit))
     }
 
-    const handleReset = () => {
-        setTimeout(() => {
-            window.location.reload()
-            setLimit(5);
-        }, 500);
-        setIsLoading(true)
-        localStorage.removeItem('bookLimit')
-    }
     
     const sortBooks = (BookList: BookType[], sortOption: string) => {
         return BookList?.sort((a, b) => {
@@ -58,27 +49,23 @@ export const PageRender = () => {
     const SortedBooks = sortBooks(BookList, sortOption)
     const PaginatedBooks = SortedBooks?.slice(0, limit)
 
-    if (error) return <div>Error loading results.</div>;
+    // reset cache on page reload
+    useEffect(() => {
+        localStorage.removeItem('bookLimit')
+    }, [])
+
+    
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    return (
-        <>
-            <div className='p-4'>
-                
-                <div className="flex justify-between items-center mb-4">
-                    <div className="flex flex-col items-center">
-                        <LoadingButton
-                            onClick={handleReset}
-                            variant="contained"
-                            loading={isLoading}
-                        >
-                            Reset All
-                        </LoadingButton>
-                    </div>
+    if (error) return <div>Error loading results.</div>;
 
+    return (
+    <>
+            <div className='p-6'>
+                <div className="flex justify-between items-center mb-4">
                     <div className="flex items-center">
                         <label className="flex items-center mr-2 font-bold">Sort By:</label>
                         <select
@@ -113,7 +100,7 @@ export const PageRender = () => {
                 </div>
                 )}
 
-                {limit >= 20 && (
+                {limit >= 10 && (
                 <button
                     onClick={scrollToTop}
                     className="fixed bottom-5 right-5 bg-white text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-400 transition"
