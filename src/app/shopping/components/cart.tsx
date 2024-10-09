@@ -34,7 +34,8 @@ export const Cart = () => {
         <>
             <div className="container p-2 sm:p-4 w-full mx-auto">
                 <div className="overflow-x-auto">
-        {cartItems.length > 0 ? (
+                    <p className="font-serif pb-2 text-lg"><strong>Total Quantity:</strong> {cartTotalQuantity}</p>
+            {cartItems.length > 0 ? (
             <>
                 <table className="w-full table-fixed bg-white border border-gray-200">
                     <thead>
@@ -68,7 +69,6 @@ export const Cart = () => {
                                         type="number"
                                         value={item.quantity}
                                         className="border text-center w-16 mx-auto"
-                                        min="1"
                                         onChange={(e) => handleQuantityChange(item, e.target.value)}
                                     />
                                 </td>

@@ -21,11 +21,11 @@ export default function BookDetail() {
         <Header />
             <div className="flex justify-center items-start py-10 bg-gray-50 min-h-screen">
                 <div className="flex flex-col md:flex-row max-w-5xl bg-white rounded-lg shadow-lg p-6">
-                    <div className="w-1/3 md:mb-0">
+                    <div className="w-1/3">
                         <img
                             src={bookDetails?.coverImage}
                             alt={bookDetails?.title}
-                            className="w-44 h-72 object-cover hover:opacity-75"
+                            className="w-52 h-72 object-cover"
                         />
                     </div>
                     <HorizontalDisplay book={bookDetails} key={book?.id}/>
