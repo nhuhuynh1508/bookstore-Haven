@@ -1,10 +1,10 @@
 export interface BookType {
     author: string;
-    cover_image: string;
+    coverImage: string;
     description: string;
-    genre: string[];
+    genres: string[];
     id: number;
-    publication_year: number;
+    publicationYear: number;
     title: string;
     price: number;
     ISBN: number;

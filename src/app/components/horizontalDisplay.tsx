@@ -47,7 +47,7 @@ export const HorizontalDisplay = (props: BookItemProps) => {
             <strong>ISBN:</strong> {ISBN}
         </p>
         <p className="text-gray-600 text-base mb-1">
-            <strong>Genres:</strong> {(book?.genre || []).join(', ')}
+            <strong>Genres:</strong> {(book?.genres || []).join(', ')}
         </p>
 
         <p className="text-lg font-semibold text-gray-800 mt-4">

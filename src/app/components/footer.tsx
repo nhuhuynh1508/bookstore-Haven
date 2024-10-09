@@ -47,7 +47,7 @@ export const Footer = () => {
             
 
 
-            <div className="mt-5 grid grid-cols-1 md:grid-cols-4 gap-10 px-5 mx-auto justify-around">
+            <div className="mt-5 grid grid-cols-1 md:grid-cols-4 space-x-* px-5 mx-auto justify-around">
                 <div className="ml-5 font-IBM">
                     <h3 className="text-lg text-blue-800 font-bold">Keep up to date</h3>
                     <p className="font-sans">Join our newsletter for regular updates.</p>
@@ -68,11 +68,11 @@ export const Footer = () => {
                         color="primary"
                         onClick={handleSubscribeButton}
                     >
-                    Subscribe
+                    Join
                     </LoadingButton>
                 </div>
             
-                <div className="ml-5">
+                <div className="ml-10">
                     <h4 className="font-bold text-blue-800">SHOPPING GUIDE</h4>
                     <ul className="mt-2 space-y-1">
                         <li>Return Policy</li>

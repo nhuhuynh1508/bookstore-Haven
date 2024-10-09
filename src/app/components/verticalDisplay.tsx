@@ -53,15 +53,16 @@ export const VerticalDisplay = (props: BookItemProps) => {
     const ISBN = storedISBN[book?.id] || 0;
 
     return (
-        
-        <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full relative hover:shadow-xl">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full relative hover:shadow-xl">
                 <Link href={`/book/${book.id}`}>
-                <img
-                    src={book.cover_image}
-                    alt={book.title}
-                    className="w-full h-72 object-cover hover:opacity-75"
-                />
-                
+                    <div className="flex justify-center items-center">
+                        <img
+                            src={book.coverImage}
+                            alt={book.title}
+                            className="w-44 h-72 object-cover hover:opacity-75"
+                        />
+                    </div>
+                </Link>
                 <button
                     className="absolute top-2 right-2"
                     onClick={(e) => {
@@ -76,18 +77,20 @@ export const VerticalDisplay = (props: BookItemProps) => {
                         style={{ width: '30px', height: '30px' }}
                     />
                 </button>
-                <div className="p-4 flex flex-col flex-grow">
-                    <h3 className="text-xl font-semibold mb-2">{book.title}</h3>
-                    <p className="text-gray-700"><strong>Author:</strong> {book.author}</p>
-                    <p className="text-gray-700"><strong>Year:</strong> {book.publication_year}</p>
-                    <p className="text-gray-700"><strong>Description:</strong> {book.description}</p>
-                    <p className="text-gray-700"><strong>Genres:</strong> {(book?.genre || []).join(', ')}</p>
-                    <p className="text-gray-700 font-bold pt-2 text-lg font-IBM">{(book?.price || []).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                <div className="p-6 flex flex-col flex-grow text-sm">
+                    <h3 className="text-xl font-semibold mb-2 p-1">{book.title}</h3>
+                    <p className="text-gray-700 p-1"><strong>Author:</strong> {book.author}</p>
+                    <p className="text-gray-700 p-1"><strong>Year:</strong> {book.publicationYear}</p>
+                    <p className="text-gray-700 p-1"><strong>Description:</strong> {book.description}</p>
+                    <p className="text-gray-700 p-1"><strong>Genres:</strong> {(book.genres || []).join(', ')}</p>
+                    <p className="text-gray-700 font-bold text-lg font-IBM p-1">
+                        {(book.price || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                    </p>
                 </div>
                 <div className="flex items-center justify-between p-4 border-t">
-                    <p className="text-gray-700 truncate"><strong>ISBN:</strong> {ISBN}</p>
+                    <p className="text-gray-700 truncate"><strong>ISBN:</strong> {book.ISBN}</p>
                     <Button
-                        sx={{ borderRadius: '50px'}}
+                        sx={{ borderRadius: '50px' }}
                         variant="contained"
                         color="primary"
                         onClick={(e) => {
@@ -97,10 +100,9 @@ export const VerticalDisplay = (props: BookItemProps) => {
                         }}
                         startIcon={<ShoppingCartIcon />}
                     >
-                    Add
+                        Add
                     </Button>
                 </div>
-                </Link>
             </div>
-    );
+        );
 };

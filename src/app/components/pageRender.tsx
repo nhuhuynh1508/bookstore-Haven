@@ -13,7 +13,7 @@ export const PageRender = () => {
 
     const [sortOption, setSortOption] = useState("titleAsc")
 
-    const {data:book, error} = useSWR(`https://freetestapi.com/api/v1/books?limit=${limit}`, async (url) => {
+    const {data:book, error} = useSWR(`http://localhost:3000/api/book`, async (url) => {
         const response = await fetch(url);
             return response.json();
     })
