@@ -1,10 +1,10 @@
 'use client';
 import { BookType } from '@/app/type';
-import { CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { processedBook } from '../home/components/bookProcessor';
 // import { NewArrivals } from './newArrivals';
+import { LinearProgress } from '@mui/material';
 import { VerticalDisplay } from './verticalDisplay';
 
 
@@ -64,7 +64,7 @@ export const PageRender = () => {
     };
 
     if (error) return <div>Error loading results.</div>;
-    if (isLoading) return <div><CircularProgress /></div>;
+    if (isLoading) return <div> <LinearProgress /></div>;
 
     return (
     <>

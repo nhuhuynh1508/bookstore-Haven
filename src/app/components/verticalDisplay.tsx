@@ -30,14 +30,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
     }, [wishList, book.id]);
     
     const handleAddToCart = () => {
-        if (book) {
-            setTimeout(() => {
-                setIsLoading(false)
-                dispatch(addToCart(book));
-                
-            }, 1000);
-            setIsLoading(true)
-        }
+        dispatch(addToCart(book));
     };
 
     const handleAddToWishList = () => {

@@ -28,13 +28,7 @@ export const HorizontalDisplay = (props: BookItemProps) => {
     const [isLoading, setIsLoading] = useState(false)
 
     const handleAddToCart = () => {
-        if (book) {
-            setTimeout(() => {
-                setIsLoading(false)
-                dispatch(addToCart(book));
-            }, 1000);
-            setIsLoading(true)
-        }
+        dispatch(addToCart(book));
     };
 
     return (
