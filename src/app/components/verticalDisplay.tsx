@@ -64,7 +64,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                             className="w-48 h-72 object-cover hover:opacity-75"
                         />
                     </div>
-                </Link>
+                
                 <button
                     className="absolute top-2 right-2 p-6"
                     onClick={(e) => {
@@ -105,6 +105,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                         Add
                     </Button>
                 </div>
+                </Link>
             </div>
         );
 };
