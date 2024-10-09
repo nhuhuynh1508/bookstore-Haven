@@ -55,11 +55,11 @@ export const VerticalDisplay = (props: BookItemProps) => {
     return (
             <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full relative hover:shadow-xl">
                 <Link href={`/book/${book.id}`}>
-                    <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center p-5">
                         <img
                             src={book.coverImage}
                             alt={book.title}
-                            className="w-44 h-72 object-cover hover:opacity-75"
+                            className="w-48 h-72 object-cover hover:opacity-75"
                         />
                     </div>
                 </Link>
@@ -77,8 +77,8 @@ export const VerticalDisplay = (props: BookItemProps) => {
                         style={{ width: '30px', height: '30px' }}
                     />
                 </button>
-                <div className="p-6 flex flex-col flex-grow text-sm">
-                    <h3 className="text-xl font-semibold mb-2 p-1">{book.title}</h3>
+                <div className="p-3 flex flex-col flex-grow text-sm">
+                    <h3 className="text-xl font-semibold p-1">{book.title}</h3>
                     <p className="text-gray-700 p-1"><strong>Author:</strong> {book.author}</p>
                     <p className="text-gray-700 p-1"><strong>Year:</strong> {book.publicationYear}</p>
                     <p className="text-gray-700 p-1"><strong>Description:</strong> {book.description}</p>

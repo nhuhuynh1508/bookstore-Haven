@@ -77,7 +77,7 @@ export async function GET() {
         {
             id: 9,
             title: "Brave New World",
-            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdpk2wS-SaWW2z5Xzf4ZObQDHAf5G6KZudjA&shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdpk2wS-SaWW2z5Xzf4ZObQDHAf5G6KZudjA&s",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMMXBZClhy-ZM-Cfre7xisCD02IE3wihMRww&s",
             author: "Aldous Huxley",
             publicationYear: 1932,
             genres: ["Dystopian", "Science Fiction"],
