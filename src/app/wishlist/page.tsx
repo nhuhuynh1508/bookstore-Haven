@@ -26,7 +26,7 @@ function Wishlist() {
                             <img
                                 src={book.coverImage}
                                 alt={book.title}
-                                className="w-24 sm:h-32 object-cover xs:h-20"
+                                className="w-24"
                             />
                         </div>
                         <div className="p-2">

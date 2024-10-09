@@ -1,3 +1,4 @@
+import HomeIcon from '@mui/icons-material/Home';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
@@ -44,11 +45,11 @@ export default function DrawerMenu() {
         onKeyDown={toggleDrawer(anchor, false)}
     >
         <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['Home', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem key={text} disablePadding>
             <ListItemButton>
                 <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index % 2 === 0 ? <HomeIcon /> : <MailIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
             </ListItemButton>

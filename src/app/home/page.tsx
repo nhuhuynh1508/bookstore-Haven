@@ -4,14 +4,12 @@ import { Background } from '@/app/components/background';
 import { Header } from '@/app/components/header';
 import { Subheader } from '@/app/components/subheader';
 import { VerticalDisplay } from '../components/verticalDisplay';
-import { processedBook } from './components/bookProcessor';
 // import library
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useState } from 'react';
 import useSWR from 'swr';
 // import type
 import { BookType } from '../type';
-
 
 const SearchResult = () => {
     const searchParams = useSearchParams()
@@ -20,13 +18,13 @@ const SearchResult = () => {
 
     const {data:book, error} = useSWR(
         search ?
-        `https://freetestapi.com/api/v1/books?search=${search}` : null, async (url) => {
+        `http://localhost:3000/api/book` : null, async (url) => {
         const response = await fetch(url);
             return response.json();
     })
     
-
-    const BookList = book ? book.map((book: BookType) => processedBook(book)) : [];
+    // search for books based on titles
+    const BookList = book ? book.filter((book: BookType) => book.title.toLowerCase().includes(search.toLowerCase())) : [];
 
     const handleLoadMore = () => {
         setLimit(limit + 5)

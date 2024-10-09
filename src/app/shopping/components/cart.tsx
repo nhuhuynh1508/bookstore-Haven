@@ -34,9 +34,9 @@ export const Cart = () => {
         <>
             <div className="container p-2 sm:p-4 w-full mx-auto">
                 <div className="overflow-x-auto">
-                    <p className="font-serif pb-2 text-lg"><strong>Total Quantity:</strong> {cartTotalQuantity}</p>
             {cartItems.length > 0 ? (
             <>
+            <p className="font-serif pb-2 text-lg"><strong>Total Quantity:</strong> {cartTotalQuantity}</p>
                 <table className="w-full table-fixed bg-white border border-gray-200">
                     <thead>
                         <tr className="w-full bg-gray-100 border-b border-gray-200">

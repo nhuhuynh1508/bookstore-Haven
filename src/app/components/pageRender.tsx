@@ -1,5 +1,6 @@
 'use client';
 import { BookType } from '@/app/type';
+import { CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { processedBook } from '../home/components/bookProcessor';
@@ -13,7 +14,7 @@ export const PageRender = () => {
 
     const [sortOption, setSortOption] = useState("titleAsc")
 
-    const {data:book, error} = useSWR(`http://localhost:3000/api/book`, async (url) => {
+    const {data:book, error, isLoading} = useSWR(`http://localhost:3000/api/book`, async (url) => {
         const response = await fetch(url);
             return response.json();
     })
@@ -51,7 +52,8 @@ export const PageRender = () => {
 
     // reset cache on page reload
     useEffect(() => {
-        localStorage.removeItem('bookLimit')
+        setLimit(5);
+        localStorage.removeItem('bookLimit');
     }, [])
 
     
@@ -61,6 +63,7 @@ export const PageRender = () => {
     };
 
     if (error) return <div>Error loading results.</div>;
+    if (isLoading) return <div><CircularProgress /></div>;
 
     return (
     <>
