@@ -45,8 +45,8 @@ export const NewArrivals = () => {
                     const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
                     const price = storedPrice[book?.id] || 0;
                     return (
-                        <Link href={`/book/${book.id}`}>
-                        <div key={book.id} className="p-1 text-center">
+                        <Link key={book.id} href={`/book/${book.id}`}>
+                        <div className="p-1 text-center">
                             <img
                                 src={book.coverImage}
                                 alt={book.title}
