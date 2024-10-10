@@ -9,7 +9,6 @@ import { useAppDispatch } from '@/lib/hooks';
 // import components
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Button } from '@mui/material';
-import { useState } from 'react';
 
 // in case of having a lot of different types
 interface BookItemProps {
@@ -24,8 +23,7 @@ export const HorizontalDisplay = (props: BookItemProps) => {
     const ISBN = storedISBN[book?.id] || 0;
     const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
     const price = storedPrice[book?.id] || 0;
-    
-    const [isLoading, setIsLoading] = useState(false)
+
 
     const handleAddToCart = () => {
         dispatch(addToCart(book));

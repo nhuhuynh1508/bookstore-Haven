@@ -221,11 +221,236 @@ export async function GET() {
         {
             id: 25,
             title: "The Stranger",
-            coverImage: "https://bizweb.dktcdn.net/thumb/1024x1024/100/431/180/products/stranger1.png?v=1637402268510",
+            coverImage: "https://m.media-amazon.com/images/I/617WkdpG8xL._AC_UF1000,1000_QL80_.jpg",
             author: "Albert Camus",
             publicationYear: 1942,
             genres: ["Existential Fiction", "Philosophical Fiction"],
             description: "A novel that explores existentialism and absurdity through the eyes of a man detached from society."
+        },
+        {
+            id: 26,
+            title: "Normal People",
+            coverImage: "https://m.media-amazon.com/images/I/71bi5ga7Y-L._AC_UF894,1000_QL80_.jpg",
+            author: "Sally Rooney",
+            publicationYear: 2018,
+            genres: ["Contemporary Fiction", "Romance"],
+            description: "A complex love story about two young people navigating their relationship through high school and university in Ireland."
+        },
+        {
+            id: 27,
+            title: "Daisy Jones & The Six",
+            coverImage: "https://bizweb.dktcdn.net/100/378/470/products/daisy-jones-and-the-six-the-sunday-times-bestseller-paperback-9-jan-2020-uk.jpg?v=1660800629063",
+            author: "Taylor Jenkins Reid",
+            publicationYear: 2019,
+            genres: ["Historical Fiction", "Music"],
+            description: "An oral history of a fictional rock band in the 1970s, exploring the complexities of fame, love, and heartbreak."
+        },
+        {
+            id: 28,
+            title: "The Giver of Stars",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTEOLehtb0zO_FkynwkOxq9yIsHdRnz7CvQQ&s",
+            author: "Jojo Moyes",
+            publicationYear: 2019,
+            genres: ["Historical Fiction", "Romance"],
+            description: "A story of female friendship and empowerment set against the backdrop of the Pack Horse Library Project in Depression-era Kentucky."
+        },
+        {
+            id: 29,
+            title: "The Midnight Library",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-XewEIDM-yCiLLSynORoahhkJwn0CiHT7qg&s",
+            author: "Matt Haig",
+            publicationYear: 2020,
+            genres: ["Fantasy", "Contemporary Fiction"],
+            description: "A magical library offers a woman the chance to explore different versions of her life, leading to profound realizations."
+        },
+        {
+            id: 30,
+            title: "The Road",
+            coverImage: "https://m.media-amazon.com/images/I/91bwHfPx-SL._AC_UF894,1000_QL80_.jpg",
+            author: "Cormac McCarthy",
+            publicationYear: 2006,
+            genres: ["Post-Apocalyptic Fiction", "Literary Fiction"],
+            description: "A haunting tale of a father and son journeying through a desolate America in a world devastated by an unspecified disaster."
+        },
+        {
+            id: 31,
+            title: "The Shadow of the Wind",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN6iMJAQfDOEbd3yOC2v1eF_0TG9FAZntimA&s",
+            author: "Carlos Ruiz Zafón",
+            publicationYear: 2001,
+            genres: ["Historical Fiction", "Mystery"],
+            description: "A young boy's discovery of a forgotten book leads him into a labyrinth of intrigue in post-war Barcelona."
+        },
+        {
+            id: 32,
+            title: "Never Let Me Go",
+            coverImage: "https://m.media-amazon.com/images/I/71K0eikl7wL._AC_UF1000,1000_QL80_.jpg",
+            author: "Kazuo Ishiguro",
+            publicationYear: 2005,
+            genres: ["Science Fiction", "Dystopian Fiction"],
+            description: "A story about students at a mysterious boarding school who confront the reality of their existence as clones."
+        },
+        {
+            id: 33,
+            title: "The Night Circus",
+            coverImage: "https://erinmorgenstern.com/wp-content/uploads/2011/03/Night-Circus-Cover-low-res.jpg",
+            author: "Erin Morgenstern",
+            publicationYear: 2011,
+            genres: ["Fantasy", "Historical Fiction"],
+            description: "A magical competition between two young illusionists takes place within an enchanting circus that only opens at night."
+        },
+        {
+            id: 34,
+            title: "Life of Pi",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfBzX1mWlsRW1tFWD2tREjstavvZXbqhrEqA&s",
+            author: "Yann Martel",
+            publicationYear: 2001,
+            genres: ["Adventure Fiction", "Philosophical Fiction"],
+            description: "A young boy survives a shipwreck and shares a lifeboat with a Bengal tiger, leading to a profound journey of faith and survival."
+        },
+        {
+            id: 35,
+            title: "The Goldfinch",
+            coverImage: "https://m.media-amazon.com/images/I/51kCei+c72L._AC_UF1000,1000_QL80_.jpg",
+            author: "Donna Tartt",
+            publicationYear: 2013,
+            genres: ["Literary Fiction", "Coming-of-Age Fiction"],
+            description: "A young boy's life is turned upside down after surviving a terrorist attack at an art museum, leading him into a world of art and crime."
+        },
+        {
+            id: 36,
+            title: "Station Eleven",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTHuuyE5TSvdfUlpzl9no9f5wMF2bYpxulqA&s",
+            author: "Emily St. John Mandel",
+            publicationYear: 2014,
+            genres: ["Post-Apocalyptic Fiction", "Literary Fiction"],
+            description: "A pandemic wipes out most of humanity, and a traveling theater troupe seeks to keep the memory of civilization alive."
+        },
+        {
+            id: 37,
+            title: "The Secret History",
+            coverImage: "https://bizweb.dktcdn.net/thumb/grande/100/326/228/products/the-secret-history-by-donna-tartt-bookworm-hanoi-e3c168e9-389c-48bb-9e1c-5060289edfd0.jpg?v=1562497112007",
+            author: "Donna Tartt",
+            publicationYear: 1992,
+            genres: ["Literary Fiction", "Mystery"],
+            description: "A tale of a group of college students studying ancient Greek who become involved in a murder plot."
+        },
+        {
+            id: 38,
+            title: "Where the Crawdads Sing",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjVLNJTsztQ-rTuQvA-biJBFugAdoP-kNnCA&s",
+            author: "Delia Owens",
+            publicationYear: 2018,
+            genres: ["Literary Fiction", "Mystery"],
+            description: "A coming-of-age story about a young girl who raises herself in the marshes of North Carolina and becomes a suspect in a murder case."
+        },
+        {
+            id: 39,
+            title: "The Invisible Life of Addie LaRue",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbPpE1RpY1A9T28EI6aMRZXh0DQJ2mRAbRUA&s",
+            author: "V.E. Schwab",
+            publicationYear: 2020,
+            genres: ["Fantasy", "Historical Fiction"],
+            description: "A young woman makes a Faustian bargain to live forever but is cursed to be forgotten by everyone she meets."
+        },
+        {
+            id: 40,
+            title: "The Alchemist",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4T0aNvgYdBX8kfK_qYc046QFsSXhHE2NXWw&s",
+            author: "Paulo Coelho",
+            publicationYear: 1988,
+            genres: ["Adventure", "Philosophical Fiction"],
+            description: "A shepherd boy embarks on a journey to discover his personal legend and the true meaning of life."
+        },
+        {
+            id: 41,
+            title: "The Brothers Karamazov",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-htT8-h7neohcAsvkrbPqdbo9uPXphf0MoA&s",
+            author: "Fyodor Dostoevsky",
+            publicationYear: 1880,
+            genres: ["Classic", "Philosophical Fiction"],
+            description: "A profound exploration of morality, faith, and family dynamics through the lives of the Karamazov brothers."
+        },
+        {
+            id: 42,
+            title: "The Color Purple",
+            coverImage: "https://prodimage.images-bn.com/pimages/9780593512371_p0_v1_s1200x630.jpg",
+            author: "Alice Walker",
+            publicationYear: 1982,
+            genres: ["Historical Fiction", "Epistolary Novel"],
+            description: "A powerful narrative about the struggles of African American women in the early 20th century, told through letters."
+        },
+        {
+            id: 43,
+            title: "Slaughterhouse-Five",
+            coverImage: "https://s26162.pcdn.co/wp-content/uploads/2019/03/110268.jpg",
+            author: "Kurt Vonnegut",
+            publicationYear: 1969,
+            genres: ["Science Fiction", "Anti-War"],
+            description: "A satirical novel about the experiences of a soldier who becomes 'unstuck in time' during and after World War II."
+        },
+        {
+            id: 44,
+            title: "A Fine Balance",
+            coverImage: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1551173390i/5211.jpg",
+            author: "Rohinton Mistry",
+            publicationYear: 1995,
+            genres: ["Historical Fiction", "Social Drama"],
+            description: "Set in India during the Emergency, it tells the story of four characters whose lives become intertwined amidst social upheaval."
+        },
+        {
+            id: 45,
+            title: "The Nightingale",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSLudgHcSTDJYZl2h-IxoOgYrtBhaAM_9LTw&s",
+            author: "Kristin Hannah",
+            publicationYear: 2015,
+            genres: ["Historical Fiction", "War Fiction"],
+            description: "The story of two sisters in France during World War II and their struggles for survival and resistance against the Nazi occupation."
+        },
+        {
+            id: 46,
+            title: "The Book Thief",
+            coverImage: "https://cdn.penguin.co.uk/dam-assets/books/9781784162122/9781784162122-jacket-large.jpg",
+            author: "Markus Zusak",
+            publicationYear: 2005,
+            genres: ["Historical Fiction", "Young Adult"],
+            description: "Narrated by Death, this novel tells the story of a young girl living in Nazi Germany who finds solace in stealing books."
+        },
+        {
+            id: 47,
+            title: "The Help",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkn7Jnb-1YqkGrr16trGJ_W0ozfVCShy578g&s",
+            author: "Kathryn Stockett",
+            publicationYear: 2009,
+            genres: ["Historical Fiction", "Social Issues"],
+            description: "Set in the 1960s, it follows the lives of African American maids working in white households and their quest for dignity."
+        },
+        {
+            id: 48,
+            title: "Circe",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQARvvBuY3z8jLJSmxZTWAfVInSYDB2RZqL-w&s",
+            author: "Madeline Miller",
+            publicationYear: 2018,
+            genres: ["Fantasy", "Mythology"],
+            description: "A retelling of the life of Circe, the enchantress from Homer's Odyssey, exploring themes of identity and empowerment."
+        },
+        {
+            id: 49,
+            title: "Anxious People",
+            coverImage: "https://m.media-amazon.com/images/I/810XLL7gvRL._UF1000,1000_QL80_.jpg",
+            author: "Fredrik Backman",
+            publicationYear: 2020,
+            genres: ["Contemporary Fiction", "Humor"],
+            description: "A poignant comedy about a failed bank robbery and the lives of the hostages who are forced to confront their anxieties."
+        },
+        {
+            id: 50,
+            title: "Pachinko",
+            coverImage: "https://bizweb.dktcdn.net/thumb/grande/100/364/248/products/9781455563920.jpg?v=1623227469370",
+            author: "Min Jin Lee",
+            publicationYear: 2017,
+            genres: ["Historical Fiction", "Family Saga"],
+            description: "A multigenerational saga about a Korean family living in Japan and the struggles they face against prejudice and hardship."
         },
     ]
     return NextResponse.json(books);
