@@ -7,7 +7,6 @@ import { Footer } from '../components/footer';
 import { Header } from '../components/header';
 import { Dashboard } from './components/dashboard';
 import { Form } from './components/form';
-import { ToDoHeader } from './components/todoHeader';
 
 const generateRandomID = (length) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -62,13 +61,18 @@ function ToDoList() {
     return (
         <div className="flex flex-col min-h-screen">
             <Header />
-            <div className="flex-grow bg-black flex flex-col justify-center items-center">
-                <ToDoHeader />
+            <main className="flex-grow bg-black flex flex-col justify-center items-center p-4">
                 <Dashboard tasks={tasks} />
-                <Form tasks={tasks} onSubmitTask={handleSubmitTask} onFinishTask={handleFinishTask} onRemoveTask={handleRemoveTask} />
-            </div>
+                <Form
+                tasks={tasks}
+                onSubmitTask={handleSubmitTask}
+                onFinishTask={handleFinishTask}
+                onRemoveTask={handleRemoveTask}
+                />
+            </main>
             <Footer />
         </div>
+
     );
 }
 

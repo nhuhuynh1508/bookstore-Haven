@@ -1,16 +1,15 @@
 'use client';
+import { Header } from '../components/header';
 // import components
 import { Subheader } from '../components/subheader';
 import { Cart } from './components/cart';
 import { CartBackground } from './components/cartBackground';
-import { CartHeader } from './components/cartHeader';
+
 
 function ShoppingCart() {
-    
-
     return (
         <>
-            <CartHeader />
+            <Header />
             <Subheader />
             <CartBackground />
             <Cart />

@@ -30,14 +30,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
     }, [wishList, book.id]);
     
     const handleAddToCart = () => {
-        if (book) {
-            setTimeout(() => {
-                setIsLoading(false)
-                dispatch(addToCart(book));
-                
-            }, 1000);
-            setIsLoading(true)
-        }
+        dispatch(addToCart(book));
     };
 
     const handleAddToWishList = () => {
@@ -51,20 +44,22 @@ export const VerticalDisplay = (props: BookItemProps) => {
 
     const storedISBN = JSON.parse(localStorage.getItem('ISBN')) || {};
     const ISBN = storedISBN[book?.id] || 0;
+    const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
+    const price = storedPrice[book?.id] || 0;
 
     return (
             <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full relative hover:shadow-xl">
                 <Link href={`/book/${book.id}`}>
-                    <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center p-5">
                         <img
                             src={book.coverImage}
                             alt={book.title}
-                            className="w-44 h-72 object-cover hover:opacity-75"
+                            className="w-48 h-72 object-cover hover:opacity-75"
                         />
                     </div>
-                </Link>
+                
                 <button
-                    className="absolute top-2 right-2"
+                    className="absolute top-2 right-2 p-6"
                     onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -77,18 +72,18 @@ export const VerticalDisplay = (props: BookItemProps) => {
                         style={{ width: '30px', height: '30px' }}
                     />
                 </button>
-                <div className="p-6 flex flex-col flex-grow text-sm">
-                    <h3 className="text-xl font-semibold mb-2 p-1">{book.title}</h3>
+                <div className="p-3 flex flex-col flex-grow text-sm">
+                    <h3 className="text-xl font-semibold p-1">{book.title}</h3>
                     <p className="text-gray-700 p-1"><strong>Author:</strong> {book.author}</p>
                     <p className="text-gray-700 p-1"><strong>Year:</strong> {book.publicationYear}</p>
                     <p className="text-gray-700 p-1"><strong>Description:</strong> {book.description}</p>
                     <p className="text-gray-700 p-1"><strong>Genres:</strong> {(book.genres || []).join(', ')}</p>
                     <p className="text-gray-700 font-bold text-lg font-IBM p-1">
-                        {(book.price || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                        {price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                     </p>
                 </div>
                 <div className="flex items-center justify-between p-4 border-t">
-                    <p className="text-gray-700 truncate"><strong>ISBN:</strong> {book.ISBN}</p>
+                    <p className="text-gray-700 truncate"><strong>ISBN:</strong> {ISBN}</p>
                     <Button
                         sx={{ borderRadius: '50px' }}
                         variant="contained"
@@ -103,6 +98,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                         Add
                     </Button>
                 </div>
+                </Link>
             </div>
         );
 };

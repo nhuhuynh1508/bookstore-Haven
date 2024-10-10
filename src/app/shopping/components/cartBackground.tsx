@@ -4,7 +4,7 @@ export const CartBackground = () => {
 
     return (
         <>
-        <div className="mt-10">
+        <div>
             <img
                 src='/assets/bookcart.jpg'
                 alt="bookcart"
