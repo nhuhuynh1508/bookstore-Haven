@@ -221,7 +221,7 @@ export async function GET() {
         {
             id: 25,
             title: "The Stranger",
-            coverImage: "https://bizweb.dktcdn.net/thumb/1024x1024/100/431/180/products/stranger1.png?v=1637402268510",
+            coverImage: "https://m.media-amazon.com/images/I/617WkdpG8xL._AC_UF1000,1000_QL80_.jpg",
             author: "Albert Camus",
             publicationYear: 1942,
             genres: ["Existential Fiction", "Philosophical Fiction"],
@@ -257,7 +257,7 @@ export async function GET() {
         {
             id: 29,
             title: "The Midnight Library",
-            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsjRkTJ0meZbylU1IQvxCFywrdoOwUbdQUxw&s",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-XewEIDM-yCiLLSynORoahhkJwn0CiHT7qg&s",
             author: "Matt Haig",
             publicationYear: 2020,
             genres: ["Fantasy", "Contemporary Fiction"],

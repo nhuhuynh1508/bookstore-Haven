@@ -9,7 +9,8 @@ import { addToWishList } from '@/lib/features/wishlistSlice';
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 // import components
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Button } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { IconButton } from '@mui/material';
 import Link from "next/link";
 import { useEffect, useState } from 'react';
 
@@ -54,12 +55,45 @@ export const VerticalDisplay = (props: BookItemProps) => {
                         <img
                             src={book.coverImage}
                             alt={book.title}
-                            className="w-48 h-72 object-cover hover:opacity-75"
+                            className="w-32 h-48 object-cover hover:opacity-75 transition-opacity duration-300"
                         />
+                        {/* <Button
+                        sx={{ borderRadius: '50px' }}
+                        variant="contained"
+                        color="primary"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handleAddToCart();
+                        }}
+                        startIcon={<ShoppingCartIcon />}
+                        >
+                        </Button> */}
+
+                        <div className="absolute inset-0 pb-8 flex items-center justify-center space-x-4 opacity-0 hover:opacity-100 transition-opacity">
+                            <IconButton
+                                sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
+                                aria-label="view"
+                            >
+                                <VisibilityIcon style={{ color: 'gray' }} />
+                            </IconButton>
+                    
+                            <IconButton
+                                sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
+                                aria-label="add to cart"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    handleAddToCart();
+                                }}
+                            >
+                                    <ShoppingCartIcon style={{ color: 'gray' }} />
+                            </IconButton>
+                        </div>
                     </div>
                 
                 <button
-                    className="absolute top-2 right-2 p-6"
+                    className="absolute top-2 right-2 pl-6"
                     onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -76,27 +110,14 @@ export const VerticalDisplay = (props: BookItemProps) => {
                     <h3 className="text-xl font-semibold p-1">{book.title}</h3>
                     <p className="text-gray-700 p-1"><strong>Author:</strong> {book.author}</p>
                     <p className="text-gray-700 p-1"><strong>Year:</strong> {book.publicationYear}</p>
-                    <p className="text-gray-700 p-1"><strong>Description:</strong> {book.description}</p>
+                    <p className="text-gray-700 p-1"><strong>ISBN:</strong> {ISBN}</p>
                     <p className="text-gray-700 p-1"><strong>Genres:</strong> {(book.genres || []).join(', ')}</p>
                     <p className="text-gray-700 font-bold text-lg font-IBM p-1">
                         {price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                     </p>
                 </div>
-                <div className="flex items-center justify-between p-4 border-t">
-                    <p className="text-gray-700 truncate"><strong>ISBN:</strong> {ISBN}</p>
-                    <Button
-                        sx={{ borderRadius: '50px' }}
-                        variant="contained"
-                        color="primary"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            handleAddToCart();
-                        }}
-                        startIcon={<ShoppingCartIcon />}
-                    >
-                        Add
-                    </Button>
+                <div className="fixed items-center justify-end p-4 border-t">
+                    
                 </div>
                 </Link>
             </div>

@@ -3,7 +3,7 @@
 import { Background } from '@/app/components/background';
 import { Header } from '@/app/components/header';
 import { Footer } from './components/footer';
-import { PageRender } from './components/pageRender';
+import { NewArrivals } from './components/newArrivals';
 import { Subheader } from './components/subheader';
 
 
@@ -13,7 +13,7 @@ const Home = () => {
             <Header />
             <Subheader />
             <Background />
-            <PageRender />
+            <NewArrivals />
             <Footer />
         </div>
     );
