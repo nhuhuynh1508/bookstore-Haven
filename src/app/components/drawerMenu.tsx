@@ -29,16 +29,18 @@ export default function TemporaryDrawer() {
                 { text: 'Home', icon: <HomeIcon />, href: '/' },
                 { text: 'To-do List', icon: <ChecklistIcon/>, href: '/to-do-list' },
             ].map((item, index) => (
-                <ListItem key={item.text} disablePadding>
                 <Link href={item.href}>
+                <ListItem key={item.text} disablePadding>
+                
                     <ListItemButton>
                     <ListItemIcon>
                         {item.icon}
                     </ListItemIcon>
                     <ListItemText primary={item.text} />
                     </ListItemButton>
-                </Link>
+                
                 </ListItem>
+                </Link>
             ))}
         </List>
 

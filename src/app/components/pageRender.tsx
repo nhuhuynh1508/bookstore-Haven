@@ -1,10 +1,9 @@
 'use client';
 import { BookType } from '@/app/type';
+import { LinearProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { processedBook } from '../home/components/bookProcessor';
-// import { NewArrivals } from './newArrivals';
-import { LinearProgress } from '@mui/material';
 import { VerticalDisplay } from './verticalDisplay';
 
 
@@ -85,7 +84,7 @@ export const PageRender = () => {
                     </div>
                 </div>
 
-                {/* <NewArrivals /> */}
+                {/* <NewArrivals  /> */}
                 <div className="p-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {PaginatedBooks?.map((book: BookType) => (
