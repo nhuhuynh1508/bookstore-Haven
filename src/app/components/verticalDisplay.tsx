@@ -24,7 +24,6 @@ export const VerticalDisplay = (props: BookItemProps) => {
     const dispatch = useAppDispatch();
     const wishList = useAppSelector((state) => state.book.wishlist.wishListItems);
     const [isInWishList, setIsInWishList] = useState(false);
-    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         setIsInWishList(wishList.some((item) => item.id === book.id));
@@ -57,18 +56,6 @@ export const VerticalDisplay = (props: BookItemProps) => {
                             alt={book.title}
                             className="w-32 h-48 object-cover hover:opacity-75 transition-opacity duration-300"
                         />
-                        {/* <Button
-                        sx={{ borderRadius: '50px' }}
-                        variant="contained"
-                        color="primary"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            handleAddToCart();
-                        }}
-                        startIcon={<ShoppingCartIcon />}
-                        >
-                        </Button> */}
 
                         <div className="absolute inset-0 pb-8 flex items-center justify-center space-x-4 opacity-0 hover:opacity-100 transition-opacity">
                             <IconButton

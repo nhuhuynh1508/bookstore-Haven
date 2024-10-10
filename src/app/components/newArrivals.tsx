@@ -1,21 +1,17 @@
+import { LinearProgress } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 export const NewArrivals = () => {
-
-    const [books, setBooks] = useState([]);
     const [newArrivals, setNewArrivals] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchBooks = async () => {
-            const response = await fetch('http://localhost:3000/api/book');
-            const data = await response.json();
-            setBooks(data);
-            generateRandomBooks(data);
-        };
+    const { data: book, error, isLoading } = useSWR('http://localhost:3000/api/book', async (url) => {
+        const response = await fetch(url);
+        return response.json();
+    });
 
-        fetchBooks();
-    }, []);
 
     // Function to generate 5 random unique books
     const generateRandomBooks = (allBooks) => {
@@ -36,6 +32,23 @@ export const NewArrivals = () => {
             setNewArrivals(randomBooks);
         }
     };
+
+    useEffect(() => {
+        if (book) {
+            generateRandomBooks(book)
+        }
+    }, [book]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (error) return <div className="font-bold text-2xl justify-center">Error loading results.</div>;
+    if (loading) return <div><LinearProgress /></div>;
 
     return (
         <div>

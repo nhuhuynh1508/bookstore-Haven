@@ -9,25 +9,13 @@ import { Subheader } from '../components/subheader';
 import { VerticalDisplay } from '../components/verticalDisplay';
 import { processedBook } from '../home/components/bookProcessor';
 
-const genresData = [
-    { label: "Music" },
-    { label: "Photography / Artbooks" },
-    { 
-        label: "Fiction", 
-        subgenres: ["Scifi", "Literature & Classics", "Mythology", "Novels", "Short Stories"] 
-    },
-    { 
-        label: "Non-fiction", 
-        subgenres: ["Music", "Photography", "Essays", "Biographies & Memoirs", "Business & Self Improvement", "Creativity / Art & Design", "Current Affairs / Politics"] 
-        }
-];
-
 export default function PageRender() {
     const [limit, setLimit] = useState(() => Number(localStorage.getItem('bookLimit')) || 8);
     const [sortOption, setSortOption] = useState('titleAsc');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
     const [genres, setGenres] = useState<string[]>([]);
+    const [loading, setLoading] = useState(true);
 
     const { data: book, error, isLoading } = useSWR('http://localhost:3000/api/book', async (url) => {
         const response = await fetch(url);
@@ -102,8 +90,16 @@ export default function PageRender() {
         localStorage.removeItem('bookLimit');
     }, []);
 
-    if (error) return <div>Error loading results.</div>;
-    if (isLoading) return <div><LinearProgress /></div>;
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (error) return <div className="font-bold text-2xl justify-center">Error loading results.</div>;
+    if (loading) return <div><LinearProgress /></div>;;
 
     return (
         <>
