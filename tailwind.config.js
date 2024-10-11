@@ -8,7 +8,9 @@ module.exports = {
         'pacifico': ['Pacifico'],
         'bodoni_moda': ['Bodoni Moda'],
         'eb_garamond': ['EB Garamond'],
-        'IBM': ['IBM Plex Sans']
+        'IBM': ['IBM Plex Sans'],
+        'montserrat': ['Montserrat'],
+        'lato': ['Lato']
       },
       screens: {
         'xs': '375px',
