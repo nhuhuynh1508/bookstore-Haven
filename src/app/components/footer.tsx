@@ -2,6 +2,7 @@
 import { useState } from "react";
 // import LoadingButton
 import { LoadingButton } from "@mui/lab";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export const Footer = () => {
     const [email, setEmail] = useState('');
@@ -80,7 +81,7 @@ export const Footer = () => {
                         {successMessage && <p className="text-green-600 text-sm mt-1">{successMessage}</p>} {/* Show success message */}
                         <LoadingButton
                             loading={isLoading}
-                            loadingIndicator="Sending…"
+                            loadingIndicator={<CircularProgress />}
                             className="ml-2"
                             variant="contained"
                             color="primary"
