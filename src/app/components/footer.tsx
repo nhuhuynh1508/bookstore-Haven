@@ -7,10 +7,12 @@ export const Footer = () => {
     const [email, setEmail] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleSubscribeButton = async (e) => {
         e.preventDefault(); // Prevent default form submission
         setError(''); // Reset error state
+        setSuccessMessage(''); // Reset success message
 
         // Basic email validation
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -22,21 +24,21 @@ export const Footer = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch('/api/subscribe', {
+            const response = await fetch('/api/send', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({ email }), // Sending email in the body
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                alert('Email subscribed successfully');
+                setSuccessMessage('You have successfully subscribed to the newsletter.'); // Set success message
                 setEmail(''); // Reset email input
             } else {
-                alert(data.message); // Show error message from server
+                setError(data.message || 'Failed to subscribe, please try again later.');
             }
         } catch (error) {
             console.error('Error subscribing email:', error);
@@ -70,17 +72,19 @@ export const Footer = () => {
                             className="h-8 p-2"
                             type='email'
                             placeholder="example@email.com"
+                            aria-label="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        {error && <p className="text-red-600 text-sm">{error}</p>} {/* Show error message */}
+                        {error && <p className="text-red-600 text-sm mt-1">{error}</p>} {/* Show error message */}
+                        {successMessage && <p className="text-green-600 text-sm mt-1">{successMessage}</p>} {/* Show success message */}
                         <LoadingButton
                             loading={isLoading}
-                            loadingIndicator="Loading…"
+                            loadingIndicator="Sending…"
                             className="ml-2"
                             variant="contained"
                             color="primary"
-                            type="submit" // Change button type to submit
+                            type="submit" // Submit form on button click
                         >
                             Join
                         </LoadingButton>
