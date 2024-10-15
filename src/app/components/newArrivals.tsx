@@ -52,7 +52,7 @@ export const NewArrivals = () => {
 
     return (
         <div>
-            <h2 className="relative inline-block font-lato text-2xl font-bold m-5 px-5 py-2 text-white bg-cyan-500 transform -skew-x-12">New Arrivals</h2>
+            <h2 className="relative inline-block font-lato text-2xl font-bold m-5 px-5 py-2 text-white bg-blue-800 transform -skew-x-12">New Arrivals</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 p-2">
                 {newArrivals.map((book) => {
                     const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
