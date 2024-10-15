@@ -74,7 +74,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                                     handleAddToCart();
                                 }}
                             >
-                                    <ShoppingCartIcon style={{ color: 'gray' }} />
+                                <ShoppingCartIcon style={{ color: 'gray' }} />
                             </IconButton>
                         </div>
                     </div>
