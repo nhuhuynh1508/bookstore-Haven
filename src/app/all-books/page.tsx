@@ -10,7 +10,7 @@ import { VerticalDisplay } from '../components/verticalDisplay';
 import { processedBook } from '../home/components/bookProcessor';
 
 export default function PageRender() {
-    const [limit, setLimit] = useState(() => Number(localStorage.getItem('bookLimit')) || 8);
+    const [limit, setLimit] = useState(() => Number(localStorage.getItem('bookLimit')) || 12);
     const [sortOption, setSortOption] = useState('titleAsc');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
@@ -76,7 +76,7 @@ export default function PageRender() {
     const PaginatedBooks = SortedBooks.slice(0, limit);
 
     const handleLoadMore = () => {
-        const newLimit = limit + 8;
+        const newLimit = limit + 12;
         setLimit(newLimit);
         localStorage.setItem('bookLimit', JSON.stringify(newLimit));
     };
