@@ -98,11 +98,13 @@ export const NewArrivals = () => {
                                     </IconButton>
                                 </div>
                             </div>
-                            <h3 className="text-lg font-semibold mb-1">{book.title}</h3>
-                            <p className="text-gray-600 mb-2 font-lato">{book.author}</p>
-                            <p className="text-orange-700 font-montserrat font-semibold">
-                                {price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
-                            </p>
+                            <div className='text-center'>
+                                <h3 className="text-lg font-semibold mb-1">{book.title}</h3>
+                                <p className="text-gray-600 mb-2 font-lato">{book.author}</p>
+                                <p className="text-orange-700 font-montserrat font-semibold">
+                                    {price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                                </p>
+                            </div>
                         </Link>
                     );
                 })}
