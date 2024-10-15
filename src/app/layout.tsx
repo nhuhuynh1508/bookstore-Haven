@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import StoreProvider from "./storeProvider";
+import Provider from "./provider";
 
 
 export const metadata: Metadata = {
@@ -38,9 +38,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet" />
       </head>
       <body>
-        <StoreProvider>
-          {children}
-        </StoreProvider>
+        <Provider>{children}</Provider>
       </body>
     </html>
   );
