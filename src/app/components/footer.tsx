@@ -55,9 +55,9 @@ export const Footer = () => {
                 <img
                     src="/assets/book-icon.png"
                     alt="icon"
-                    className="ml-2 sm:ml-4 xs:mr-2 w-10 h-10 sm:w-16 sm:h-16"
+                    className="sm:ml-4 xs:mr-2 w-10 h-10 sm:w-16 sm:h-16"
                 />
-                <div className="pl-2">
+                <div className="pl-3">
                     <span className="text-black text-2xl sm:text-4xl xs:text-sm font-pacifico pl-0">Book Haven</span>
                 </div>
             </div>
