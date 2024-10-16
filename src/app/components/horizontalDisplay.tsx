@@ -26,7 +26,7 @@ export const HorizontalDisplay = (props: BookItemProps) => {
 
 
     const handleAddToCart = () => {
-        dispatch(addToCart(book));
+        dispatch(addToCart({...book, price}));
     };
 
     return (

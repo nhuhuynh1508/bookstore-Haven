@@ -8,13 +8,12 @@ import useSWR from "swr";
 export default function BookDetail() {
     const { id } = useParams();
 
-    const {data:book, error} = useSWR(`http://localhost:3000/api/book`, async (url) => {
+    const {data:books, error} = useSWR(`http://localhost:3000/api/book`, async (url) => {
         const response = await fetch(url);
             return response.json()
     })
 
-    const bookDetails = book ? book.find((b) => b.id === Number(id)) : null;
-    console.log(book);
+    const bookDetails = books ? books.find((book) => book.id === Number(id)) : null;
 
     return (
         <>
@@ -28,7 +27,7 @@ export default function BookDetail() {
                             className="w-52 h-72 object-cover"
                         />
                     </div>
-                    <HorizontalDisplay book={bookDetails} key={book?.id}/>
+                    <HorizontalDisplay book={bookDetails} key={books?.id}/>
                 </div>
             </div>
         </>

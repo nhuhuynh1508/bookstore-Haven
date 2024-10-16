@@ -14,14 +14,12 @@ export const NewArrivals = () => {
     const dispatch = useAppDispatch();
 
     // SWR for fetching book data
-    const { data: books, error, isLoading } = useSWR('http://localhost:3000/api/book', async (url) => {
+    const { data: book, error, isLoading } = useSWR('http://localhost:3000/api/book', async (url) => {
         const response = await fetch(url);
         return response.json();
     });
 
-    const handleAddToCart = (book) => {
-        dispatch(addToCart(book));
-    };
+    
 
     // Function to generate 5 random unique books
     const generateRandomBooks = (allBooks) => {
@@ -44,10 +42,10 @@ export const NewArrivals = () => {
 
     // Generate random books when the book data is fetched
     useEffect(() => {
-        if (books) {
-            generateRandomBooks(books);
+        if (book) {
+            generateRandomBooks(book);
         }
-    }, [books]);
+    }, [book]);
 
     // Simulate loading
     useEffect(() => {
@@ -57,6 +55,12 @@ export const NewArrivals = () => {
 
         return () => clearTimeout(timer);
     }, []);
+
+    const handleAddToCart = (book) => {
+        const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
+        const price = storedPrice[book?.id] || 0;
+        dispatch(addToCart({...book, price}));
+    };
 
     if (error) return <div className="font-bold text-2xl justify-center">Error loading results.</div>;
     if (loading || isLoading) return <div><LinearProgress /></div>;
