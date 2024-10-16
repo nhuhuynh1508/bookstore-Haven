@@ -3,6 +3,7 @@ import { useAppDispatch } from '@/lib/hooks';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IconButton, LinearProgress } from "@mui/material";
+import { useSession } from 'next-auth/react';
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
@@ -10,6 +11,7 @@ import useSWR from "swr";
 export const NewArrivals = () => {
     const [newArrivals, setNewArrivals] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { data: session } = useSession();
     
     const dispatch = useAppDispatch();
 
@@ -19,7 +21,8 @@ export const NewArrivals = () => {
         return response.json();
     });
 
-    
+    const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
+    const price = storedPrice[book?.id] || 0;
 
     // Function to generate 5 random unique books
     const generateRandomBooks = (allBooks) => {
@@ -57,10 +60,13 @@ export const NewArrivals = () => {
     }, []);
 
     const handleAddToCart = (book) => {
-        const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
-        const price = storedPrice[book?.id] || 0;
-        dispatch(addToCart({...book, price}));
+        if (session) {
+            dispatch(addToCart({...book, price}));
+        } else {
+            alert('You can add to cart after signing in!')
+        }
     };
+
 
     if (error) return <div className="font-bold text-2xl justify-center">Error loading results.</div>;
     if (loading || isLoading) return <div><LinearProgress /></div>;

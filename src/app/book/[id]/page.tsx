@@ -8,7 +8,7 @@ import useSWR from "swr";
 export default function BookDetail() {
     const { id } = useParams();
 
-    const {data:books, error} = useSWR(`http://localhost:3000/api/book`, async (url) => {
+    const {data:books} = useSWR(`http://localhost:3000/api/book`, async (url) => {
         const response = await fetch(url);
             return response.json()
     })
