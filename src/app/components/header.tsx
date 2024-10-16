@@ -77,7 +77,7 @@ export const Header = () => {
                         size="small"
                         sx={{ borderRadius: '20px', fontWeight: 'bold' }}
                     >
-                        Sign in
+                        Sign up
                     </Button>
                     <Button
                         variant="contained"

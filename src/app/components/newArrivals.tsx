@@ -30,7 +30,7 @@ export const NewArrivals = () => {
             const selectedIndices = new Set();
 
             // Get 5 random books
-            while (randomBooks.length < 5) {
+            while (randomBooks.length < 10) {
                 const randomIndex = Math.floor(Math.random() * allBooks.length);
                 if (!selectedIndices.has(randomIndex)) {
                     selectedIndices.add(randomIndex);
@@ -69,7 +69,7 @@ export const NewArrivals = () => {
                     const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
                     const price = storedPrice[book?.id] || 0;
                     return (
-                        <Link key={book.id} href={`/book/${book.id}`} passHref>
+                        <Link key={book.id} href={`/book/${book.id}`}>
                             <div className='flex justify-center items-center p-5 relative hover:opacity-75'>
                                 <img
                                     src={book.coverImage}
@@ -77,7 +77,7 @@ export const NewArrivals = () => {
                                     className="w-full h-auto mb-1"
                                     style={{ height: '250px', objectFit: 'contain' }}
                                 />
-                                <div className="absolute inset-0 pb-8 flex items-center justify-center space-x-4 hover:opacity-100 transition-opacity">
+                                <div className="absolute inset-0 pb-8 flex items-center justify-center space-x-4 opacity-0 hover:opacity-100 transition-opacity">
                                     <IconButton
                                         sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
                                         aria-label="view"
