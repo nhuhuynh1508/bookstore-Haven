@@ -26,7 +26,7 @@ export const HorizontalDisplay = (props: BookItemProps) => {
     const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
     const price = storedPrice[book?.id] || 0;
 
-
+    // add to cart
     const handleAddToCart = () => {
         if (session) {
             dispatch(addToCart({...book, price}));
