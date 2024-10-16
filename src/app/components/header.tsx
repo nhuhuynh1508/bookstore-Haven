@@ -1,4 +1,5 @@
 'use client';
+
 // import hooks
 import { useAppSelector } from "@/lib/hooks";
 
@@ -6,17 +7,30 @@ import { useAppSelector } from "@/lib/hooks";
 import { SearchBar } from '@/app/home/components/searchBar';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Badge, Button } from "@mui/material";
+import { Badge, Box, Button, Menu, MenuItem, Typography } from "@mui/material";
 import { signIn, signOut, useSession } from "next-auth/react";
+
 import Link from 'next/link';
+import React from "react";
 import DrawerMenu from "./drawerMenu";
 
+const settings = ['Profile', 'Logout'];
+
 export const Header = () => {
+    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const { data: session } = useSession();
     const cartItems = useAppSelector((state) => state.book.cart.cartItems);
     const wishListItems = useAppSelector((state) => state.book.wishlist.wishListItems);
     const cartTotalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
     const wishListTotalQuantity = wishListItems.length;
+    
+    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElUser(event.currentTarget);
+    };
+    
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
     
     return (
     <div className="w-full bg-blue-300 h-16 sm:h-20 flex items-center px-2 justify-between">
@@ -29,22 +43,21 @@ export const Header = () => {
             </Link>
 
             <div className='flex flex-grow mx-2 justify-center max-w-1/2'><SearchBar /></div>
-            
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-4 mx-4">
                 {session ? (
                     <>
-                <Link href="/shopping" className="relative inline-block">
-                    <Badge badgeContent={cartTotalQuantity} color="primary" sx={{ '& .MuiBadge-badge': { fontSize: '0.7rem', minWidth: '18px', height: '18px' } }}>
-                        <ShoppingCartIcon color="action" sx={{ fontSize: 30, sm: { fontSize: 24 }, xs: { fontSize: 16 }  }} />
-                    </Badge>
-                </Link>
-                <Link href="/wishlist" className="relative inline-block">
-                    <Badge badgeContent={wishListTotalQuantity} color="primary" sx={{ '& .MuiBadge-badge': { fontSize: '0.7rem', minWidth: '18px', height: '18px' } }}>
-                        <FavoriteIcon color="action" sx={{ fontSize: 30, sm: { fontSize: 24 }, xs: { fontSize: 16 } }} />
-                    </Badge>
-                </Link>
-                </>
+                    <Link href="/shopping" className="relative inline-block">
+                        <Badge badgeContent={cartTotalQuantity} color="primary" sx={{ '& .MuiBadge-badge': { fontSize: '0.7rem', minWidth: '18px', height: '18px' } }}>
+                            <ShoppingCartIcon color="action" sx={{ fontSize: 30 }} />
+                        </Badge>
+                    </Link>
+                    <Link href="/wishlist" className="relative inline-block">
+                        <Badge badgeContent={wishListTotalQuantity} color="primary" sx={{ '& .MuiBadge-badge': { fontSize: '0.7rem', minWidth: '18px', height: '18px' } }}>
+                            <FavoriteIcon color="action" sx={{ fontSize: 30 }} />
+                        </Badge>
+                    </Link>
+                    </>
                 ) : (
                     <p></p>
                 )}
@@ -52,24 +65,46 @@ export const Header = () => {
 
             <div className="flex items-center space-x-2">
                 {session ? (
-                    // Display user profile image if authenticated
                     <>
+                        {/* User Profile Image */}
                         <img
-                            src={session.user?.image}
+                            src={session.user?.image || 'book-icon.png'}
                             alt="User Profile"
-                            className="w-10 h-10 rounded-full"
+                            className="w-10 h-10 rounded-full cursor-pointer"
+                            onClick={handleOpenUserMenu}
                         />
-                    <Button
-                        variant="contained"
-                        onClick={() => signOut()}
-                        size="small"
-                        sx={{ borderRadius: '20px' }}
-                    >
-                        Log out
-                    </Button>
+
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Menu
+                                sx={{ mt: '45px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu}
+                            >
+                                {settings.map((setting) => (
+                                    <MenuItem key={setting} onClick={() => {
+                                        if (setting === 'Logout') {
+                                            signOut();
+                                            handleCloseUserMenu();
+                                        }
+                                    }}>
+                                        <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                                    </MenuItem>
+                                ))}
+                            </Menu>
+                        </Box>
                     </>
                 ) : (
-                    // Display Sign In button if not authenticated
                     <>
                     <Button
                         variant="contained"
@@ -91,5 +126,5 @@ export const Header = () => {
                 )}
             </div>
         </div>
-    )
+    );
 }
