@@ -13,6 +13,7 @@ export const NewArrivals = () => {
     const [loading, setLoading] = useState(true);
     const { data: session } = useSession();
     
+    // add dispatch
     const dispatch = useAppDispatch();
 
     // SWR for fetching book data
