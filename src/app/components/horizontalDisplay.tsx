@@ -52,7 +52,7 @@ export const HorizontalDisplay = (props: BookItemProps) => {
         </p>
 
         <p className="text-lg font-semibold text-gray-900 mt-6">
-        <strong>Price:</strong> {book?.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+        <strong>Price:</strong> {(book?.price || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
         </p>
 
         <div className="absolute bottom-0 right-0">

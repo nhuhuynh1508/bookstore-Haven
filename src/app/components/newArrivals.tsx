@@ -108,7 +108,7 @@ export const NewArrivals = () => {
                                 <h3 className="text-lg font-semibold mb-1">{book.title}</h3>
                                 <p className="text-gray-600 mb-2 font-lato">{book.author}</p>
                                 <p className="text-orange-700 font-montserrat font-semibold">
-                                    {book.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                                    {(book?.price || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                                 </p>
                             </div>
                         </Link>

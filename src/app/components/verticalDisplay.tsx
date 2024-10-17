@@ -106,7 +106,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                     <p className="text-gray-700 p-1"><strong>ISBN:</strong> {book.ISBN}</p>
                     <p className="text-gray-700 p-1"><strong>Genres:</strong> {(book.genres || []).join(', ')}</p>
                     <p className="text-gray-700 font-bold text-lg font-IBM p-1">
-                        {book.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                        {(book?.price || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                     </p>
                 </div>
                 <div className="fixed items-center justify-end p-4 border-t">
