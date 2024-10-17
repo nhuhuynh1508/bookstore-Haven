@@ -22,9 +22,6 @@ export const NewArrivals = () => {
         return response.json();
     });
 
-    const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
-    const price = storedPrice[book?.id] || 0;
-
     // Function to generate 5 random unique books
     const generateRandomBooks = (allBooks) => {
         if (allBooks.length > 0) {
@@ -62,7 +59,7 @@ export const NewArrivals = () => {
 
     const handleAddToCart = (book) => {
         if (session) {
-            dispatch(addToCart({...book, price}));
+            dispatch(addToCart(book));
         } else {
             alert('You can add to cart after signing in!')
         }
@@ -77,8 +74,6 @@ export const NewArrivals = () => {
             <h2 className="relative inline-block font-lato text-2xl font-bold m-5 px-5 py-2 text-white bg-blue-800 transform -skew-x-12">New Arrivals</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 p-2">
                 {newArrivals.map((book) => {
-                    const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
-                    const price = storedPrice[book?.id] || 0;
                     return (
                         <Link key={book.id} href={`/book/${book.id}`}>
                             <div className='flex justify-center items-center p-5 relative hover:opacity-75'>
@@ -113,7 +108,7 @@ export const NewArrivals = () => {
                                 <h3 className="text-lg font-semibold mb-1">{book.title}</h3>
                                 <p className="text-gray-600 mb-2 font-lato">{book.author}</p>
                                 <p className="text-orange-700 font-montserrat font-semibold">
-                                    {price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                                    {book.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                                 </p>
                             </div>
                         </Link>

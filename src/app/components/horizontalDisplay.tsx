@@ -21,15 +21,10 @@ export const HorizontalDisplay = (props: BookItemProps) => {
     const dispatch = useAppDispatch();
     const { data: session } = useSession();
 
-    const storedISBN = JSON.parse(localStorage.getItem('ISBN')) || {};
-    const ISBN = storedISBN[book?.id] || 0;
-    const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
-    const price = storedPrice[book?.id] || 0;
-
     // add to cart
     const handleAddToCart = () => {
         if (session) {
-            dispatch(addToCart({...book, price}));
+            dispatch(addToCart(book));
         } else {
             alert('You can add to cart after signing in!')
         }
@@ -42,7 +37,7 @@ export const HorizontalDisplay = (props: BookItemProps) => {
         </h2>
 
         <p className="text-gray-600 text-base mb-1">
-            <strong>ISBN:</strong> {ISBN}
+            <strong>ISBN:</strong> {book?.ISBN}
         </p>
         <p className="text-gray-600 text-base mb-1">
             <strong>Genres:</strong> {(book?.genres || []).join(', ')}
@@ -57,7 +52,7 @@ export const HorizontalDisplay = (props: BookItemProps) => {
         </p>
 
         <p className="text-lg font-semibold text-gray-900 mt-6">
-        <strong>Price:</strong> {price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+        <strong>Price:</strong> {book?.price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
         </p>
 
         <div className="absolute bottom-0 right-0">
