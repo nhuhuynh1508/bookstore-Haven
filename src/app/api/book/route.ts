@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
+    // set cors headers
+    const headers = new Headers();
+    // allow all origins
+    headers.set('Access-Control-Allow-Origin', '*');
+    // allow methods
+    headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    headers.set('Access-Control-Allow-Headers', 'Content-Type');
+
     const books = [
         {
             id: 1,
