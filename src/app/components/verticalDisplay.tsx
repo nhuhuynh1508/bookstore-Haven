@@ -4,13 +4,14 @@
 import { BookType } from '@/app/type';
 // import reducers
 import { addToCart } from "@/lib/features/cartSlice";
-import { addToWishList } from '@/lib/features/wishlistSlice';
+import { addToWishList, removeFromWishList } from '@/lib/features/wishlistSlice';
 // import hooks
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 // import components
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IconButton } from '@mui/material';
+import { useSession } from 'next-auth/react';
 import Link from "next/link";
 import { useEffect, useState } from 'react';
 
@@ -21,6 +22,7 @@ interface BookItemProps {
 
 export const VerticalDisplay = (props: BookItemProps) => {
     const { book } = props;
+    const { data: session } = useSession();
     const dispatch = useAppDispatch();
     const wishList = useAppSelector((state) => state.book.wishlist.wishListItems);
     const [isInWishList, setIsInWishList] = useState(false);
@@ -30,16 +32,25 @@ export const VerticalDisplay = (props: BookItemProps) => {
     }, [wishList, book.id]);
     
     const handleAddToCart = () => {
-        dispatch(addToCart(book));
+        if (session) {
+            dispatch(addToCart({...book, price}));
+        } else {
+            alert('You can add to cart after signing in!')
+        }
+        
     };
 
     const handleAddToWishList = () => {
-        if (!isInWishList) {
-            dispatch(addToWishList(book));
+        if (session) {
+            if (!isInWishList) {
+                dispatch(addToWishList(book));
+            } else {
+                dispatch(removeFromWishList(book));
+            }
+            setIsInWishList(!isInWishList)
         } else {
-            dispatch(addToWishList(book));
+            alert('You can add to wishlist after signing in!')
         }
-        setIsInWishList(!isInWishList)
     };
 
     const storedISBN = JSON.parse(localStorage.getItem('ISBN')) || {};

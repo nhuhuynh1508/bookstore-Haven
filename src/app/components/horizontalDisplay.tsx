@@ -9,6 +9,7 @@ import { useAppDispatch } from '@/lib/hooks';
 // import components
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Button } from '@mui/material';
+import { useSession } from 'next-auth/react';
 
 // in case of having a lot of different types
 interface BookItemProps {
@@ -18,15 +19,20 @@ interface BookItemProps {
 export const HorizontalDisplay = (props: BookItemProps) => {
     const { book } = props;
     const dispatch = useAppDispatch();
+    const { data: session } = useSession();
 
     const storedISBN = JSON.parse(localStorage.getItem('ISBN')) || {};
     const ISBN = storedISBN[book?.id] || 0;
     const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
     const price = storedPrice[book?.id] || 0;
 
-
+    // add to cart
     const handleAddToCart = () => {
-        dispatch(addToCart(book));
+        if (session) {
+            dispatch(addToCart({...book, price}));
+        } else {
+            alert('You can add to cart after signing in!')
+        }
     };
 
     return (

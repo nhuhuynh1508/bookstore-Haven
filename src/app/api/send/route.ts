@@ -1,12 +1,15 @@
-import clientPromise from '@/lib/mongodb';
+
+import { MongoClient } from 'mongodb';
 import { NextResponse } from 'next/server';
 
 const nodemailer = require('nodemailer');
+const connectionURL = process.env.MONGODB_URI
+const client = new MongoClient(connectionURL);
+
 
 export async function POST(req) {
     const { email } = await req.json();
-    const client = await clientPromise;
-    const db = client.db(process.env.MONGO_URI);
+    const db = client.db(process.env.MONGO_DB);
     
     try {
         const subscriber = await db.collection('subscribers').findOne({ email });

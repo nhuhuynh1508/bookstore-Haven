@@ -3,6 +3,7 @@ import { useAppDispatch } from '@/lib/hooks';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IconButton, LinearProgress } from "@mui/material";
+import { useSession } from 'next-auth/react';
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
@@ -10,18 +11,19 @@ import useSWR from "swr";
 export const NewArrivals = () => {
     const [newArrivals, setNewArrivals] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { data: session } = useSession();
     
+    // add dispatch
     const dispatch = useAppDispatch();
 
     // SWR for fetching book data
-    const { data: books, error, isLoading } = useSWR('http://localhost:3000/api/book', async (url) => {
+    const { data: book, error, isLoading } = useSWR('http://localhost:3000/api/book', async (url) => {
         const response = await fetch(url);
         return response.json();
     });
 
-    const handleAddToCart = (book) => {
-        dispatch(addToCart(book));
-    };
+    const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
+    const price = storedPrice[book?.id] || 0;
 
     // Function to generate 5 random unique books
     const generateRandomBooks = (allBooks) => {
@@ -30,7 +32,7 @@ export const NewArrivals = () => {
             const selectedIndices = new Set();
 
             // Get 5 random books
-            while (randomBooks.length < 5) {
+            while (randomBooks.length < 10) {
                 const randomIndex = Math.floor(Math.random() * allBooks.length);
                 if (!selectedIndices.has(randomIndex)) {
                     selectedIndices.add(randomIndex);
@@ -44,10 +46,10 @@ export const NewArrivals = () => {
 
     // Generate random books when the book data is fetched
     useEffect(() => {
-        if (books) {
-            generateRandomBooks(books);
+        if (book) {
+            generateRandomBooks(book);
         }
-    }, [books]);
+    }, [book]);
 
     // Simulate loading
     useEffect(() => {
@@ -57,6 +59,15 @@ export const NewArrivals = () => {
 
         return () => clearTimeout(timer);
     }, []);
+
+    const handleAddToCart = (book) => {
+        if (session) {
+            dispatch(addToCart({...book, price}));
+        } else {
+            alert('You can add to cart after signing in!')
+        }
+    };
+
 
     if (error) return <div className="font-bold text-2xl justify-center">Error loading results.</div>;
     if (loading || isLoading) return <div><LinearProgress /></div>;
@@ -69,7 +80,7 @@ export const NewArrivals = () => {
                     const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
                     const price = storedPrice[book?.id] || 0;
                     return (
-                        <Link key={book.id} href={`/book/${book.id}`} passHref>
+                        <Link key={book.id} href={`/book/${book.id}`}>
                             <div className='flex justify-center items-center p-5 relative hover:opacity-75'>
                                 <img
                                     src={book.coverImage}
@@ -77,7 +88,7 @@ export const NewArrivals = () => {
                                     className="w-full h-auto mb-1"
                                     style={{ height: '250px', objectFit: 'contain' }}
                                 />
-                                <div className="absolute inset-0 pb-8 flex items-center justify-center space-x-4 hover:opacity-100 transition-opacity">
+                                <div className="absolute inset-0 pb-8 flex items-center justify-center space-x-4 opacity-0 hover:opacity-100 transition-opacity">
                                     <IconButton
                                         sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
                                         aria-label="view"
