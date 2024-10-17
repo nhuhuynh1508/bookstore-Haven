@@ -33,7 +33,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
     
     const handleAddToCart = () => {
         if (session) {
-            dispatch(addToCart({...book, price}));
+            dispatch(addToCart(book));
         } else {
             alert('You can add to cart after signing in!')
         }
@@ -52,11 +52,6 @@ export const VerticalDisplay = (props: BookItemProps) => {
             alert('You can add to wishlist after signing in!')
         }
     };
-
-    const storedISBN = JSON.parse(localStorage.getItem('ISBN')) || {};
-    const ISBN = storedISBN[book?.id] || 0;
-    const storedPrice = JSON.parse(localStorage.getItem('price')) || {};
-    const price = storedPrice[book?.id] || 0;
 
     return (
             <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full relative hover:shadow-xl">
@@ -108,10 +103,10 @@ export const VerticalDisplay = (props: BookItemProps) => {
                     <h3 className="text-xl font-semibold p-1">{book.title}</h3>
                     <p className="text-gray-700 p-1"><strong>Author:</strong> {book.author}</p>
                     <p className="text-gray-700 p-1"><strong>Year:</strong> {book.publicationYear}</p>
-                    <p className="text-gray-700 p-1"><strong>ISBN:</strong> {ISBN}</p>
+                    <p className="text-gray-700 p-1"><strong>ISBN:</strong> {book.ISBN}</p>
                     <p className="text-gray-700 p-1"><strong>Genres:</strong> {(book.genres || []).join(', ')}</p>
                     <p className="text-gray-700 font-bold text-lg font-IBM p-1">
-                        {price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                        {(book?.price || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                     </p>
                 </div>
                 <div className="fixed items-center justify-end p-4 border-t">
