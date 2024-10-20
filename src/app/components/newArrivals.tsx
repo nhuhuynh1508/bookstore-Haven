@@ -17,7 +17,7 @@ export const NewArrivals = () => {
     const dispatch = useAppDispatch();
 
     // SWR for fetching book data
-    const { data: book, error, isLoading } = useSWR('http://localhost:3000/api/book', async (url) => {
+    const { data: book, error, isLoading } = useSWR('/api/book', async (url) => {
         const response = await fetch(url);
         return response.json();
     });
