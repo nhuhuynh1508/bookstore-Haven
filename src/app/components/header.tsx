@@ -68,7 +68,7 @@ export const Header = () => {
                     <>
                         {/* User Profile Image */}
                         <img
-                            src={session.user?.image || 'book-icon.png'}
+                            src="/assets/user-profile.jpg"
                             alt="User Profile"
                             className="w-10 h-10 rounded-full cursor-pointer"
                             onClick={handleOpenUserMenu}
