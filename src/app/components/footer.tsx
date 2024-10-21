@@ -37,7 +37,7 @@ export const Footer = () => {
 
             if (response.ok) {
                 setSuccessMessage('You have successfully subscribed to the newsletter.');
-                setEmail(''); // Reset email input
+                setEmail('');
             } else {
                 setError(data.message || 'Failed to subscribe, please try again later.');
             }
@@ -55,34 +55,32 @@ export const Footer = () => {
                 <img
                     src="/assets/book-icon.png"
                     alt="icon"
-                    className="sm:ml-4 xs:mr-2 w-10 h-10 sm:w-16 sm:h-16"
+                    className="sm:ml-4 w-10 h-10 sm:w-16 sm:h-16 xs:ml-8"
                 />
                 <div className="pl-3">
-                    <span className="text-black text-2xl sm:text-4xl xs:text-sm font-pacifico pl-0">Book Haven</span>
+                    <span className="text-black text-2xl sm:text-4xl xs:text-2xl font-pacifico xs:pl-2">Book Haven</span>
                 </div>
             </div>
 
-            <div className="mt-5 grid grid-cols-1 md:grid-cols-4 space-x-* px-5 mx-auto justify-around">
+            <div className="mt-5 grid grid-cols-1 md:grid-cols-4 space-x-16 px-5 justify-around">
                 <div className="ml-5 font-IBM">
                     <h3 className="text-lg text-blue-800 font-bold">Keep up to date</h3>
                     <p className="font-sans">Join our newsletter for regular updates.</p>
                     <div className="mt-3 font-bold">Your Email: <br /></div>
 
-                    <form onSubmit={handleSubscribeButton}>
+                    <form onSubmit={handleSubscribeButton} className="flex items-center">
                         <input
-                            className="h-8 p-2"
+                            className="h-8 p-2 mr-2"
                             type='email'
                             placeholder="example@email.com"
                             aria-label="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        {error && <p className="text-red-600 text-sm mt-1">{error}</p>} {/* Show error message */}
-                        {successMessage && <p className="text-green-600 text-sm mt-1">{successMessage}</p>} {/* Show success message */}
+
                         <LoadingButton
                             loading={isLoading}
                             loadingIndicator={<CircularProgress />}
-                            className="ml-2"
                             variant="contained"
                             color="primary"
                             type="submit" // Submit form on button click
@@ -90,30 +88,35 @@ export const Footer = () => {
                             Join
                         </LoadingButton>
                     </form>
+
+                    {error && <p className="text-red-600 text-sm mt-1">{error}</p>} {/* Show error message */}
+                    {successMessage && <p className="text-green-600 text-sm mt-1">{successMessage}</p>} {/* Show success message */}
                 </div>
 
-                <div className="ml-10">
-                    <h4 className="font-bold text-blue-800">SHOPPING GUIDE</h4>
-                    <ul className="mt-2 space-y-1">
-                        <li>Return Policy</li>
-                        <li>Payments & Shipping</li>
-                    </ul>
-                </div>
+                <div className="ml-0 md:ml-auto">
+                    <div className="mt-6">
+                        <h4 className="font-bold text-blue-800">SHOPPING GUIDE</h4>
+                        <ul className="mt-2 space-y-1">
+                            <li>Return Policy</li>
+                            <li>Payments & Shipping</li>
+                        </ul>
+                    </div>
 
-                <div>
-                    <h4 className="font-bold text-blue-800">INFORMATION</h4>
-                    <ul className="mt-2 space-y-1">
-                        <li>Blog</li>
-                        <li>Privacy Policy</li>
-                        <li>Terms & Condition</li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 className="font-bold text-blue-800">QUICK HELP</h4>
-                    <ul className="mt-2 space-y-1">
-                        <li>Help Center</li>
-                    </ul>
+                    <div className="mt-6">
+                        <h4 className="font-bold text-blue-800">INFORMATION</h4>
+                        <ul className="mt-2 space-y-1">
+                            <li>Blog</li>
+                            <li>Privacy Policy</li>
+                            <li>Terms & Condition</li>
+                        </ul>
+                    </div>
+
+                    <div className="mt-6">
+                        <h4 className="font-bold text-blue-800">QUICK HELP</h4>
+                        <ul className="mt-2 space-y-1">
+                            <li>Help Center</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </footer>
