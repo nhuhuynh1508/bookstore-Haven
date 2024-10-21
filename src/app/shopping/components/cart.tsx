@@ -12,7 +12,7 @@ import Link from "next/link";
 
 export const Cart = () => {
     const dispatch = useAppDispatch();
-    const cartItems = useAppSelector((state) => state.book.cart.cartItems);
+    const cartItems = useAppSelector((state) => state.cart.cartItems);
     const cartTotalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
     const cartTotalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 

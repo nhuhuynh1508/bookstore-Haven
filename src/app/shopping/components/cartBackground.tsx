@@ -1,7 +1,5 @@
 
 export const CartBackground = () => {
-    
-
     return (
         <>
         <div>

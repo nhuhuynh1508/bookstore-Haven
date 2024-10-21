@@ -15,9 +15,8 @@ export default function PageRender() {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
     const [genres, setGenres] = useState<string[]>([]);
-    const [loading, setLoading] = useState(true);
 
-    const { data: book, error, isLoading } = useSWR('http://localhost:3000/api/book', async (url) => {
+    const { data: book, error, isLoading} = useSWR('/api/book', async (url) => {
         const response = await fetch(url);
         return response.json();
     });
@@ -90,16 +89,8 @@ export default function PageRender() {
         localStorage.removeItem('bookLimit');
     }, []);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-
-        return () => clearTimeout(timer);
-    }, []);
-
     if (error) return <div className="font-bold text-2xl justify-center">Error loading results.</div>;
-    if (loading) return <div><LinearProgress /></div>;;
+    if (isLoading) return <div><LinearProgress /></div>;;
 
     return (
         <>
