@@ -19,8 +19,8 @@ const settings = ['Profile', 'Logout'];
 export const Header = () => {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const { data: session } = useSession();
-    const cartItems = useAppSelector((state) => state.book.cart.cartItems);
-    const wishListItems = useAppSelector((state) => state.book.wishlist.wishListItems);
+    const cartItems = useAppSelector((state) => state.cart.cartItems);
+    const wishListItems = useAppSelector((state) => state.wishlist.wishListItems);
     const cartTotalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
     const wishListTotalQuantity = wishListItems.length;
     
