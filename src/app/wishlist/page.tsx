@@ -8,7 +8,7 @@ import { Header } from "../components/header";
 import { BookType } from "../type";
 
 function Wishlist() {
-    const wishListItems = useAppSelector((state) => state.book.wishlist.wishListItems);
+    const wishListItems = useAppSelector((state) => state.wishlist.wishListItems);
     const dispatch = useDispatch();
 
     const handleRemoveFromWishlist = (book: BookType) => {
