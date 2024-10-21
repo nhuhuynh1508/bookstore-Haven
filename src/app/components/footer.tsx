@@ -30,13 +30,13 @@ export const Footer = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email }), // Sending email in the body
+                body: JSON.stringify({ email }),
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                setSuccessMessage('You have successfully subscribed to the newsletter.'); // Set success message
+                setSuccessMessage('You have successfully subscribed to the newsletter.');
                 setEmail(''); // Reset email input
             } else {
                 setError(data.message || 'Failed to subscribe, please try again later.');
