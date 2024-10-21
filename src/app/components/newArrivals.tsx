@@ -3,15 +3,14 @@ import { useAppDispatch } from '@/lib/hooks';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IconButton, LinearProgress } from "@mui/material";
-import { useSession } from 'next-auth/react';
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import session from 'redux-persist/es/storage/session';
 import useSWR from "swr";
 
 export const NewArrivals = () => {
     const [newArrivals, setNewArrivals] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const { data: session } = useSession();
+    // const [loading, setLoading] = useState(true);
     
     // add dispatch
     const dispatch = useAppDispatch();
@@ -21,6 +20,8 @@ export const NewArrivals = () => {
         const response = await fetch(url);
         return response.json();
     });
+
+    console.log(session);
 
     // Function to generate 5 random unique books
     const generateRandomBooks = (allBooks) => {
@@ -48,15 +49,6 @@ export const NewArrivals = () => {
         }
     }, [book]);
 
-    // Simulate loading
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-
-        return () => clearTimeout(timer);
-    }, []);
-
     const handleAddToCart = (book) => {
         if (session) {
             dispatch(addToCart(book));
@@ -67,7 +59,7 @@ export const NewArrivals = () => {
 
 
     if (error) return <div className="font-bold text-2xl justify-center">Error loading results.</div>;
-    if (loading || isLoading) return <div><LinearProgress /></div>;
+    if (isLoading) return <div><LinearProgress /></div>;
 
     return (
         <div>
