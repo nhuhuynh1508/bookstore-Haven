@@ -24,7 +24,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
     const { book } = props;
     const { data: session } = useSession();
     const dispatch = useAppDispatch();
-    const wishList = useAppSelector((state) => state.book.wishlist.wishListItems);
+    const wishList = useAppSelector((state) => state.wishlist.wishListItems);
     const [isInWishList, setIsInWishList] = useState(false);
 
     useEffect(() => {

@@ -7,6 +7,7 @@ import wishlistSlice from './features/wishlistSlice';
 const persistConfig = {
     key: "root",
     storage,
+    // specify the slice of the state to be ignored
 };
 
 const rootReducer = combineReducers({
@@ -17,9 +18,13 @@ const rootReducer = combineReducers({
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-        reducer: {
-            book: persistedReducer,
-        },
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+            }
+        }),
 });
 
 // Infer the type of makeStore
