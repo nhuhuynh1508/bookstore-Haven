@@ -40,7 +40,7 @@ export const Header = () => {
     
         {/* Logo */}
         <Link href="/" className="flex items-center">
-            <span className="text-blue-800 text-4xl sm:text-4xl xs:text-base font-pacifico hidden sm:flex">
+            <span className="text-blue-800 text-4xl sm:text-4xl xs:text-base font-pacifico hidden sm:flex m-3">
                 Book Haven
             </span>
         </Link>
@@ -127,7 +127,7 @@ export const Header = () => {
                         onClick={() => signIn()}
                         size="small"
                         className="hidden xs:block"
-                        sx={{ borderRadius: '20px', fontWeight: 'bold' }}
+                        sx={{ borderRadius: '20px', fontWeight: 'bold', fontSize: { xs: '10px', md: '14px'} }}
                     >
                         Sign up
                     </Button>
@@ -136,7 +136,7 @@ export const Header = () => {
                         onClick={() => signIn()}
                         size="small"
                         className="hidden xs:block"
-                        sx={{ borderRadius: '20px', bgcolor: 'white', color: 'blue', fontWeight: 'bold' }}
+                        sx={{ borderRadius: '20px', bgcolor: 'white', color: 'blue', fontWeight: 'bold', fontSize: { xs: '10px', md: '14px'} }}
                     >
                         Log in
                     </Button>
