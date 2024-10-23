@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(req) {
     const books = [
         {
             id: 1,
@@ -553,5 +553,14 @@ export async function GET() {
             description: "A multigenerational saga about a Korean family living in Japan and the struggles they face against prejudice and hardship."
         },
     ]
-    return NextResponse.json(books);
+
+    const url = new URL(req.url);
+    const searchParams = new URLSearchParams(url.search);
+    const limitParam = searchParams.get('limit')
+    
+    const limit = parseInt(limitParam, 10) || books.length
+
+    const limitedBooks = books.slice(0, limit)
+
+    return NextResponse.json(limitedBooks);
 }
