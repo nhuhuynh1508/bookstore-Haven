@@ -50,7 +50,7 @@ export const Footer = () => {
     };
 
     return (
-        <footer className="bg-blue-300 py-4">
+        <footer className="bg-blue-300 py-0">
             <div className="container flex flex-row items-center justify-start">
                 <img
                     src="/assets/book-icon.png"
@@ -116,6 +116,10 @@ export const Footer = () => {
                             <li>Help Center</li>
                         </ul>
                     </div>
+                </div>
+
+                <div className="mt-5 text-center text-white font-bold bg-blue-950">
+                    <p>&copy; 2024 Book Haven. All rights reserved.</p>
                 </div>
 
         </footer>
