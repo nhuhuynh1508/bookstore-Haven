@@ -6,15 +6,21 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 // import components
+import { LinearProgress } from '@mui/material';
+import { useSession } from 'next-auth/react';
 import { Footer } from '../components/footer';
 import { Header } from '../components/header';
+import { Subheader } from '../components/subheader';
 
 export default function FAQ() {
+    const { data: session, status } = useSession();
+    if (status === "loading") return <LinearProgress />
     return (
         <>
         <Header />
+        <Subheader />
         <section className="bg-white p-8">
-            <h2 className="text-2xl font-bold mb-6 font-eb_garamond">Frequently Asked Questions (FAQ)</h2>
+            <h2 className="text-3xl font-bold mb-6 font-eb_garamond">Frequently Asked Questions (FAQ)</h2>
 
             <div className="space-y-4">
                 <Accordion>
