@@ -111,6 +111,10 @@ export const Header = () => {
                                         if (setting === 'Logout') {
                                             signOut();
                                             handleCloseUserMenu();
+                                            localStorage.clear();
+                                        }
+                                        else if (setting === 'Profile') {
+                                            alert('Profile');
                                         }
                                     }}
                                 >
