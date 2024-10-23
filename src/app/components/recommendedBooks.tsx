@@ -1,12 +1,17 @@
+// import slices
 import { addToCart } from '@/lib/features/cartSlice';
 import { addToWishList } from '@/lib/features/wishlistSlice';
 import { useAppDispatch } from '@/lib/hooks';
+import '@splidejs/splide/dist/css/splide.min.css';
+
+// import material ui components
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { IconButton, LinearProgress } from "@mui/material";
+import { IconButton, Skeleton } from "@mui/material";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/splide/dist/css/splide.min.css';
+
+// import components
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
@@ -58,7 +63,35 @@ export const RecommendedBooks = () => {
     };
 
     if (error) return <div className="flex font-bold text-2xl justify-center">Error loading results.</div>;
-    if (isLoading) return <div><LinearProgress /></div>;
+    if (isLoading) {
+        return (
+            <div>
+                <h2 className="relative inline-block font-lato text-xl font-bold ml-10 mt-5 px-5 py-2 text-white bg-blue-800 transform -skew-x-12">YOU MIGHT ALSO ENJOY</h2>
+                <Splide
+                    options={{
+                        type: 'loop',
+                        perPage: 4,
+                        pagination: false,
+                        arrows: true,
+                        autoplay: true,
+                    }}
+                    className="p-2"
+                >
+                    {[...Array(4)].map((_, index) => (
+                        <SplideSlide key={index}>
+                            <div className='flex justify-center items-center p-5 relative'>
+                                <Skeleton variant="rectangular" width="100%" height={250} className="mb-1" />
+                            </div>
+                            <div className='flex justify-center m-3'>
+                                <Skeleton variant="text" width="70%" height={50} />
+                            </div>
+                        </SplideSlide>
+                    ))}
+                </Splide>
+            </div>
+        );
+    }
+    
 
     return (
         <div>
@@ -66,7 +99,7 @@ export const RecommendedBooks = () => {
             <Splide
                 options={{
                     type: 'loop',
-                    perPage: 4, 
+                    perPage: 4,
                     pagination: false,
                     arrows: true,
                     autoplay: true,

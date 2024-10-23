@@ -4,7 +4,7 @@ import { useAppDispatch } from '@/lib/hooks';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { IconButton, LinearProgress } from "@mui/material";
+import { IconButton, Skeleton } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import session from 'redux-persist/es/storage/session';
@@ -64,7 +64,20 @@ export const NewArrivals = () => {
     };
 
     if (error) return <div className="flex font-bold text-2xl justify-center">Error loading results.</div>;
-    if (isLoading) return <div><LinearProgress /></div>;
+    if (isLoading) return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 p-2">
+            {Array.from({ length: 10 }).map((_, index) => (
+                <div key={index} className="flex flex-col items-center p-5">
+                    <Skeleton variant="rectangular" width="100%" height={250} />
+                    <div className='text-center'>
+                        <Skeleton variant="text" width="70%" height={30} className="mt-2" />
+                        <Skeleton variant="text" width="30%" height={20} className="mt-1" />
+                        <Skeleton variant="text" width="50%" height={20} className="mt-1" />
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
 
     return (
         <div>

@@ -7,7 +7,8 @@ import { clearCart, removeFromCart, updateQuantity } from "@/lib/features/cartSl
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 // import components
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Button } from "@mui/material";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Button, IconButton } from "@mui/material";
 import Link from "next/link";
 
 export const Cart = () => {
@@ -51,13 +52,23 @@ export const Cart = () => {
                     <tbody>
                         {cartItems.map((item, index) => (
                             <tr key={index} className="border-b border-gray-200">
-                                <td className="p-2 sm:p-3 text-center">
-                                    <img
-                                        src={item.coverImage}
-                                        alt={item.title}
-                                        className="w-24"
-                                    />
-                                </td>
+                                <Link key={item.id} href={`/book/${item.id}`}>
+                                    <td className="relative p-2 sm:p-3 text-center">
+                                        <img
+                                            src={item.coverImage}
+                                            alt={item.title}
+                                            className="w-24"
+                                        />
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                        <IconButton
+                                            sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
+                                            aria-label="view"
+                                        >
+                                            <VisibilityIcon style={{ color: 'gray' }} />
+                                        </IconButton>
+                                        </div>
+                                    </td>
+                                </Link>
                                 <td className="p-2 sm:p-3 text-[10px] sm:text-base">
                                     <h1 className="font-bold">{item.title}</h1>
                                 </td>

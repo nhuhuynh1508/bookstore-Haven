@@ -470,7 +470,7 @@ const books: Book[] = [
         id: 42,
         ISBN: "21380944321131",
         title: "The Color Purple",
-        coverImage: "https://prodimage.images-bn.com/pimages/9780593512371_p0_v1_s1200x630.jpg",
+        coverImage: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/ColorPurple.jpg/220px-ColorPurple.jpg",
         author: "Alice Walker",
         publicationYear: 1982,
         genres: ["Historical Fiction", "Epistolary Novel"],

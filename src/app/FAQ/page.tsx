@@ -1,9 +1,11 @@
 'use client'
+// import material ui components
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
+// import components
 import { Footer } from '../components/footer';
 import { Header } from '../components/header';
 
