@@ -1,5 +1,5 @@
 'use client'
-import { addToWishList } from "@/lib/features/wishlistSlice";
+import { removeFromWishList } from "@/lib/features/wishlistSlice";
 import { useAppSelector } from "@/lib/hooks";
 import { Button } from "@mui/material";
 import Link from "next/link";
@@ -12,7 +12,7 @@ function Wishlist() {
     const dispatch = useDispatch();
 
     const handleRemoveFromWishlist = (book: BookType) => {
-        dispatch(addToWishList(book));
+        dispatch(removeFromWishList(book));
     };
 
     return (

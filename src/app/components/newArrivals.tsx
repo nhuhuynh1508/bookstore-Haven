@@ -1,5 +1,7 @@
 import { addToCart } from '@/lib/features/cartSlice';
+import { addToWishList } from '@/lib/features/wishlistSlice';
 import { useAppDispatch } from '@/lib/hooks';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IconButton, LinearProgress } from "@mui/material";
@@ -10,9 +12,8 @@ import useSWR from "swr";
 
 export const NewArrivals = () => {
     const [newArrivals, setNewArrivals] = useState([]);
-    // const [loading, setLoading] = useState(true);
     
-    // add dispatch
+    // Add dispatch
     const dispatch = useAppDispatch();
 
     // SWR for fetching book data
@@ -20,8 +21,6 @@ export const NewArrivals = () => {
         const response = await fetch(url);
         return response.json();
     });
-
-    console.log(session);
 
     // Function to generate 5 random unique books
     const generateRandomBooks = (allBooks) => {
@@ -53,12 +52,19 @@ export const NewArrivals = () => {
         if (session) {
             dispatch(addToCart(book));
         } else {
-            alert('You can add to cart after signing in!')
+            alert('You can add to cart after signing in!');
         }
     };
 
+    const handleAddToWishlist = (book) => {
+        if (session) {
+            dispatch(addToWishList(book));
+        } else {
+            alert('You can add to wishlist after signing in!');
+        }
+    };
 
-    if (error) return <div className="font-bold text-2xl justify-center">Error loading results.</div>;
+    if (error) return <div className="flex font-bold text-2xl justify-center">Error loading results.</div>;
     if (isLoading) return <div><LinearProgress /></div>;
 
     return (
@@ -93,6 +99,18 @@ export const NewArrivals = () => {
                                         }}
                                     >
                                         <ShoppingCartIcon style={{ color: 'gray' }} />
+                                    </IconButton>
+
+                                    <IconButton
+                                        sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
+                                        aria-label="add to wishlist"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            handleAddToWishlist(book);
+                                        }}
+                                    >
+                                        <FavoriteBorderIcon style={{ color: 'gray' }} />
                                     </IconButton>
                                 </div>
                             </div>

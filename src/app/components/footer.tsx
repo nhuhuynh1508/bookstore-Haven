@@ -55,10 +55,10 @@ export const Footer = () => {
                 <img
                     src="/assets/book-icon.png"
                     alt="icon"
-                    className="sm:ml-4 w-10 h-10 sm:w-16 sm:h-16 xs:ml-8"
+                    className="sm:ml-4 w-10 h-10 sm:w-16 sm:h-16 xs:ml-5"
                 />
                 <div className="pl-3">
-                    <span className="text-black text-2xl sm:text-4xl xs:text-2xl font-pacifico xs:pl-2">Book Haven</span>
+                    <span className="text-black text-2xl sm:text-4xl xs:text-2xl font-pacifico">Book Haven</span>
                 </div>
             </div>
 
@@ -68,7 +68,7 @@ export const Footer = () => {
                     <p className="font-sans">Join our newsletter for regular updates.</p>
                     <div className="mt-3 font-bold">Your Email: <br /></div>
 
-                    <form onSubmit={handleSubscribeButton} className="flex items-center">
+                    <form onSubmit={handleSubscribeButton} className="flex items-center xs:flex-col">
                         <input
                             className="h-8 p-2 mr-2"
                             type='email'
@@ -93,8 +93,7 @@ export const Footer = () => {
                     {successMessage && <p className="text-green-600 text-sm mt-1">{successMessage}</p>} {/* Show success message */}
                 </div>
 
-                <div className="ml-0 md:ml-auto">
-                    <div className="mt-6">
+                    <div className="mt-6 flex-1 mx-2">
                         <h4 className="font-bold text-blue-800">SHOPPING GUIDE</h4>
                         <ul className="mt-2 space-y-1">
                             <li>Return Policy</li>
@@ -102,7 +101,7 @@ export const Footer = () => {
                         </ul>
                     </div>
 
-                    <div className="mt-6">
+                    <div className="mt-6 flex-1 mx-2">
                         <h4 className="font-bold text-blue-800">INFORMATION</h4>
                         <ul className="mt-2 space-y-1">
                             <li>Blog</li>
@@ -111,14 +110,14 @@ export const Footer = () => {
                         </ul>
                     </div>
 
-                    <div className="mt-6">
+                    <div className="mt-6 flex-1 mx-2">
                         <h4 className="font-bold text-blue-800">QUICK HELP</h4>
                         <ul className="mt-2 space-y-1">
                             <li>Help Center</li>
                         </ul>
                     </div>
                 </div>
-            </div>
+
         </footer>
     );
 };
