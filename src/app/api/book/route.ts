@@ -116,7 +116,7 @@ export async function GET(req) {
             id: 11,
             ISBN: "4370141547241",
             title: "The Odyssey",
-            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz4bnewBCnGhvinvS4My2wvMrmbkZE_L0npQ&s",
+            coverImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVPTQl5OoSguJPcMBKNXFzpIpIR_dDP8K8kQ&s",
             author: "Homer",
             publicationYear: -800,
             genres: ["Epic", "Classic", "Mythology"],

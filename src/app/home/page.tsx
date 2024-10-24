@@ -9,26 +9,36 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense, useState } from 'react';
 import useSWR from 'swr';
 // import type
+import { Button } from '@mui/material';
+import { Footer } from '../components/footer';
 import { BookType } from '../type';
 
-const SearchResult = () => {
+const SearchResult = ({ searchLimit = 5 }) => {
     const searchParams = useSearchParams()
     const search = searchParams.get("search") || ""
-    const [limit, setLimit] = useState(5)
 
-    const {data:book, error} = useSWR(
-        search ?
-        `http://localhost:3000/api/book` : null, async (url) => {
+    const [limit, setLimit] = useState(() => {
+        const savedSearchLimit = localStorage.getItem('searchLimit');
+        return savedSearchLimit ? JSON.parse(savedSearchLimit) : searchLimit;
+    });
+
+    const {data:book, error} = useSWR(`/api/book`, async (url) => {
         const response = await fetch(url);
             return response.json();
     })
     
-    // search for books based on titles
+    // Search for books based on titles
     const BookList = book ? book.filter((book: BookType) => book.title.toLowerCase().includes(search.toLowerCase())) : [];
 
     const handleLoadMore = () => {
-        setLimit(limit + 5)
+        const newLimit = limit + 5
+        setLimit(newLimit)
+        localStorage.setItem('searchLimit', JSON.stringify(newLimit));
     }
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     const PaginatedBooks = BookList.slice(0, limit)
 
@@ -39,7 +49,11 @@ const SearchResult = () => {
             <Header />
             <Subheader />
             <Background />
-            <h1 className="font-eb_garamond font-bold text-4xl p-4">Search Results</h1>
+            <div className="flex items-center m-3">
+                    <span className="xs:text-3xl sm:text-5xl font-eb_garamond font-bold border-gray-300 pb-2 pt-2">Wishlist</span>
+                    <hr className="w-full my-2 border-t-2 border-gray-300"/>
+                    <hr></hr>
+            </div>
             {search ? (
                 // Check if there are any books to display
                 BookList.length > 0 ? (
@@ -53,11 +67,14 @@ const SearchResult = () => {
                             ))}
                         </div>
                         <div className="mt-4 flex justify-center pb-4">
-                            <button
+                            <Button
+                                variant='contained'
                                 onClick={handleLoadMore}
-                                className="bg-gray-300 text-black px-4 py-2 rounded">
+                                size='medium'
+                                sx={{ fontWeight: 'bold' }}
+                            >
                                 Load More
-                            </button>
+                            </Button>
                         </div>
                     </>
                 ) : (
@@ -70,6 +87,17 @@ const SearchResult = () => {
                 // Message for empty search input
                 <div className='text-xl font-serif pl-4'>Please enter a search term to see results.</div>
             )}
+
+            {limit >= 10 && (
+                <button
+                    onClick={scrollToTop}
+                    className="fixed bottom-5 right-5 bg-white text-black px-4 py-2 rounded-full shadow-lg hover:bg-gray-400 transition"
+                    title="Scroll to Top"
+                >
+                    <img src="/assets/up-arrow.png" className="w-3 h-5" alt="Scroll to Top" />
+                </button>
+            )}
+            <Footer />
         </>
     )
 }

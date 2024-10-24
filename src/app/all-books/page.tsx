@@ -7,13 +7,13 @@ import { Background } from '../components/background';
 import { Header } from '../components/header';
 import { Subheader } from '../components/subheader';
 import { VerticalDisplay } from '../components/verticalDisplay';
-import { processedBook } from '../home/components/bookProcessor';
 
 export default function PageRender({ initialLimit = 8 }) {
     const [limit, setLimit] = useState(() => {
         const savedLimit = localStorage.getItem('bookLimit');
         return savedLimit ? JSON.parse(savedLimit) : initialLimit;
     });
+
     const [sortOption, setSortOption] = useState('titleAsc');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
@@ -25,7 +25,6 @@ export default function PageRender({ initialLimit = 8 }) {
         return response.json();
     });
 
-    const BookList = book ? book.map((book: BookType) => processedBook(book)) : [];
 
     // Extract unique genres from the books
     useEffect(() => {
@@ -53,7 +52,7 @@ export default function PageRender({ initialLimit = 8 }) {
     );
 
     // Filter books based on selected genres
-    const filteredBooks = BookList.filter((book) =>
+    const filteredBooks = book.filter((book) =>
         selectedGenres.length === 0 || selectedGenres.every((genre) => book.genres.includes(genre))
     );
 
@@ -82,7 +81,6 @@ export default function PageRender({ initialLimit = 8 }) {
         const newLimit = limit + 8;
         setLimit(newLimit);
         localStorage.setItem('bookLimit', JSON.stringify(newLimit));
-        console.log('newLimit', newLimit);
     };
 
 
@@ -108,7 +106,7 @@ export default function PageRender({ initialLimit = 8 }) {
         }
     }, [isLoading]);
 
-    if (error) return <div className="font-bold text-2xl justify-center">Error loading results.</div>;
+    if (error) return <div className="flex font-bold text-2xl justify-center">Error loading results.</div>;
     if (isLoading) return <div><LinearProgress /></div>;
 
     return (
@@ -176,7 +174,8 @@ export default function PageRender({ initialLimit = 8 }) {
                         <Button
                             variant='contained'
                             onClick={handleLoadMore}
-                            className="bg-gray-300 text-black px-4 py-2 rounded"
+                            size='medium'
+                            sx={{ fontWeight: 'bold' }}
                         >
                             Load More
                         </Button>

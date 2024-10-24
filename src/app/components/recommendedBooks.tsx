@@ -18,11 +18,12 @@ import useSWR from "swr";
 
 export const RecommendedBooks = () => {
     const [recommendedBooks, setRecommendedBooks] = useState([]);
-    const wishList = useAppSelector((state) => state.wishlist.wishListItems);
-    const [isInWishList, setIsInWishList] = useState(false);
     
     // Add dispatch
     const dispatch = useAppDispatch();
+
+    const wishList = useAppSelector((state) => state.wishlist.wishListItems);
+    const [isInWishList, setIsInWishList] = useState(false);
 
     // SWR for fetching book data
     const { data: book, error, isLoading } = useSWR(`/api/book`, async (url) => {
@@ -65,7 +66,7 @@ export const RecommendedBooks = () => {
     };
 
     // Add to wishlist
-    const handleAddToWishList = (book, isInWishList) => {
+    const handleAddToWishList = (book: any, isInWishList: boolean) => {
         if (session) {
             if (!isInWishList) {
                 dispatch(addToWishList(book));
@@ -81,48 +82,37 @@ export const RecommendedBooks = () => {
     if (error) return <div className="flex font-bold text-2xl justify-center">Error loading results.</div>;
     if (isLoading) {
         return (
-            <div>
-                <h2 className="relative inline-block font-lato text-xl font-bold ml-10 mt-5 px-5 py-2 text-white bg-blue-800 transform -skew-x-12">YOU MIGHT ALSO ENJOY</h2>
-                <Splide
+            <>
+                {[...Array(4)].map((_, index) => (
+                    <SplideSlide key={index}>
+                        <div className='flex justify-center items-center p-5 relative'>
+                            <Skeleton variant="rectangular" width="100%" height={250} className="mb-1" />
+                        </div>
+                        <div className='flex justify-center m-3'>
+                            <Skeleton variant="text" width="70%" height={50} />
+                        </div>
+                    </SplideSlide>
+                ))}
+            </>
+        );
+    }
+    
+
+    return (
+        <>
+            <h2 className="relative inline-block font-lato text-xl font-bold ml-10 mt-5 px-5 py-2 text-white bg-blue-800 transform -skew-x-12">YOU MIGHT ALSO ENJOY</h2>
+            <Splide
                     options={{
                         type: 'loop',
                         perPage: 4,
                         pagination: false,
                         arrows: true,
                         autoplay: true,
+                        
                     }}
-                    className="p-2"
-                >
-                    {[...Array(4)].map((_, index) => (
-                        <SplideSlide key={index}>
-                            <div className='flex justify-center items-center p-5 relative'>
-                                <Skeleton variant="rectangular" width="100%" height={250} className="mb-1" />
-                            </div>
-                            <div className='flex justify-center m-3'>
-                                <Skeleton variant="text" width="70%" height={50} />
-                            </div>
-                        </SplideSlide>
-                    ))}
-                </Splide>
-            </div>
-        );
-    }
-    
-
-    return (
-        <div>
-            <h2 className="relative inline-block font-lato text-xl font-bold ml-10 mt-5 px-5 py-2 text-white bg-blue-800 transform -skew-x-12">YOU MIGHT ALSO ENJOY</h2>
-            <Splide
-                options={{
-                    type: 'loop',
-                    perPage: 4,
-                    pagination: false,
-                    arrows: true,
-                    autoplay: true,
-                    
-                }}
-            >
+                    >
                 {recommendedBooks.map((book) => {
+                    
                     const isInWishList = wishList.some((item) => item.id === book.id);
                     return (
                     <SplideSlide key={book.id}>
@@ -155,7 +145,7 @@ export const RecommendedBooks = () => {
                                     </IconButton>
                                 </div>
                                 <button
-                                    className="absolute top-2 right-2 pr-6"
+                                    className="absolute top-2 right-2 mr-6"
                                     onClick={(e) => {
                                         e.preventDefault();
                                         e.stopPropagation();
@@ -180,6 +170,6 @@ export const RecommendedBooks = () => {
                     </SplideSlide>
                 )})}
             </Splide>
-        </div>
+        </>
     );
 };
