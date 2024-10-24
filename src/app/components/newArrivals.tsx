@@ -96,50 +96,51 @@ export const NewArrivals = () => {
                     // check if the book is in the wishlist
                     const isInWishList = wishList.some((item) => item.id === book.id);
                     return (
-                        <Link key={book.id} href={`/book/${book.id}`}>
-                            <div className='flex justify-center items-center p-5 relative hover:opacity-75'>
-                                <img
-                                    src={book.coverImage}
-                                    alt={book.title}
-                                    className="w-full h-auto mb-1"
-                                    style={{ height: '250px', objectFit: 'contain' }}
-                                />
-                                <div className="absolute inset-0 pb-8 flex items-center justify-center space-x-4 opacity-0 hover:opacity-100 transition-opacity">
+                        <div key={book.id} className='flex flex-col justify-center items-center p-5 m-2 relative hover:opacity-75 bg-white shadow-lg rounded-lg transition-all duration-300'>
+                            <img
+                                src={book.coverImage}
+                                alt={book.title}
+                                className="w-full h-auto mb-1"
+                                style={{ height: '250px', objectFit: 'contain' }}
+                            />
+                            <div className="absolute inset-0 pb-8 flex items-center justify-center space-x-4 opacity-0 hover:opacity-100 transition-opacity">
+                                <Link href={`/book/${book.id}`}>
                                     <IconButton
                                         sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
                                         aria-label="view"
                                     >
                                         <VisibilityIcon style={{ color: 'gray' }} />
                                     </IconButton>
+                                </Link>
                     
-                                    <IconButton
-                                        sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
-                                        aria-label="add to cart"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            handleAddToCart(book);
-                                        }}
-                                    >
-                                        <ShoppingCartIcon style={{ color: 'gray' }} />
-                                    </IconButton>
-                                </div>
-
-                                <button
-                                    className="absolute top-2 right-2 pl-6"
+                                <IconButton
+                                    sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
+                                    aria-label="add to cart"
                                     onClick={(e) => {
                                         e.preventDefault();
                                         e.stopPropagation();
-                                        handleAddToWishList(book, isInWishList);
+                                        handleAddToCart(book);
                                     }}
                                 >
-                                    <img
-                                        src={isInWishList ? "/assets/red-heart.png" : "/assets/heart.png"}
-                                        alt="wishlist"
-                                        style={{ width: '30px', height: '30px' }}
-                                    />
-                                </button>
+                                    <ShoppingCartIcon style={{ color: 'gray' }} />
+                                </IconButton>
                             </div>
+                    
+                            <button
+                                className="absolute top-2 right-2 pl-6"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    handleAddToWishList(book, isInWishList);
+                                }}
+                            >
+                                <img
+                                    src={isInWishList ? "/assets/red-heart.png" : "/assets/heart.png"}
+                                    alt="wishlist"
+                                    style={{ width: '30px', height: '30px' }}
+                                />
+                            </button>
+                            
                             <div className='text-center'>
                                 <h3 className="text-lg font-semibold mb-1">{book.title}</h3>
                                 <p className="text-gray-600 mb-2 font-lato">{book.author}</p>
@@ -147,8 +148,9 @@ export const NewArrivals = () => {
                                     {(book?.price || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                                 </p>
                             </div>
-                        </Link>
+                        </div>
                     );
+                    
                 })}
             </div>
         </div>
