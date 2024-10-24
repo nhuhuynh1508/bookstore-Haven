@@ -1,9 +1,13 @@
 'use client'
-import { removeFromWishList } from "@/lib/features/wishlistSlice";
+import { clearWishList, removeFromWishList } from "@/lib/features/wishlistSlice";
 import { useAppSelector } from "@/lib/hooks";
+import CloseIcon from '@mui/icons-material/Close';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from "@mui/material";
+import IconButton from '@mui/material/IconButton';
 import Link from "next/link";
 import { useDispatch } from "react-redux";
+import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 import { BookType } from "../type";
 
@@ -15,13 +19,21 @@ function Wishlist() {
         dispatch(removeFromWishList(book));
     };
 
+    const handleClearWishlist = () => {
+        dispatch(clearWishList())
+    };
+
     return (
         <>
             <Header />
             <div className="container mx-auto p-6">
-                <h1 className="font-eb_garamond sm:text-4xl font-bold xs:text-2xl pb-6">Wishlist</h1>
+                <div className="flex items-center pb-2">
+                    <span className="xs:text-3xl sm:text-5xl font-eb_garamond font-bold border-gray-300 pb-2 pt-2">Wishlist</span>
+                    <hr className="w-full my-2 border-t-2 border-gray-300"/>
+                    <hr></hr>
+                </div>
                 {wishListItems.map((book) => (
-                    <div key={book.id} className="flex items-center border-b pb-6 mb-6">
+                    <div key={book.id} className="flex items-center border-b m-2 pb-6 mb-6">
                         <div className="w-1/6">
                             <img
                                 src={book.coverImage}
@@ -38,33 +50,28 @@ function Wishlist() {
                                 <Button
                                 variant="contained"
                                 color="primary"
-                                size="medium"
+                                size="small"
                                 sx={{
-                                    fontSize: '14px',
+                                    fontSize: { xs: '12px', sm: '14px' },
                                     padding: '5px 8px',
+                                    fontWeight: 'bold',
                                 }}
                                 >
                                     View Book
                                 </Button>
                             </Link>
-                            {/* <button
-                                onClick={() => handleRemoveFromWishlist(book)}
-                                className="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300"
-                            >
-                                Remove
-                            </button> */}
-                            <Button
-                                variant="contained"
+
+                            <IconButton
                                 color="error"
-                                size="medium"
                                 onClick={() => handleRemoveFromWishlist(book)}
                                 sx={{
                                     fontSize: '14px',
                                     padding: '5px 5px',
+                                    fontWeight: 'bold',
                                 }}
                             >
-                                Remove
-                            </Button>
+                                <CloseIcon />
+                            </IconButton>
                         </div>
                     </div>
                 ))}
@@ -75,14 +82,27 @@ function Wishlist() {
                         </span>
                     </div>
                 )}
+                {wishListItems.length > 0 && (
+                    <Button
+                        variant="contained"
+                        color="error"
+                        size="small"
+                        startIcon={<DeleteIcon />}
+                        onClick={() => handleClearWishlist()}
+                        sx={{
+                            fontSize: '14px',
+                            padding: '5px 8px',
+                            fontWeight: 'bold',
+                            margin: '2px'
+                        }}
+                        >
+                        Clear All
+                    </Button>
+                    )}
             </div>
+            <Footer/>
             </>
-
     )
 }
 
 export default Wishlist;
-
-function dispatch(arg0: any) {
-    throw new Error("Function not implemented.");
-}
