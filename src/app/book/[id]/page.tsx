@@ -7,14 +7,13 @@ import { RecommendedBooks } from '@/app/components/recommendedBooks';
 import { useParams } from 'next/navigation';
 import useSWR from "swr";
 
-export default function BookDetail() {
+const BookDetail = () => {
     const { id } = useParams();
 
     const {data:book, isLoading} = useSWR(`/api/book/${id}`, async (url) => {
         const response = await fetch(url);
             return response.json()
     })
-
 
     return (
         <>
@@ -32,3 +31,5 @@ export default function BookDetail() {
         </>
         )
 }
+
+export default BookDetail;

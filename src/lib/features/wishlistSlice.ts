@@ -20,32 +20,24 @@ const wishlistSlice = createSlice({
     initialState,
     reducers: {
         addToWishList(state, action) {
-            // const existedWishItems = JSON.parse(localStorage.getItem('WishListItems')) || [];
-            // const itemIndex = existedWishItems.findIndex((item: BookType) => item.id === action.payload.id);
-            
-            // if (itemIndex === -1) {
-            //     existedWishItems.push({id: action.payload.id});
-            // } else {
-            //     existedWishItems.slice(itemIndex, 1)
-            // }
-            
             const bookIndex = state.wishListItems.findIndex((book) => book.id === action.payload.id);
             if (bookIndex === -1) {
                 state.wishListItems.push(action.payload);
             } else {
                 state.wishListItems.splice(bookIndex, 1)
             }
-
-            // localStorage.setItem('WishListItems', JSON.stringify(existedWishItems));
         },
 
         removeFromWishList(state, action) {
             state.wishListItems = state.wishListItems.filter((book) => book.id !== action.payload.id);
         },
 
+        clearWishList(state) {
+            state.wishListItems = [];
+        }
     }
 });
 
-export const { addToWishList, removeFromWishList } = wishlistSlice.actions;
+export const { addToWishList, removeFromWishList, clearWishList } = wishlistSlice.actions;
 
 export default wishlistSlice.reducer;

@@ -18,16 +18,6 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart(state, action) {
-            // const existedItems = JSON.parse(localStorage.getItem('CartItems')) || [];
-            // const itemIndex = existedItems.findIndex((item: BookType) => item.id === action.payload.id);
-
-            // if (itemIndex >= 0) {
-            //     existedItems[itemIndex].quantity += 1;
-            // } else {
-            //     existedItems.push({ id: action.payload.id, quantity: 1 });
-            //     alert(`${action.payload.title} has been added!`)
-            // }
-
             const bookIndex = state.cartItems.findIndex((book) => book.id === action.payload.id);
             if (bookIndex >= 0) {
                 state.cartItems[bookIndex].quantity += 1;
@@ -36,8 +26,6 @@ const cartSlice = createSlice({
                 const tempBook = {...action.payload, quantity: 1};
                 state.cartItems.push(tempBook);
             }
-
-            // localStorage.setItem('CartItems', JSON.stringify(existedItems));
         },
 
         removeFromCart(state, action) {

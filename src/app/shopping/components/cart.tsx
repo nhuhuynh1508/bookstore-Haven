@@ -6,6 +6,7 @@ import { clearCart, removeFromCart, updateQuantity } from "@/lib/features/cartSl
 // import hooks
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 // import components
+import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Button, IconButton } from "@mui/material";
@@ -42,7 +43,7 @@ export const Cart = () => {
                     <thead>
                         <tr className="w-full bg-gray-100 border-b border-gray-200">
                             <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Thumbnail</th>
-                            <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Product Title</th>
+                            <th className="p-4 sm:p-3 text-xs sm:text-base text-left">Title</th>
                             <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Price</th>
                             <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Quantity</th>
                             <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Total</th>
@@ -69,7 +70,7 @@ export const Cart = () => {
                                         </div>
                                     </td>
                                 </Link>
-                                <td className="p-2 sm:p-3 text-[10px] sm:text-base">
+                                <td className="p-4 sm:p-3 text-[10px] sm:text-base">
                                     <h1 className="font-bold">{item.title}</h1>
                                 </td>
                                 <td className="p-2 sm:p-3 text-[10px] sm:text-base">
@@ -79,7 +80,7 @@ export const Cart = () => {
                                     <input
                                         type="number"
                                         value={item.quantity}
-                                        className="border text-center w-16 mx-auto"
+                                        className="border text-center w-10 mx-auto"
                                         onChange={(e) => handleQuantityChange(item, e.target.value)}
                                     />
                                 </td>
@@ -87,12 +88,17 @@ export const Cart = () => {
                                     <span>{(item.price * item.quantity).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
                                 </td>
                                 <td className="p-2 sm:p-3 text-[10px] sm:text-base text-center">
-                                    <button
-                                        className="text-red-500 hover:text-red-600 text-2xl font-bold"
+                                    <IconButton
+                                        color="error"
                                         onClick={() => handleRemoveFromCart(item)}
+                                        sx={{
+                                            fontSize: '14px',
+                                            padding: '5px 5px',
+                                            fontWeight: 'bold',
+                                        }}
                                     >
-                                        &times;
-                                    </button>
+                                        <CloseIcon />
+                                    </IconButton>
                                 </td>
                             </tr>
                         ))}
@@ -104,13 +110,14 @@ export const Cart = () => {
                         variant="contained"
                         color="error"
                         size="medium"
-                        onClick={handleClearCart}
                         startIcon={<DeleteIcon />}
+                        onClick={() => handleClearCart()}
                         sx={{
-                            fontSize: '18px',
+                            fontSize: '14px',
                             padding: '5px 8px',
+                            fontWeight: 'bold',
                         }}
-                    >
+                        >
                         Clear All
                     </Button>
                     <div className="text-base sm:text-lg font-bold border-2 mt-4 sm:mt-0 p-2 sm:p-4">

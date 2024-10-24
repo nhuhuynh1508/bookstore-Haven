@@ -23,7 +23,10 @@ interface BookItemProps {
 export const VerticalDisplay = (props: BookItemProps) => {
     const { book } = props;
     const { data: session } = useSession();
+
+    // Add dispatch
     const dispatch = useAppDispatch();
+
     const wishList = useAppSelector((state) => state.wishlist.wishListItems);
     const [isInWishList, setIsInWishList] = useState(false);
 

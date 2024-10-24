@@ -57,20 +57,20 @@ export const Footer = () => {
                     alt="icon"
                     className="sm:ml-4 w-10 h-10 sm:w-16 sm:h-16 xs:ml-5"
                 />
-                <div className="pl-3">
+                <div className="pl-3 m-2">
                     <span className="text-black text-2xl sm:text-4xl xs:text-2xl font-pacifico">Book Haven</span>
                 </div>
             </div>
 
-            <div className="mt-5 grid grid-cols-1 md:grid-cols-4 space-x-16 px-5 justify-around">
+            <div className="mt-3 grid grid-cols-1 md:grid-cols-4 space-x-16 px-5 justify-around">
                 <div className="ml-5 font-IBM">
                     <h3 className="text-lg text-blue-800 font-bold">Keep up to date</h3>
                     <p className="font-sans">Join our newsletter for regular updates.</p>
                     <div className="mt-3 font-bold">Your Email: <br /></div>
 
-                    <form onSubmit={handleSubscribeButton} className="flex items-center xs:flex-col">
+                    <form onSubmit={handleSubscribeButton} className="flex items-center md:flex-col sm:flex-col xs:flex-col">
                         <input
-                            className="h-8 p-2 mr-2"
+                            className="h-full p-2 m-2"
                             type='email'
                             placeholder="example@email.com"
                             aria-label="email"
@@ -83,7 +83,7 @@ export const Footer = () => {
                             loadingIndicator={<CircularProgress />}
                             variant="contained"
                             color="primary"
-                            type="submit" // Submit form on button click
+                            type="submit"
                         >
                             Join
                         </LoadingButton>
