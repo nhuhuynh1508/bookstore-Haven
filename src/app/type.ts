@@ -1,4 +1,5 @@
 export interface BookType {
+    quantity: number;
     author: string;
     coverImage: string;
     description: string;

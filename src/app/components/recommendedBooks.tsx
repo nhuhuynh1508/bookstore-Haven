@@ -1,91 +1,115 @@
+// import slices
 import { addToCart } from '@/lib/features/cartSlice';
 import { addToWishList } from '@/lib/features/wishlistSlice';
 import { useAppDispatch } from '@/lib/hooks';
+import '@splidejs/splide/dist/css/splide.min.css';
+
+// import material ui components
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IconButton, Skeleton } from "@mui/material";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+
+// import components
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import session from 'redux-persist/es/storage/session';
 import useSWR from "swr";
 
-export const NewArrivals = () => {
-    const [newArrivals, setNewArrivals] = useState([]);
+export const RecommendedBooks = () => {
+    const [recommendedBooks, setRecommendedBooks] = useState([]);
     
     // Add dispatch
     const dispatch = useAppDispatch();
 
     // SWR for fetching book data
-    const { data: book, error, isLoading } = useSWR('/api/book', async (url) => {
+    const { data: book, error, isLoading } = useSWR(`/api/book`, async (url) => {
         const response = await fetch(url);
         return response.json();
     });
 
     // Function to generate random unique books
-    const generateRandomBooks = (allBooks) => {
+    const generateRandomBooks = (allBooks, currentBookId) => {
         if (allBooks.length > 0) {
             const randomBooks = [];
             const selectedIndices = new Set();
 
-            while (randomBooks.length < 10) {
+            while (randomBooks.length < 20) {
                 const randomIndex = Math.floor(Math.random() * allBooks.length);
-                if (!selectedIndices.has(randomIndex)) {
+                const selectedBook = allBooks[randomIndex];
+                if (!selectedIndices.has(randomIndex) && selectedBook.id !== currentBookId) {
                     selectedIndices.add(randomIndex);
                     randomBooks.push(allBooks[randomIndex]);
                 }
             }
-
-            setNewArrivals(randomBooks);
+            setRecommendedBooks(randomBooks);
         }
     };
 
     // Generate random books when the book data is fetched
     useEffect(() => {
         if (book) {
-            generateRandomBooks(book);
+            const currentBookId = book.id;
+            generateRandomBooks(book, currentBookId);
         }
     }, [book]);
 
     const handleAddToCart = (book) => {
-        if (session) {
-            dispatch(addToCart(book));
-        } else {
-            alert('You can add to cart after signing in!');
-        }
+        dispatch(addToCart(book));
     };
 
     const handleAddToWishlist = (book) => {
-        if (session) {
-            dispatch(addToWishList(book));
-        } else {
-            alert('You can add to wishlist after signing in!');
-        }
+        dispatch(addToWishList(book));
     };
 
     if (error) return <div className="flex font-bold text-2xl justify-center">Error loading results.</div>;
-    if (isLoading) return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 p-2">
-            {Array.from({ length: 10 }).map((_, index) => (
-                <div key={index} className="flex flex-col items-center p-5">
-                    <Skeleton variant="rectangular" width="100%" height={250} />
-                    <div className='text-center'>
-                        <Skeleton variant="text" width="70%" height={30} className="mt-2" />
-                        <Skeleton variant="text" width="30%" height={20} className="mt-1" />
-                        <Skeleton variant="text" width="50%" height={20} className="mt-1" />
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
+    if (isLoading) {
+        return (
+            <div>
+                <h2 className="relative inline-block font-lato text-xl font-bold ml-10 mt-5 px-5 py-2 text-white bg-blue-800 transform -skew-x-12">YOU MIGHT ALSO ENJOY</h2>
+                <Splide
+                    options={{
+                        type: 'loop',
+                        perPage: 4,
+                        pagination: false,
+                        arrows: true,
+                        autoplay: true,
+                    }}
+                    className="p-2"
+                >
+                    {[...Array(4)].map((_, index) => (
+                        <SplideSlide key={index}>
+                            <div className='flex justify-center items-center p-5 relative'>
+                                <Skeleton variant="rectangular" width="100%" height={250} className="mb-1" />
+                            </div>
+                            <div className='flex justify-center m-3'>
+                                <Skeleton variant="text" width="70%" height={50} />
+                            </div>
+                        </SplideSlide>
+                    ))}
+                </Splide>
+            </div>
+        );
+    }
+    
 
     return (
         <div>
-            <h2 className="relative inline-block font-lato text-2xl font-bold m-5 px-5 py-2 text-white bg-blue-800 transform -skew-x-12">New Arrivals</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 p-2">
-                {newArrivals.map((book) => {
-                    return (
-                        <Link key={book.id} href={`/book/${book.id}`}>
+            <h2 className="relative inline-block font-lato text-xl font-bold ml-10 mt-5 px-5 py-2 text-white bg-blue-800 transform -skew-x-12">YOU MIGHT ALSO ENJOY</h2>
+            <Splide
+                options={{
+                    type: 'loop',
+                    perPage: 4,
+                    pagination: false,
+                    arrows: true,
+                    autoplay: true,
+                    
+                }}
+                className="p-2"
+            >
+                {recommendedBooks.map((book) => (
+                    <SplideSlide key={book.id}>
+                        <Link href={`/book/${book.id}`}>
                             <div className='flex justify-center items-center p-5 relative hover:opacity-75'>
                                 <img
                                     src={book.coverImage}
@@ -126,7 +150,7 @@ export const NewArrivals = () => {
                                     </IconButton>
                                 </div>
                             </div>
-                            <div className='text-center'>
+                            <div className='text-center m-3'>
                                 <h3 className="text-lg font-semibold mb-1">{book.title}</h3>
                                 <p className="text-gray-600 mb-2 font-lato">{book.author}</p>
                                 <p className="text-orange-700 font-montserrat font-semibold">
@@ -134,9 +158,9 @@ export const NewArrivals = () => {
                                 </p>
                             </div>
                         </Link>
-                    );
-                })}
-            </div>
+                    </SplideSlide>
+                ))}
+            </Splide>
         </div>
     );
 };

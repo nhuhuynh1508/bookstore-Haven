@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(req) {
     const books = [
         {
             id: 1,
@@ -457,7 +457,7 @@ export async function GET() {
             id: 42,
             ISBN: "21380944321131",
             title: "The Color Purple",
-            coverImage: "https://prodimage.images-bn.com/pimages/9780593512371_p0_v1_s1200x630.jpg",
+            coverImage: "https://upload.wikimedia.org/wikipedia/en/thumb/6/60/ColorPurple.jpg/220px-ColorPurple.jpg",
             author: "Alice Walker",
             publicationYear: 1982,
             genres: ["Historical Fiction", "Epistolary Novel"],
@@ -553,5 +553,14 @@ export async function GET() {
             description: "A multigenerational saga about a Korean family living in Japan and the struggles they face against prejudice and hardship."
         },
     ]
-    return NextResponse.json(books);
+
+    const url = new URL(req.url);
+    const searchParams = new URLSearchParams(url.search);
+    const limitParam = searchParams.get('limit')
+    
+    const limit = parseInt(limitParam, 10) || books.length
+
+    const limitedBooks = books.slice(0, limit)
+
+    return NextResponse.json(limitedBooks);
 }

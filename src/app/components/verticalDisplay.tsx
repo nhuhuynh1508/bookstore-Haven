@@ -99,6 +99,7 @@ export const VerticalDisplay = (props: BookItemProps) => {
                         style={{ width: '30px', height: '30px' }}
                     />
                 </button>
+                
                 <div className="p-3 flex flex-col flex-grow text-sm">
                     <h3 className="text-xl font-semibold p-1">{book.title}</h3>
                     <p className="text-gray-700 p-1"><strong>Author:</strong> {book.author}</p>
