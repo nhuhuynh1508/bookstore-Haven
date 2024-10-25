@@ -92,7 +92,10 @@ export const HorizontalDisplay = (props: BookItemProps) => {
             {/* Add to Cart Button */}
             <div className="mt-6">
                 <Button
-                    sx={{ borderRadius: '100px' }}
+                    sx={{
+                        borderRadius: '100px',
+                        fontWeight: 'bold'
+                    }}
                     variant="contained"
                     color="primary"
                     onClick={(e) => {

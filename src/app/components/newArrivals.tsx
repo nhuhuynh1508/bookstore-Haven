@@ -1,7 +1,6 @@
 import { addToCart } from '@/lib/features/cartSlice';
-import { addToWishList } from '@/lib/features/wishlistSlice';
-import { useAppDispatch } from '@/lib/hooks';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { addToWishList, removeFromWishList } from '@/lib/features/wishlistSlice';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { IconButton, Skeleton } from "@mui/material";
@@ -16,6 +15,9 @@ export const NewArrivals = () => {
     // Add dispatch
     const dispatch = useAppDispatch();
 
+    const wishList = useAppSelector((state) => state.wishlist.wishListItems);
+    const [isInWishList, setIsInWishList] = useState(false);
+
     // SWR for fetching book data
     const { data: book, error, isLoading } = useSWR('/api/book', async (url) => {
         const response = await fetch(url);
@@ -23,7 +25,7 @@ export const NewArrivals = () => {
     });
 
     // Function to generate random unique books
-    const generateRandomBooks = (allBooks) => {
+    const generateRandomBooks = (allBooks: any[]) => {
         if (allBooks.length > 0) {
             const randomBooks = [];
             const selectedIndices = new Set();
@@ -47,6 +49,7 @@ export const NewArrivals = () => {
         }
     }, [book]);
 
+    // Add to cart
     const handleAddToCart = (book) => {
         if (session) {
             dispatch(addToCart(book));
@@ -55,11 +58,17 @@ export const NewArrivals = () => {
         }
     };
 
-    const handleAddToWishlist = (book) => {
+    // Add to wishlist
+    const handleAddToWishList = (book, isInWishList) => {
         if (session) {
-            dispatch(addToWishList(book));
+            if (!isInWishList) {
+                dispatch(addToWishList(book));
+            } else {
+                dispatch(removeFromWishList(book));
+            }
+            setIsInWishList(!isInWishList)
         } else {
-            alert('You can add to wishlist after signing in!');
+            alert('You can add to wishlist after signing in!')
         }
     };
 
@@ -84,48 +93,54 @@ export const NewArrivals = () => {
             <h2 className="relative inline-block font-lato text-2xl font-bold m-5 px-5 py-2 text-white bg-blue-800 transform -skew-x-12">New Arrivals</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 p-2">
                 {newArrivals.map((book) => {
+                    // check if the book is in the wishlist
+                    const isInWishList = wishList.some((item) => item.id === book.id);
                     return (
-                        <Link key={book.id} href={`/book/${book.id}`}>
-                            <div className='flex justify-center items-center p-5 relative hover:opacity-75'>
-                                <img
-                                    src={book.coverImage}
-                                    alt={book.title}
-                                    className="w-full h-auto mb-1"
-                                    style={{ height: '250px', objectFit: 'contain' }}
-                                />
-                                <div className="absolute inset-0 pb-8 flex items-center justify-center space-x-4 opacity-0 hover:opacity-100 transition-opacity">
+                        <div key={book.id} className='flex flex-col justify-center items-center p-5 m-2 relative hover:opacity-75 bg-white shadow-lg rounded-lg transition-all duration-300'>
+                            <img
+                                src={book.coverImage}
+                                alt={book.title}
+                                className="w-full h-auto mb-1"
+                                style={{ height: '250px', objectFit: 'contain' }}
+                            />
+                            <div className="absolute inset-0 pb-8 flex items-center justify-center space-x-4 opacity-0 hover:opacity-100 transition-opacity">
+                                <Link href={`/book/${book.id}`}>
                                     <IconButton
                                         sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
                                         aria-label="view"
                                     >
                                         <VisibilityIcon style={{ color: 'gray' }} />
                                     </IconButton>
+                                </Link>
                     
-                                    <IconButton
-                                        sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
-                                        aria-label="add to cart"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            handleAddToCart(book);
-                                        }}
-                                    >
-                                        <ShoppingCartIcon style={{ color: 'gray' }} />
-                                    </IconButton>
-
-                                    <IconButton
-                                        sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
-                                        aria-label="add to wishlist"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            handleAddToWishlist(book);
-                                        }}
-                                    >
-                                        <FavoriteBorderIcon style={{ color: 'gray' }} />
-                                    </IconButton>
-                                </div>
+                                <IconButton
+                                    sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
+                                    aria-label="add to cart"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        handleAddToCart(book);
+                                    }}
+                                >
+                                    <ShoppingCartIcon style={{ color: 'gray' }} />
+                                </IconButton>
                             </div>
+                    
+                            <button
+                                className="absolute top-2 right-2 pl-6"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    handleAddToWishList(book, isInWishList);
+                                }}
+                            >
+                                <img
+                                    src={isInWishList ? "/assets/red-heart.png" : "/assets/heart.png"}
+                                    alt="wishlist"
+                                    style={{ width: '30px', height: '30px' }}
+                                />
+                            </button>
+                            
                             <div className='text-center'>
                                 <h3 className="text-lg font-semibold mb-1">{book.title}</h3>
                                 <p className="text-gray-600 mb-2 font-lato">{book.author}</p>
@@ -133,8 +148,9 @@ export const NewArrivals = () => {
                                     {(book?.price || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                                 </p>
                             </div>
-                        </Link>
+                        </div>
                     );
+                    
                 })}
             </div>
         </div>
