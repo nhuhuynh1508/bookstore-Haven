@@ -33,9 +33,8 @@ export const Cart = () => {
     };
 
     return (
-        <div className="container mx-auto flex flex-col lg:flex-row">
+        <div className="container p-2 sm:p-4 w-full mx-auto">
             {/* Cart Section */}
-            <div className="lg:w-2/3 p-8">
                 <div className="overflow-x-auto">
                     {cartItems.length > 0 ? (
                         <>
@@ -118,10 +117,22 @@ export const Cart = () => {
                                 >
                                     Clear All
                                 </Button>
-                                <div className="text-lg font-bold">
+                                <div className="text-lg font-bold border-2 p-3">
                                     Total: {cartTotalAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                                 </div>
+                                
                             </div>
+                            <div className="flex justify-end pt-2">
+                                    <Link href="/shopping/checkout">
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        sx={{fontWeight: 'bold'}}
+                                    >
+                                        Proceed to Payment
+                                    </Button>
+                                    </Link>
+                                </div>
                         </>
                     ) : (
                         <div className="flex flex-col items-center justify-center space-y-4 p-12">
@@ -140,27 +151,5 @@ export const Cart = () => {
                     )}
                 </div>
             </div>
-
-            {/* Checkout Section */}
-            <div className="lg:w-1/3 p-10 lg:border-l border-gray-200">
-                <h2 className="text-2xl font-bold mb-4">Checkout Summary</h2>
-                <p className="text-lg">Items: {cartTotalQuantity}</p>
-                <p className="text-lg">Total Amount: {cartTotalAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
-                
-                {/* Payment Information */}
-                <div className="mt-6">
-                    <Link href="/shopping/checkout">
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        className="mt-4"
-                    >
-                        Proceed to Payment
-                    </Button>
-                    </Link>
-                </div>
-            </div>
-        </div>
     );
 };
