@@ -33,114 +33,134 @@ export const Cart = () => {
     };
 
     return (
-        <>
-            <div className="container p-2 sm:p-4 w-full mx-auto">
+        <div className="container mx-auto flex flex-col lg:flex-row">
+            {/* Cart Section */}
+            <div className="lg:w-2/3 p-8">
                 <div className="overflow-x-auto">
-            {cartItems.length > 0 ? (
-            <>
-            <p className="font-serif pb-2 text-lg"><strong>Total Quantity:</strong> {cartTotalQuantity}</p>
-                <table className="w-full table-fixed bg-white border border-gray-200">
-                    <thead>
-                        <tr className="w-full bg-gray-100 border-b border-gray-200">
-                            <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Thumbnail</th>
-                            <th className="p-4 sm:p-3 text-xs sm:text-base text-left">Title</th>
-                            <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Price</th>
-                            <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Quantity</th>
-                            <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Total</th>
-                            <th className="p-2 sm:p-3"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {cartItems.map((item, index) => (
-                            <tr key={index} className="border-b border-gray-200">
-                                <Link key={item.id} href={`/book/${item.id}`}>
-                                    <td className="relative p-2 sm:p-3 text-center">
-                                        <img
-                                            src={item.coverImage}
-                                            alt={item.title}
-                                            className="w-24"
-                                        />
-                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                                        <IconButton
-                                            sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
-                                            aria-label="view"
-                                        >
-                                            <VisibilityIcon style={{ color: 'gray' }} />
-                                        </IconButton>
-                                        </div>
-                                    </td>
-                                </Link>
-                                <td className="p-4 sm:p-3 text-[10px] sm:text-base">
-                                    <h1 className="font-bold">{item.title}</h1>
-                                </td>
-                                <td className="p-2 sm:p-3 text-[10px] sm:text-base">
-                                    <span>{(item?.price || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
-                                </td>
-                                <td className="p-2 sm:p-3 text-[10px] sm:text-base">
-                                    <input
-                                        type="number"
-                                        value={item.quantity}
-                                        className="border text-center w-10 mx-auto"
-                                        onChange={(e) => handleQuantityChange(item, e.target.value)}
-                                    />
-                                </td>
-                                <td className="p-2 sm:p-3 text-[10px] sm:text-base">
-                                    <span>{(item.price * item.quantity).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
-                                </td>
-                                <td className="p-2 sm:p-3 text-[10px] sm:text-base text-center">
-                                    <IconButton
-                                        color="error"
-                                        onClick={() => handleRemoveFromCart(item)}
-                                        sx={{
-                                            fontSize: '14px',
-                                            padding: '5px 5px',
-                                            fontWeight: 'bold',
-                                        }}
-                                    >
-                                        <CloseIcon />
-                                    </IconButton>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                    {cartItems.length > 0 ? (
+                        <>
+                            <p className="font-serif pb-2 text-lg"><strong>Total Quantity:</strong> {cartTotalQuantity}</p>
+                            <table className="w-full table-fixed bg-white border border-gray-200">
+                                {/* Table Headers */}
+                                <thead>
+                                    <tr className="w-full bg-gray-100 border-b border-gray-200">
+                                        <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Thumbnail</th>
+                                        <th className="p-4 sm:p-3 text-xs sm:text-base text-left">Title</th>
+                                        <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Price</th>
+                                        <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Quantity</th>
+                                        <th className="p-2 sm:p-3 text-xs sm:text-base text-left">Total</th>
+                                        <th className="p-2 sm:p-3"></th>
+                                    </tr>
+                                </thead>
+                                {/* Table Body */}
+                                <tbody>
+                                    {cartItems.map((item, index) => (
+                                        <tr key={index} className="border-b border-gray-200">
+                                            <Link key={item.id} href={`/book/${item.id}`}>
+                                                <td className="relative p-2 sm:p-3 text-center">
+                                                    <img src={item.coverImage} alt={item.title} className="w-24" />
+                                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                                                        <IconButton
+                                                            sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
+                                                            aria-label="view"
+                                                        >
+                                                            <VisibilityIcon style={{ color: 'gray' }} />
+                                                        </IconButton>
+                                                    </div>
+                                                </td>
+                                            </Link>
+                                            <td className="p-4 sm:p-3 text-[10px] sm:text-base">
+                                                <h1 className="font-bold">{item.title}</h1>
+                                            </td>
+                                            <td className="p-2 sm:p-3 text-[10px] sm:text-base">
+                                                <span>{(item?.price || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+                                            </td>
+                                            <td className="p-2 sm:p-3 text-[10px] sm:text-base">
+                                                <input
+                                                    type="number"
+                                                    value={item.quantity}
+                                                    className="border text-center w-10 mx-auto"
+                                                    onChange={(e) => handleQuantityChange(item, e.target.value)}
+                                                />
+                                            </td>
+                                            <td className="p-2 sm:p-3 text-[10px] sm:text-base">
+                                                <span>{(item.price * item.quantity).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</span>
+                                            </td>
+                                            <td className="p-2 sm:p-3 text-[10px] sm:text-base text-center">
+                                                <IconButton
+                                                    color="error"
+                                                    onClick={() => handleRemoveFromCart(item)}
+                                                    sx={{
+                                                        fontSize: '14px',
+                                                        padding: '5px 5px',
+                                                        fontWeight: 'bold',
+                                                    }}
+                                                >
+                                                    <CloseIcon />
+                                                </IconButton>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            <div className="flex justify-between items-center mt-3">
+                                <Button
+                                    variant="contained"
+                                    color="error"
+                                    size="medium"
+                                    startIcon={<DeleteIcon />}
+                                    onClick={handleClearCart}
+                                    sx={{
+                                        fontSize: '14px',
+                                        padding: '5px 8px',
+                                        fontWeight: 'bold',
+                                    }}
+                                >
+                                    Clear All
+                                </Button>
+                                <div className="text-lg font-bold">
+                                    Total: {cartTotalAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="flex flex-col items-center justify-center space-y-4 p-12">
+                            <span className="text-4xl font-serif text-center">
+                                Your cart seems to be empty for now. Let's fix that!
+                            </span>
+                            <Link href="/">
+                                <div className="text-2xl font-serif text-gray-600 hover:underline flex items-center p-4">
+                                    <div className="relative flex items-center">
+                                        <div className="h-0 w-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-[16px] border-black"></div>
+                                        <span className="ml-2">Return to Shop</span>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                    )}
+                </div>
+            </div>
 
-                <div className="flex flex-col sm:flex-row justify-between items-center mt-3">
+            {/* Checkout Section */}
+            <div className="lg:w-1/3 p-10 lg:border-l border-gray-200">
+                <h2 className="text-2xl font-bold mb-4">Checkout Summary</h2>
+                <p className="text-lg">Items: {cartTotalQuantity}</p>
+                <p className="text-lg">Total Amount: {cartTotalAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</p>
+                
+                {/* Payment Information */}
+                <div className="mt-6">
+                    <Link href="/shopping/checkout">
                     <Button
                         variant="contained"
-                        color="error"
-                        size="medium"
-                        startIcon={<DeleteIcon />}
-                        onClick={() => handleClearCart()}
-                        sx={{
-                            fontSize: '14px',
-                            padding: '5px 8px',
-                            fontWeight: 'bold',
-                        }}
-                        >
-                        Clear All
+                        color="primary"
+                        fullWidth
+                        className="mt-4"
+                    >
+                        Proceed to Payment
                     </Button>
-                    <div className="text-base sm:text-lg font-bold border-2 mt-4 sm:mt-0 p-2 sm:p-4">
-                        Total: {cartTotalAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
-                    </div>
+                    </Link>
                 </div>
-            </>
-        ) : (
-            <div className="flex flex-col items-center justify-center space-y-4 p-12">
-                <span className="text-4xl font-serif text-center">
-                    Your cart seems to be empty for now. Let's fix that!
-                </span>
-                <Link href="/">
-                    <div className="text-2xl font-serif text-gray-600 hover:underline flex items-center p-4">
-                        <div className="relative flex items-center">
-                            <div className="h-0 w-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-[16px] border-black"></div>
-                            <span className="ml-2">Return to Shop</span>
-                        </div>
-                    </div>
-                </Link>
             </div>
-        )}
         </div>
-    </div>
-    </>
-)}
+    );
+};
