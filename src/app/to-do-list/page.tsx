@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 // import components
 import { Footer } from '../components/footer';
 import { Header } from '../components/header';
+import { Subheader } from '../components/subheader';
 import { Dashboard } from './components/dashboard';
 import { Form } from './components/form';
 
@@ -61,7 +62,8 @@ function ToDoList() {
     return (
         <div className="flex flex-col min-h-screen">
             <Header />
-            <main className="flex-grow bg-black flex flex-col justify-center items-center p-4">
+            <Subheader />
+            <main className="flex-grow bg-green-100 flex flex-col justify-center items-center p-4">
                 <Dashboard tasks={tasks} />
                 <Form
                 tasks={tasks}

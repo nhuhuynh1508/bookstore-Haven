@@ -1,8 +1,6 @@
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import HomeIcon from '@mui/icons-material/Home';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -45,7 +43,7 @@ export default function TemporaryDrawer() {
         </List>
 
         <Divider />
-        <List>
+        {/* <List>
             {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding>
                 <ListItemButton>
@@ -56,7 +54,7 @@ export default function TemporaryDrawer() {
                 </ListItemButton>
             </ListItem>
             ))}
-        </List>
+        </List> */}
         </Box>
     );
 
