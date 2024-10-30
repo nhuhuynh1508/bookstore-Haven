@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-let books = [
+const books = [
     {
         id: 1,
         ISBN: "9780743273565",
