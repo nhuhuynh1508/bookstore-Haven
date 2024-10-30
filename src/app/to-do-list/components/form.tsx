@@ -46,11 +46,11 @@ export const Form = ({ tasks, onSubmitTask, onFinishTask, onRemoveTask }) => {
                 {tasks.map((task) => (
                     <li
                         key={task.id}
-                        className="py-2 pl-3 pr-3 border border-white text-white rounded-md flex items-center justify-between"
+                        className="py-2 pl-3 pr-3 border-2 border-green-600 text-black rounded-md flex items-center justify-between"
                     >
                         <div className="flex items-center gap-2">
                             <button
-                                className={`w-6 h-6 rounded-full border-2 ${task.isCompleted ? 'bg-green-500 border-green-500' : 'border-gray-300'}`}
+                                className={`w-6 h-6 rounded-full border-2 ${task.isCompleted ? 'bg-green-500 border-green-500' : 'border-green-300'}`}
                                 onClick={() => onFinishTask(task.id)}
                             >
                             </button>

@@ -50,7 +50,7 @@ const SearchResult = ({ searchLimit = 5 }) => {
             <Subheader />
             <Background />
             <div className="flex items-center m-3">
-                    <span className="xs:text-3xl sm:text-5xl font-eb_garamond font-bold border-gray-300 pb-2 pt-2">Wishlist</span>
+                    <span className="xs:text-3xl sm:text-5xl font-eb_garamond font-bold border-gray-300 pb-2 pt-2">Search</span>
                     <hr className="w-full my-2 border-t-2 border-gray-300"/>
                     <hr></hr>
             </div>
