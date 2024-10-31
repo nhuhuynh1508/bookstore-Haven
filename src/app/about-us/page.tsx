@@ -30,7 +30,7 @@ export default function AboutUs() {
                 </div>
             </div>
             <div className="flex flex-col items-center justify-center p-24">
-                <p className="font-eb_garamond font-bold text-4xl text-center">It is only with the heart that one can see rightly; what is essential is invisible to the eye.</p>
+                <p className="font-eb_garamond font-bold text-5xl text-center">It is only with the heart that one can see rightly; what is essential is invisible to the eye.</p>
                 <p className="text-center mt-4 font-montserrat text-xl">-Antoine de Saint-Exupéry</p>
                 <p className="font-IBM font-semibold text-lg">from Le Petit Prince</p>
             </div>

@@ -188,6 +188,7 @@ export default function FAQ() {
                     </AccordionDetails>
                 </Accordion>
             </div>
+            <p className='font-eb_garamond text-2xl flex justify-center text-center p-8'>If you have any more questions, don't hestitate to email us!</p>
         </section>
         <Footer />
         </>

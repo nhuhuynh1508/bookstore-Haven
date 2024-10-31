@@ -1,5 +1,6 @@
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import HomeIcon from '@mui/icons-material/Home';
+import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -43,8 +44,8 @@ export default function TemporaryDrawer() {
         </List>
 
         <Divider />
-        {/* <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        <List>
+            {/* {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding>
                 <ListItemButton>
                 <ListItemIcon>
@@ -53,8 +54,22 @@ export default function TemporaryDrawer() {
                 <ListItemText primary={text} />
                 </ListItemButton>
             </ListItem>
+            ))} */}
+            {[
+                { text: 'Mail', icon: <MailIcon/>, href: 'https://mail.google.com/' },
+            ].map((item, index) => (
+                <Link href={item.href} key={index}>
+                <ListItem key={item.text} disablePadding>
+                    <ListItemButton>
+                    <ListItemIcon>
+                        {item.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={item.text} />
+                    </ListItemButton>
+                </ListItem>
+                </Link>
             ))}
-        </List> */}
+        </List>
         </Box>
     );
 
