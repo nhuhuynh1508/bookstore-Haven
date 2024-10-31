@@ -4,6 +4,7 @@ import { Footer } from '@/app/components/footer';
 import { Header } from '@/app/components/header';
 import { HorizontalDisplay } from '@/app/components/horizontalDisplay';
 import { RecommendedBooks } from '@/app/components/recommendedBooks';
+import { Subheader } from '@/app/components/subheader';
 import { useParams } from 'next/navigation';
 import useSWR from "swr";
 
@@ -18,6 +19,7 @@ const BookDetail = () => {
     return (
         <>
             <Header />
+            <Subheader />
             <HorizontalDisplay book={book} key={book?.id} loading={isLoading}/>
             <div className="flex justify-center m-10">
                 <img

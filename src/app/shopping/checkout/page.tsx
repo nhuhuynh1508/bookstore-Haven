@@ -39,7 +39,6 @@ export default function Checkout() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form data:', formData);
-        // Handle form submission, such as API call
     };
 
     return (
