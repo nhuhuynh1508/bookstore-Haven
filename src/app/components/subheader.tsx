@@ -9,8 +9,12 @@ export const Subheader = () => {
             <Link href='/FAQ'>
                 <p>FAQ</p>
             </Link>
+            <Link href='/contact'>
             <p>Contact</p>
-            <p>About Us</p>
+            </Link>
+            <Link href='/about-us'>
+                <p>About Us</p>
+            </Link>
         </div>
     )
 }

@@ -52,13 +52,13 @@ export default function PageRender({ initialLimit = 8 }) {
     );
 
     // Filter books based on selected genres
-    const filteredBooks = book.filter((book) =>
+    const filteredBooks = book?.filter((book) =>
         selectedGenres.length === 0 || selectedGenres.every((genre) => book.genres.includes(genre))
     );
 
     // Sort books
     const sortBooks = (BookList: BookType[], sortOption: string) => {
-        return BookList.sort((a, b) => {
+        return BookList?.sort((a, b) => {
             switch (sortOption) {
                 case 'priceAsc':
                     return a.price - b.price;
@@ -75,7 +75,7 @@ export default function PageRender({ initialLimit = 8 }) {
     };
 
     const SortedBooks = sortBooks(filteredBooks, sortOption);
-    const PaginatedBooks = SortedBooks.slice(0, limit);
+    const PaginatedBooks = SortedBooks?.slice(0, limit);
 
     const handleLoadMore = () => {
         const newLimit = limit + 8;

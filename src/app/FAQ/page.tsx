@@ -123,7 +123,7 @@ export default function FAQ() {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            Yes, we offer international shipping to select countries. Shipping costs and delivery times will vary based on the destination.
+                            No, at the time we don't offer international shipping to select countries.
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
@@ -153,7 +153,7 @@ export default function FAQ() {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
-                            You can reach our customer service team via email at support@bookstore.com or by using the contact form on our website. We're here to help!
+                            You can reach our customer service team via email at bookstoreHaven.sdc@gmail.com or by using the contact form on our website. We're here to help!
                         </Typography>
                     </AccordionDetails>
                 </Accordion>
@@ -188,6 +188,7 @@ export default function FAQ() {
                     </AccordionDetails>
                 </Accordion>
             </div>
+            <p className='font-eb_garamond text-2xl flex justify-center text-center p-8'>If you have any more questions, don't hestitate to email us!</p>
         </section>
         <Footer />
         </>

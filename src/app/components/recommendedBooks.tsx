@@ -116,7 +116,7 @@ export const RecommendedBooks = () => {
                     const isInWishList = wishList.some((item) => item.id === book.id);
                     return (
                     <SplideSlide key={book.id}>
-                        <Link href={`/book/${book.id}`}>
+                        
                             <div className='flex justify-center items-center p-5 relative hover:opacity-75'>
                                 <img
                                     src={book.coverImage}
@@ -124,14 +124,16 @@ export const RecommendedBooks = () => {
                                     className="w-full h-auto mb-1"
                                     style={{ height: '250px', objectFit: 'contain' }}
                                 />
+                                
                                 <div className="absolute inset-0 pb-8 flex items-center justify-center space-x-4 opacity-0 hover:opacity-100 transition-opacity">
-                                    <IconButton
-                                        sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
-                                        aria-label="view"
-                                    >
-                                        <VisibilityIcon style={{ color: 'gray' }} />
-                                    </IconButton>
-                    
+                                    <Link href={`/book/${book.id}`}>
+                                        <IconButton
+                                            sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
+                                            aria-label="view"
+                                        >
+                                            <VisibilityIcon style={{ color: 'gray' }} />
+                                        </IconButton>
+                                    </Link>
                                     <IconButton
                                         sx={{ bgcolor: 'white', '&:hover': { bgcolor: 'gray.200' }, boxShadow: 2 }}
                                         aria-label="add to cart"
@@ -166,7 +168,6 @@ export const RecommendedBooks = () => {
                                     {(book?.price || 0).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
                                 </p>
                             </div>
-                        </Link>
                     </SplideSlide>
                 )})}
             </Splide>
