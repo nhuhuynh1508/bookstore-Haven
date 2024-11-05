@@ -20,10 +20,15 @@ export default function PageRender({ initialLimit = 8 }) {
     const [genres, setGenres] = useState<string[]>([]);
     const [loadingFinished, setLoadingFinished] = useState(false);
 
-    const { data: book, error, isLoading } = useSWR(`/api/book?limit=${limit}`, async (url) => {
+    const { data: bookData, error, isLoading } = useSWR(`/api/book?limit=${limit}`, async (url) => {
         const response = await fetch(url);
         return response.json();
     });
+
+    const { data: book } = useSWR(`/api/book`, async (url) => {
+        const response = await fetch(url);
+        return response.json();
+    }, { revalidateOnFocus: false, revalidateOnReconnect: false, revalidateOnMount: false });
 
 
     // Extract unique genres from the books
@@ -78,9 +83,13 @@ export default function PageRender({ initialLimit = 8 }) {
     const PaginatedBooks = SortedBooks?.slice(0, limit);
 
     const handleLoadMore = () => {
-        const newLimit = limit + 8;
-        setLimit(newLimit);
-        localStorage.setItem('bookLimit', JSON.stringify(newLimit));
+        if (limit >= book?.length) {
+            alert('No more books to load.');
+        } else {
+            const newLimit = limit + 8;
+            setLimit(newLimit);
+            localStorage.setItem('bookLimit', JSON.stringify(newLimit));
+        }
     };
 
 
@@ -94,7 +103,6 @@ export default function PageRender({ initialLimit = 8 }) {
 
     // Reset limit when the component mounts
     useEffect(() => {
-        setLimit(8);
         localStorage.removeItem('bookLimit');
     }, []);
 
@@ -143,7 +151,7 @@ export default function PageRender({ initialLimit = 8 }) {
                 </div>
 
                 {/* Books Display Section */}
-                <div className="flex-1">
+                <div className="flex-1 overflow-hidden">
                     <div className="flex justify-between items-center mb-4">
                         <div className="flex items-center">
                             <label className="flex items-center mr-2 font-bold">Sort By:</label>
@@ -160,11 +168,11 @@ export default function PageRender({ initialLimit = 8 }) {
                         </div>
                     </div>
 
-                    {filteredBooks.length === 0 ? (
+                    {filteredBooks?.length === 0 ? (
                         <div className="text-center text-gray-500 mt-4">No books available for the selected genres.</div>
                     ) : (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                            {PaginatedBooks.map((book: BookType) => (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                            {PaginatedBooks?.map((book: BookType) => (
                                 <VerticalDisplay book={book} key={book.id} />
                             ))}
                         </div>
