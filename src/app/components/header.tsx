@@ -114,7 +114,7 @@ export const Header = () => {
                                             localStorage.clear();
                                         }
                                         else if (setting === 'Profile') {
-                                            alert('Profile');
+                                            alert(session.user.email);
                                         }
                                     }}
                                 >
